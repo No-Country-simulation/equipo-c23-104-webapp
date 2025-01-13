@@ -1,0 +1,87 @@
+services:
+  rabbit:
+    image: rabbitmq:4.0.5-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  configserver:
+    image: "mangoru5/configserver:1.0"
+    container_name: configserver-ms
+    ports:
+      - "8071:8071"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  eurekaserver:
+    image: "mangoru5/eurekaserver:1.0"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+
+  ms1db:
+    container_name: ms1db
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: ms1db
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  ms1:
+    image: "mangoru5/ms1:1.0"
+    container_name: ms1-ms
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "ms1"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://ms1db:5432/ms1db"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "root"
+    depends_on:
+      ms1db:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+networks:
+  nocountry:
+    driver: "bridge"
