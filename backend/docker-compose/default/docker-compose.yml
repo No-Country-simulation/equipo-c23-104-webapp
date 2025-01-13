@@ -53,28 +53,28 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
-  ms1db:
-    container_name: ms1db
+  commentsdb:
+    container_name: commentsdb
     ports:
-      - 3307:3306
+      - "5433:5432"
     environment:
-      MYSQL_DATABASE: ms1db
+      POSTGRES_DB: commentsdb
     extends:
       file: common-config.yml
       service: microservice-db-config
 
-  ms1:
-    image: "mangoru5/ms1:1.0"
-    container_name: ms1-ms
+  comments-ms:
+    image: "mangoru5/comments-ms:1.0"
+    container_name: comments-ms
     ports:
       - "8081:8080"
     environment:
-      SPRING_APPLICATION_NAME: "ms1"
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://ms1db:5432/ms1db"
+      SPRING_APPLICATION_NAME: "comments"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://commentsdb:5432/commentsdb"
       SPRING_DATASOURCE_USERNAME: "postgres"
       SPRING_DATASOURCE_PASSWORD: "root"
     depends_on:
-      ms1db:
+      commentsdb:
         condition: service_healthy
       configserver:
         condition: service_healthy
