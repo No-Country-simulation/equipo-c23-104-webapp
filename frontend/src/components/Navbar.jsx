@@ -28,7 +28,7 @@ export default function Navbar() {
                 ></path>
               </svg>
             </button>
-            <a href="https://flowbite.com" className="flex ms-2 md:me-24">
+            <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-16">
               <img src="" className="h-8 me-3" alt="" />
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-green-500 dark:shadow-none">
                 Parolu!
