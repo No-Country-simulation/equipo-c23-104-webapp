@@ -23,15 +23,15 @@ public class SecurityFilterChainConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagementCustomizer ->
                         sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/users/register", "/api/users/login","/health").permitAll()
-                        .requestMatchers("/api/users/logout").authenticated()
-                        .requestMatchers("/api/users/**").authenticated()
+                        .requestMatchers("api/users/**", "api/auth/password-reset/**",
+                                "health").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

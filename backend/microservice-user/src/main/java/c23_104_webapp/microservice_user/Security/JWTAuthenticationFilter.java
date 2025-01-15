@@ -48,8 +48,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String uri = request.getRequestURI().replaceFirst("/", "");
-
-        boolean isUnprotectedPath = UNPROTECTED_PATHS.contains(uri);
+        boolean isUnprotectedPath = UNPROTECTED_PATHS.contains(uri) || uri.startsWith("health");
 
         if (isUnprotectedPath) {
             filterChain.doFilter(request, response);
