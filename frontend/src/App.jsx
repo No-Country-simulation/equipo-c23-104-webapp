@@ -1,13 +1,16 @@
 import React from "react";
-import "./App.css";
-import Interactive from "./components/Interactive";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Publications from "./components/Publications";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Interactive />
-    </>
+    <div>
+      <Navbar />
+      <Sidebar />
+      <Publications />
+    </div>
   );
-}
+};
 
 export default App;
