@@ -31,7 +31,8 @@ public class SecurityFilterChainConfig {
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("api/users/**", "api/auth/password-reset/**",
-                                "health").permitAll()
+                                "health","api/profile/**").permitAll()
+                        .requestMatchers("/api/profile/user").authenticated()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

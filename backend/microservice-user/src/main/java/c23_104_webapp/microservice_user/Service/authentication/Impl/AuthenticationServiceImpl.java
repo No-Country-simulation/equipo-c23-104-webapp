@@ -2,7 +2,7 @@ package c23_104_webapp.microservice_user.Service.authentication.Impl;
 
 import c23_104_webapp.microservice_user.DTO.request.authentication.LoginRequest;
 import c23_104_webapp.microservice_user.DTO.request.authentication.UserRegisterRequest;
-import c23_104_webapp.microservice_user.DTO.response.dashboard.UserDetailsResponse;
+import c23_104_webapp.microservice_user.DTO.response.profile.UserDetailsResponse;
 import c23_104_webapp.microservice_user.Entities.Token;
 import c23_104_webapp.microservice_user.Entities.User;
 import c23_104_webapp.microservice_user.Exception.ApiException;

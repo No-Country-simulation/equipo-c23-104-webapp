@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String email;
 
     private String description;
-    private String url_profile;
+    private String urlProfile;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
