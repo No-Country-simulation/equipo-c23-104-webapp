@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Navbar() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-lg">
-      <div className="px-3 py-2 lg:px-5 lg:pl-3">
+    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
             <button
+              id="burger-button"
               data-drawer-target="logo-sidebar"
               data-drawer-toggle="logo-sidebar"
               aria-controls="logo-sidebar"
               type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-white rounded-lg sm:hidden "
             >
               <span className="sr-only">Open sidebar</span>
               <svg
@@ -28,18 +35,22 @@ export default function Navbar() {
                 ></path>
               </svg>
             </button>
-            <a href="" className="flex ms-2 md:me-24 ml-16">
-              <img src="" className="h-8 me-3" alt="" />
+            <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-9">
+              <img
+                src="https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1"
+                className="h-8 me-3 mr-1 rounded-full"
+                alt="FlowBite Logo"
+              />
               <span
                 id="page-name"
-                className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-green-600 dark:shadow-none"
+                className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white hidden md:inline"
               >
                 Parolu!
               </span>
             </a>
           </div>
 
-          <form className="w-full sm:w-96 flex items-center">
+          <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center">
             <label
               htmlFor="default-search"
               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -68,78 +79,94 @@ export default function Navbar() {
                 type="search"
                 id="default-search"
                 placeholder="Buscar personas, comentarios, palabras..."
-                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2  rounded-full bg-white placeholder:text-[10px] placeholder:italic  hover:shadow-lg focus:ring-0  focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
+                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2 rounded-full bg-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
               />
             </div>
           </form>
           <div className="flex items-center">
-            <div className="flex items-center ms-3">
-              <div>
-                <button
-                  id="user-button"
-                  type="button"
-                  className="flex text-lg bg-white border-2  rounded-full w-12 h-12  hover:shadow-lg focus:ring-0  focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
-                  aria-expanded="false"
-                  data-dropdown-toggle="dropdown-user"
-                ></button>
-              </div>
-              <div
-                className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                id="dropdown-user"
+            <div className="relative flex items-center ms-3">
+              <a
+                id="user-button"
+                type="button"
+                className="flex text-sm border-3 rounded-full w-11 h-11 overflow-hidden hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
+                aria-expanded={isDropdownOpen ? "true" : "false"}
+                onClick={toggleDropdown}
+                data-dropdown-toggle="dropdown-user"
               >
-                <div className="px-4 py-3" role="none">
-                  <p
-                    className="text-sm text-gray-900 dark:text-white"
-                    role="none"
-                  >
-                    Neil Sims
-                  </p>
-                  <p
-                    className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
-                    role="none"
-                  >
-                    neil.sims@flowbite.com
-                  </p>
+                <span className="sr-only">Open user menu</span>
+                <img
+                  className="w-full h-full object-cover"
+                  src="https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1"
+                  alt="user photo"
+                />
+              </a>
+
+              {/* Dropdown de usuario */}
+              {isDropdownOpen && (
+                <div
+                  className="absolute top-full right-0 mt-2 z-50 w-48 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+                  id="dropdown-user"
+                >
+                  <div className="px-4 py-3">
+                    <p className="text-sm text-gray-900 dark:text-white">
+                      Lionel Messi
+                    </p>
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300">
+                      messi@test.com
+                    </p>
+                  </div>
+                  <ul className="py-1">
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Panel de perfil
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Configuración
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Mis Recursos
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Ayuda
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Mejorar Plan
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Sign out
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="py-1" role="none">
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Sign out
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              )}
             </div>
           </div>
         </div>
