@@ -73,7 +73,9 @@ public class CommentsService implements ICommentsService {
 
     @Override
     public List<CommentWithCommentsDto> getCommentWithReplies(long commentId) {
-        return commentRepository.findCommentsHierarchy(commentId).stream()
+        List<Comment> comments = commentRepository.findCommentsHierarchy(commentId);
+        List<Comment> rootComments = buildCommentHierarchy(comments);
+        return rootComments.stream()
                 .map(comment -> CommentMapper.toDto(comment, CommentWithCommentsDto.class))
                 .toList();
     }

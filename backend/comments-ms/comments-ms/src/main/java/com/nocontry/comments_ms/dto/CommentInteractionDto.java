@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Schema(description = "Data transfer object representing an interaction with a comment (e.g., like, dislike).")
 @Data
 @AllArgsConstructor
@@ -22,11 +24,7 @@ public class CommentInteractionDto {
     @NotNull(message = "User ID is required.")
     private Long userId;
 
-    @Schema(description = "The type of reaction to the comment (e.g., LIKE, DISLIKE).", example = "LIKE")
-    @NotNull(message = "Reaction type is required.")
-    private String reactionType; // Change to Enum if Enum is implemented
-
     @Schema(description = "The timestamp when the interaction occurred.", example = "2023-01-14T12:34:56")
-    private String createdAt;
+    private LocalDateTime createdAt;
 
 }

@@ -13,6 +13,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentWithCommentsDto  extends  CommentDto{
+public class CommentWithCommentsDto extends CommentDto{
     private List<CommentDto> replies = new ArrayList<>();
 }

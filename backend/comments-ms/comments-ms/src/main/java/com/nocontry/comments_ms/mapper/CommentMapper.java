@@ -13,6 +13,7 @@ public class CommentMapper {
             CommentDto commentDto = new CommentDto();
             commentDto.setCommentId(comment.getCommentId());
             commentDto.setContent(comment.getContent());
+            commentDto.setReactions(comment.getReactions());
             commentDto.setUserId(comment.getUserId());
             commentDto.setPostId(comment.getPostId());
             commentDto.setParentCommentId(comment.getParentCommentId());
@@ -22,6 +23,7 @@ public class CommentMapper {
             CommentWithCommentsDto commentWithCommentsDto = new CommentWithCommentsDto();
             commentWithCommentsDto.setCommentId(comment.getCommentId());
             commentWithCommentsDto.setContent(comment.getContent());
+            commentWithCommentsDto.setReactions(comment.getReactions());
             commentWithCommentsDto.setUserId(comment.getUserId());
             commentWithCommentsDto.setPostId(comment.getPostId());
             commentWithCommentsDto.setParentCommentId(comment.getParentCommentId());
@@ -34,12 +36,11 @@ public class CommentMapper {
         throw new IllegalArgumentException("Unsupported DTO type: " + dtoClass.getName());
     }
 
-
-
     public static Comment toEntity(CommentDto commentDto) {
         Comment comment = new Comment();
         comment.setCommentId(commentDto.getCommentId());
         comment.setContent(commentDto.getContent());
+        comment.setReactions(commentDto.getReactions());
         comment.setUserId(commentDto.getUserId());
         comment.setPostId(commentDto.getPostId());
         comment.setParentCommentId(commentDto.getParentCommentId());

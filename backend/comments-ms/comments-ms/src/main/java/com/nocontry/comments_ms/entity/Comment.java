@@ -28,6 +28,9 @@ public class Comment extends BaseEntity {
     @Column(name = "parent_comment_id")
     private Long parentCommentId;
 
+    @Column(name = "reactions")
+    private int reactions;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id", insertable = false, updatable = false)
     private Comment parentComment;
@@ -36,5 +39,4 @@ public class Comment extends BaseEntity {
     @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> replies = new ArrayList<>();
 
-    private boolean isDeleted;
 }

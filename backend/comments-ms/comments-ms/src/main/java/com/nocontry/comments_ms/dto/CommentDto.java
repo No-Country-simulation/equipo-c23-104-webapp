@@ -48,6 +48,9 @@ public class CommentDto {
     @NotBlank(message = "Content cannot be blank.")
     private String content;
 
+    @Schema(description = "count of reactions", example = "100")
+    private int reactions;
+
     @Schema(description = "The timestamp when the comment was created.", example = "2023-01-14T12:34:56")
     private LocalDateTime createdAt;
 }

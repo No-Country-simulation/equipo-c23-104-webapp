@@ -8,15 +8,17 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class CommentInteraction extends  BaseEntity{
+public class CommentInteraction extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="interaction_id")
     private Long interactionId;
 
-    @Column(name="user_id")
+    @Column(name = "comment_id", nullable = false)
+    private Long commentId;
+
+
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name="comment_id")
-    private Long commentId;
 }
