@@ -32,8 +32,9 @@ export default function Publications() {
         )}
         <div className="flex justify-end mb-4">
           <button
+            id="create-button-publications"
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-3 bg-green-700 text-white rounded-full hover:bg-green-600 hover:shadow-lg"
+            className="px-4 py-3  text-white rounded-full hover:shadow-lg"
           >
             <i className="fa-solid fa-plus"></i>
           </button>
@@ -102,8 +103,9 @@ export default function Publications() {
                     <i class="fa-solid fa-xmark"></i> Cancelar
                   </button>
                   <button
+                    id="create-publications"
                     type="submit"
-                    className="px-6 py-2 bg-green-700 text-white rounded-md text-sm hover:shadow-lg"
+                    className="px-6 py-2  text-white rounded-md text-sm hover:shadow-lg"
                   >
                     <i class="fa-solid fa-check"></i> Crear
                   </button>

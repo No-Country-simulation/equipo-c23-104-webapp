@@ -28,9 +28,12 @@ export default function Navbar() {
                 ></path>
               </svg>
             </button>
-            <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-16">
+            <a href="" className="flex ms-2 md:me-24 ml-16">
               <img src="" className="h-8 me-3" alt="" />
-              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-green-600 dark:shadow-none">
+              <span
+                id="page-name"
+                className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-green-600 dark:shadow-none"
+              >
                 Parolu!
               </span>
             </a>
@@ -65,7 +68,7 @@ export default function Navbar() {
                 type="search"
                 id="default-search"
                 placeholder="Buscar personas, comentarios, palabras..."
-                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2 border-green-600 rounded-full bg-white placeholder:text-[10px] placeholder:italic hover:border-green-500 hover:shadow-lg focus:ring-0 focus:border-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
+                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2  rounded-full bg-white placeholder:text-[10px] placeholder:italic  hover:shadow-lg focus:ring-0  focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
               />
             </div>
           </form>
@@ -73,8 +76,9 @@ export default function Navbar() {
             <div className="flex items-center ms-3">
               <div>
                 <button
+                  id="user-button"
                   type="button"
-                  className="flex text-lg bg-white border-2 border-green-600 rounded-full w-12 h-12 hover:border-green-500 hover:shadow-lg focus:ring-0 focus:border-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
+                  className="flex text-lg bg-white border-2  rounded-full w-12 h-12  hover:shadow-lg focus:ring-0  focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
                   aria-expanded="false"
                   data-dropdown-toggle="dropdown-user"
                 ></button>

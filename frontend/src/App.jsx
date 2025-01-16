@@ -5,11 +5,11 @@ import Publications from "./components/Publications";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <Sidebar />
       <Publications />
-    </div>
+    </>
   );
 };
 
