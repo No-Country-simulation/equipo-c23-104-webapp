@@ -37,8 +37,30 @@ export default function Sidebar() {
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group text-sm ml-8 mr-8 hover:text-black hover:font-bold"
             >
               <span className="flex-1 ms-3 whitespace-nowrap">
-                <i className="fa-solid fa-bell text-green-600"></i>
-                <span className="ml-3">Notificaciones</span>
+                <i className="fa-solid fa-users text-green-600"></i>
+                <span className="ml-3">Comunidades</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group text-sm ml-8 mr-8 hover:text-black hover:font-bold"
+            >
+              <span className="flex-1 ms-3 whitespace-nowrap">
+                <i class="fa-solid fa-microphone-lines text-green-600"></i>
+                <span className="ml-3">Practicar</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group text-sm ml-8 mr-8 hover:text-black hover:font-bold"
+            >
+              <span className="flex-1 ms-3 whitespace-nowrap">
+                <i class="fa-solid fa-screwdriver-wrench text-green-600"></i>
+                <span className="ml-3">Recursos</span>
               </span>
             </a>
           </li>
@@ -59,8 +81,8 @@ export default function Sidebar() {
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group text-sm ml-8 mr-8 hover:text-black hover:font-bold"
             >
               <span className="flex-1 ms-3 whitespace-nowrap">
-                <i className="fa-solid fa-users text-green-600"></i>
-                <span className="ml-3">Comunidades</span>
+                <i className="fa-solid fa-bell text-green-600"></i>
+                <span className="ml-3">Notificaciones</span>
               </span>
             </a>
           </li>
@@ -81,19 +103,8 @@ export default function Sidebar() {
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group text-sm ml-8 mr-8 hover:text-black hover:font-bold"
             >
               <span className="flex-1 ms-3 whitespace-nowrap">
-                <i className="fa-solid fa-user text-green-600"></i>
-                <span className="ml-3">Perfil</span>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group text-sm ml-8 mr-8 hover:text-black hover:font-bold"
-            >
-              <span className="flex-1 ms-3 whitespace-nowrap">
-                <i className="fa-solid fa-circle-info text-green-600"></i>
-                <span className="ml-3">Mas</span>
+                <i class="fa-solid fa-right-from-bracket text-green-600"></i>
+                <span className="ml-3">Cerrar sesión</span>
               </span>
             </a>
           </li>
@@ -101,7 +112,7 @@ export default function Sidebar() {
 
         <button
           type="button"
-          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-56 ml-8 mr-8 mt-2 hover:border-green-500 hover:shadow-lg transition-all duration-300"
+          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-56 ml-8 mr-8 mt-3 hover:border-green-500 hover:shadow-lg transition-all duration-300"
         >
           <i className="fa-solid fa-plus"></i> Crear
         </button>
