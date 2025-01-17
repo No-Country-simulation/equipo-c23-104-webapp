@@ -6,13 +6,14 @@ import fotoP from '../../assets/fotoP.jpg';
 import picture1 from '../../assets/picture1.png'
 import { TypeAnimation } from 'react-type-animation';
 import './Marque.css';
+import PostAnimated from './components/PostAnimated';
 
 
 const Welcome = () => {
 
     return (
         <>
-            <section className="text-center h-full">
+            <section className="text-center h-full" >
                 <div className=" lg:h-screen w-full">
                 <div className='grid sm:grid-cols-1 md:grid-cols1 lg:grid-cols-2 gap-2 h-full'>
                     <div className='p-10 lg:p-16 text-start bg-white h-full flex flex-col align-center justify-center'>
@@ -25,36 +26,18 @@ const Welcome = () => {
                         </div>
                     </div>
 
-                    <div className='py-20 lg:py-40 flex justify-center items-center rounded-md bg-gray-200 order-first lg:order-last bg-cover bg-center' style={{ backgroundImage: `url(${fondo1})` }}>
-                        <div className="relative w-full mx-10">
+                    <div className='py-20 lg:py-40 flex justify-center items-center rounded-md bg-gray-200 order-first lg:order-last bg-cover bg-center' style={{ backgroundImage: `url(${fondo1})` }} >
+                        <div className="relative w-full mx-10" >
                             {/* Fondo Gradiente Desfasado */}
-                            <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-lime-600 rounded-md shadow-lg h-56"></div>
+                            <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-lime-600 rounded-md shadow-lg h-60"></div>
 
                             {/* Contenido Principal */}
-                            <div className="relative flex justify-center flex-col p-8 bg-white rounded-md shadow-lg h-56 my-auto z-10">
-                                <div className="flex items-center content-center justify-start border-b-2 border-gray-300 pb-4">
-                                    <img src={fotoP} alt="" className="w-16 h-16 rounded-full" />
-                                    <p className="text-2xl lg:text-2xl font-bold text-gray-700 w-2/3 text-left ml-4">
-                                        Lucas Ybañez
-                                    </p>
-                                </div>
-                                <TypeAnimation className="text-2xl lg:text-7xl text-gray-700 mt-5 text-start"
-                                    sequence={[
-                                        'Saluton! Mia nomo estas Lucas.',
-                                        1000,
-                                        'Hello! My name is Lucas.',
-                                        1000,
-                                        'Hola! Mi nombre es Lucas.',
-                                        1000
-                                    ]}
-                                    wrapper="span"
-                                    speed={10}
-                                    style={{ fontSize: '1.5rem', display: 'inline-block'}}
-                                    repeat={Infinity}
-                                />
+                            <div className='relative w-full flex justify-center items-center h-56' >
+                                <PostAnimated image={fotoP} nombre={"Lucas G. Ybañez"} textos={["Saluton! Mia nomo estas Lucas","Hello! My name is Lucas","¡Hola! Mi nombre es Lucas"]} />
                             </div>
                         </div>
                     </div>
+
 
 
                 </div>
@@ -68,7 +51,7 @@ const Welcome = () => {
 <section className="bg-white pt-20">
     <div>
         <div className="container mx-auto text-center">
-            <h2 className="text-4xl lg:text-7xl text-lime-600 font-bold mb-10">¿Por qué Parolu?</h2>
+            <h2 className="text-4xl lg:text-7xl text-lime-600 font-bold mb-10">¿Qué es Parolu?</h2>
             <p className="text-xl text-gray-700 mb-10">Parolu es la plataforma perfecta para mejorar tus habilidades lingüísticas. Con nuestra comunidad global, podrás:</p>
             </div>
     </div>
@@ -88,41 +71,43 @@ const Welcome = () => {
 
 {/* Sección Imágenes de Beneficios */}
 <section className="py-20">
+    <h2 className="text-4xl text-center lg:text-7xl text-lime-600 font-bold mb-10">¿Cómo funciona?</h2>
     <div className="container w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* Primera Fila: Imagen | Texto */}
         <div className='w-auto'>
             <div className="mx-20 relative">
-                <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-gradient-to-r from-emerald-400 to-lime-600 rounded-md shadow-lg"></div>
+                <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-lime-600 rounded-md shadow-lg"></div>
                 <img src={picture1} alt="Beneficio 1" className="relative w-full rounded-md z-10"/>
             </div>
         </div>
         <div className="text-center md:text-left">
-            <h3 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">Crea tu cuenta</h3>
+            <h3 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">#1 Crea tu cuenta</h3>
             <p className="text-xl lg:text-3xl text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi molestiae aspernatur exercitationem sequi hic nihil velit dolorem eveniet.</p>
         </div>
 
         {/* Segunda Fila: Texto | Imagen */}
+        
         <div className="text-center md:text-right">
-            <h3 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">Mejora tus Habilidades</h3>
+            <h3 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">#2 Elegí tu idioma</h3>
             <p className="text-xl lg:text-3xl text-gray-700">Perfecciona tu gramática, vocabulario y pronunciación.</p>
         </div>
         <div className='w-auto'>
             <div className="mx-20 relative">
-                <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-gradient-to-r from-emerald-400 to-lime-600 rounded-md shadow-lg"></div>
+                <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-lime-600 rounded-md shadow-lg"></div>
                 <img src={picture1} alt="Beneficio 1" className="relative w-full rounded-md z-10"/>
             </div>
         </div>
 
         {/* Tercera Fila: Imagen | Texto */}
-        <div className='w-auto'>
-            <div className="mx-20 relative">
-                <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-gradient-to-r from-emerald-400 to-lime-600 rounded-md shadow-lg"></div>
-                <img src={picture1} alt="Beneficio 1" className="relative w-full rounded-md z-10"/>
+        <div className='w-auto my-20 relative'>
+                <div className="absolute w-full inset-0 -translate-x-4 translate-y-4 bg-lime-600 rounded-md shadow-lg"></div>
+                <div className='relative'>
+                    <PostAnimated nombre={"Jhon Doe"} textos={["Saluton mondo! Hodiaû la vetero estas tre varma","Hello world! Today the weather is very hot","¡Hola mundo! Hoy el tiempo está re caluroso"]} image={fotoP}/>
+                </div>
             </div>
-        </div>
         <div className="text-center md:text-left">
-            <h3 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">Haz Nuevos Amigos</h3>
-            <p className="text-xl lg:text-3xl text-gray-700">Conéctate con personas de todo el mundo y crea nuevas amistades.</p>
+            <h3 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">#3 Parolu!</h3>
+            <p className="text-xl lg:text-3xl text-gray-700">Publicá y lee las publicaciones de otros en todas partes del mundo. Escribe sobre lo que haces, lo que te gusta y lo que piensas.</p>
         </div>
     </div>
 </section>
@@ -131,7 +116,7 @@ const Welcome = () => {
 {/* Sección Casos de Éxito */}
 <section className="bg-white p-10">
     <div className="container mx-auto text-center">
-        <h2 className="text-4xl text-lime-600 font-bold mb-10">Casos de Éxito</h2>
+        <h2 className="text-4xl lg:text-6xl text-lime-600 font-bold mb-10">Casos de Éxito</h2>
         <p className="text-xl text-gray-700 mb-5">Miles de estudiantes han alcanzado sus metas con Parolu. ¡Conoce sus historias de éxito!</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="bg-gray-100 p-8 rounded-md shadow-md">
@@ -149,8 +134,8 @@ const Welcome = () => {
 {/* Sección de Usuarios Totales y Puntuación Media */}
 <section className="bg-white py-20">
     <div className="container mx-auto text-center">
-        <h2 className="text-4xl text-gray-700 font-bold mb-10">Nuestra Comunidad</h2>
-        <div className="grid grid-cols-2 gap-10">
+        <h2 className="text-4xl lg:text-6xl text-gray-700 font-bold mb-10">Nuestra Comunidad</h2>
+        <div className="grid grid-cols-2 gap-10 px-10">
             <div>
                 <h3 className="text-5xl md:text-6xl font-bold text-lime-600">1M+</h3>
                 <p className="text-xl text-gray-700">Usuarios Totales</p>
