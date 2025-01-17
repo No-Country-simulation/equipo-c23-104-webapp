@@ -58,6 +58,14 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return buildUserInfoResponse(user);
     }
 
+    @Override
+    public UserInfoResponse getUserInfoByHandleUsername(String handleUsername) {
+        User user = userRepository.findByHandleUsername(handleUsername).orElseThrow(()->
+                new ApiException("User not found for the given username", HttpStatus.BAD_REQUEST));
+
+        return buildUserInfoResponse(user);
+    }
+
     private UserInfoResponse buildUserInfoResponse(User user) {
         return new UserInfoResponse(user.getId(),
                                     user.getName(),

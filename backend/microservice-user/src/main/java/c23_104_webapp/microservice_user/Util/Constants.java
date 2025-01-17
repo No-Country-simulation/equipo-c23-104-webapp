@@ -15,5 +15,6 @@ public class Constants {
             "api/auth/password-reset/verify-otp",
             "api/auth/password-reset",
             "api/profile/id/.*",
-            "api/profile/email/.*");
+            "api/profile/email/.*",
+            "api/profile/user/.*");
 }

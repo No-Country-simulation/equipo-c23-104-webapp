@@ -23,7 +23,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<UserInfoResponse> getUserInfo(@PathVariable @Email String email) {
+    public ResponseEntity<UserInfoResponse> getUserInfoByEmail(@PathVariable @Email String email) {
         return ResponseEntity.ok(userService.getUserInfoByEmail(email));
     }
 
@@ -31,4 +31,10 @@ public class UserProfileController {
     public ResponseEntity<UserInfoResponse> getUserInfoById(@PathVariable Long id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
+
+    @GetMapping("/user/{handleUsername}")
+    public ResponseEntity<UserInfoResponse> getUserInfoByHandleUsername(@PathVariable String handleUsername) {
+        return ResponseEntity.ok(userService.getUserInfoByHandleUsername(handleUsername));
+    }
+
 }

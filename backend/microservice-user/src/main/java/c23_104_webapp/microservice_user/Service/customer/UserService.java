@@ -6,4 +6,5 @@ public interface UserService {
     UserInfoResponse getLoggedInUserDetails();
     UserInfoResponse getUserInfoByEmail(String email);
     UserInfoResponse getUserById(Long id);
+    UserInfoResponse getUserInfoByHandleUsername(String handleUsername);
 }
