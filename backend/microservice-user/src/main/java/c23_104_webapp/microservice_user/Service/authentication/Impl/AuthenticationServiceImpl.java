@@ -78,12 +78,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public Token login(LoginRequest loginRequest) {
         try {
+            User user = userRepository.findByEmailOrHandleUsername(loginRequest.identifier(), loginRequest.identifier())
+                    .orElseThrow(() -> new BadCredentialsException("User not found"));
+
+            if (!passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
+                throw new BadCredentialsException("Bad credentials");
+            }
+
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.identifier(), loginRequest.password()));
+                    new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequest.password()));
 
-            User userDetails = (User) authentication.getPrincipal();
-
-            String token = tokenService.generateToken(userDetails);
+            String token = tokenService.generateToken(user);
 
             return new Token(token);
 
