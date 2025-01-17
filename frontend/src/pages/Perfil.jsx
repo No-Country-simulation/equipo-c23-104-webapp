@@ -1,8 +1,28 @@
 import Post from "../components/Post";
 import perfilImagen from "../assets/perfil-icono.png";
 import { Outlet, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Perfil = () => {
+    const [postLista, setPostLista] = useState([]);
+
+    const getPost = (url) => {
+        axios.get(`http://localhost:3000/${url}`)
+            .then(response => {
+                setPostLista(response.data);
+            })
+            .catch(error => {
+                console.error("Error", error);
+            });
+    };
+
+    useEffect(() => {
+        getPost("posts");
+    }, []);
+
+    console.log(postLista);
+
     return (
         <>
             <section>
@@ -23,10 +43,12 @@ const Perfil = () => {
                         </div>
                     </div>
                     <nav className="mt-2 flex border-b border-[#A19FA1]">
-                        <Link to="/post" className="text-center w-full p-4 hover:bg-[#A19FA1]">Post</Link>
-                        <Link to="/me-gusta" className="text-center w-full p-4 hover:bg-[#A19FA1]">Me gusta</Link>
+                        {/* <Link to="/post" className="text-center w-full p-4 hover:bg-[#A19FA1]">Post</Link>
+                        <Link to="/me-gusta" className="text-center w-full p-4 hover:bg-[#A19FA1]">Me gusta</Link> */}
+                        <button className="text-center w-full p-4 hover:bg-[#A19FA1]" onClick={() => getPost("posts")}>Post</button>
+                        <button className="text-center w-full p-4 hover:bg-[#A19FA1]" onClick={() => getPost("comments")}>Me gusta</button>
                     </nav>
-                    <Post />
+                    <Post postLista={postLista} />
                 </div>
             </section>
             <Outlet />

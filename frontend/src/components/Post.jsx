@@ -1,8 +1,6 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
 import PostTarjeta from "./PostTarjeta";
 
-const Post = () => {
+const Post = ({postLista}) => {
     // npx json-server db.json
     // const llamarDatos = () => {
     //     const url = "http://localhost:3000/posts";
@@ -27,24 +25,6 @@ const Post = () => {
     //         })
     // };
     // llamarDatos();
-
-    const [postLista, setPostLista] = useState([]);
-
-    const getPost = () => {
-        axios.get("http://localhost:3000/posts")
-            .then(response => {
-                setPostLista(response.data);
-            })
-            .catch(error => {
-                console.error("Error", error);
-            });
-    };
-
-    useEffect(() => {
-        getPost();
-    }, []);
-
-    console.log(postLista);
 
     return (
         <div className="p-4 flex flex-col gap-y-4">
