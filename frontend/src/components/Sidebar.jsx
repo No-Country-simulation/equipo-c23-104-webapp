@@ -38,7 +38,7 @@ export default function Sidebar() {
             >
               <span className="flex-1 ms-3 whitespace-nowrap">
                 <i id="users-icon" className="fa-solid fa-users "></i>
-                <span className="ml-3">Comunidades</span>
+                <span className="ml-2">Comunidades</span>
               </span>
             </a>
           </li>
@@ -52,7 +52,7 @@ export default function Sidebar() {
                   id="microphone-icon"
                   class="fa-solid fa-microphone-lines "
                 ></i>
-                <span className="ml-3">Practicar</span>
+                <span className="ml-4">Practicar</span>
               </span>
             </a>
           </li>

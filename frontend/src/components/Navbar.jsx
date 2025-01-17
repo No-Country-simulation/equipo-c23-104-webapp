@@ -121,6 +121,10 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
+                        <i
+                          id="user-panel-icon"
+                          class="fa-solid fa-user mr-2"
+                        ></i>{" "}
                         Panel de perfil
                       </a>
                     </li>
@@ -129,6 +133,10 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
+                        <i
+                          id="user-setting-icon"
+                          class="fa-solid fa-gear mr-2"
+                        ></i>{" "}
                         Configuración
                       </a>
                     </li>
@@ -137,6 +145,10 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
+                        <i
+                          id="user-resources-icon"
+                          class="fa-solid fa-screwdriver-wrench mr-2"
+                        ></i>{" "}
                         Mis Recursos
                       </a>
                     </li>
@@ -145,6 +157,10 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
+                        <i
+                          id="user-help-icon"
+                          class="fa-solid fa-circle-question mr-2"
+                        ></i>{" "}
                         Ayuda
                       </a>
                     </li>
@@ -153,6 +169,10 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
+                        <i
+                          id="user-upgrade-icon"
+                          class="fa-solid fa-circle-up mr-2"
+                        ></i>{" "}
                         Mejorar Plan
                       </a>
                     </li>
@@ -161,6 +181,10 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
+                        <i
+                          id="user-logout-icon"
+                          class="fa-solid fa-right-from-bracket mr-2"
+                        ></i>
                         Sign out
                       </a>
                     </li>

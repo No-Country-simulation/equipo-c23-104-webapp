@@ -1,6 +1,12 @@
 .contenedor-publicaciones {
   width: 500px;
 }
+#user-logout-icon,
+#user-upgrade-icon,
+#user-help-icon,
+#user-resources-icon,
+#user-setting-icon,
+#user-panel-icon,
 #logout-icon,
 #premium-icon,
 #notifications-icon,
