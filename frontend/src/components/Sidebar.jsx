@@ -4,10 +4,10 @@ export default function Sidebar() {
   return (
     <aside
       id="logo-sidebar"
-      className="fixed top-0 left-0 z-40 w-80 h-screen pt-20 transition-transform -translate-x-full bg-white  sm:translate-x-0 dark:bg-[#4A494A] dark:border-gray-700"
+      className="fixed top-0 left-0 z-40 w-80 h-screen pt-20  bg-white  sm:translate-x-0 dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500"
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-[#4A494A] mt-4">
+      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-[#4A494A] mt-4 transition-all duration-500">
         <ul className="space-y-2 font-medium">
           <li>
             <a
