@@ -27,6 +27,8 @@ public class User implements UserDetails {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false, unique = true)
+    private String handleUsername;
 
     private String description;
     private String urlProfile;

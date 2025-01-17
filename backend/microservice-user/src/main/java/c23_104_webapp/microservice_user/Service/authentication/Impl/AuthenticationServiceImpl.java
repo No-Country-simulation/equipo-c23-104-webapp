@@ -33,6 +33,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public UserDetailsResponse registerUser(UserRegisterRequest userRegisterRequest) {
 
         validateEmail(userRegisterRequest);
+        validateUsername(userRegisterRequest);
 
         String encodedPassword = passwordEncoder.encode(userRegisterRequest.password());
 
@@ -40,6 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .name(userRegisterRequest.name())
                 .email(userRegisterRequest.email())
                 .password(encodedPassword)
+                .handleUsername(userRegisterRequest.username())
                 .build();
 
         userRepository.save(user);
@@ -56,12 +58,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     }
 
+    private void validateUsername(UserRegisterRequest userRegisterRequest){
+        if(userRepository.existsByHandleUsernameIgnoreCase(userRegisterRequest.username())){
+            throw new ApiException("Username already exists", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     private UserDetailsResponse createUserResponse(UserRegisterRequest userRegisterRequest,
                                                    String encodedPassword) {
 
         return new UserDetailsResponse(
                 userRegisterRequest.name(),
                 userRegisterRequest.email(),
+                userRegisterRequest.username(),
                 encodedPassword
         );
     }

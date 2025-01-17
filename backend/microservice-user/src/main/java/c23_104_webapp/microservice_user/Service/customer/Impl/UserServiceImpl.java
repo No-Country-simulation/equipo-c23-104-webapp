@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     private UserInfoResponse buildUserInfoResponse(User user) {
-        return new UserInfoResponse(user.getId(), user.getName(), user.getEmail(), user.getDescription(), user.getUrlProfile());
+        return new UserInfoResponse(user.getId(),
+                                    user.getName(),
+                                    user.getHandleUsername(),
+                                    user.getEmail(),
+                                    user.getDescription(),
+                                    user.getUrlProfile());
     }
 }
