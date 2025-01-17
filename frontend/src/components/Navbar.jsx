@@ -2,39 +2,25 @@ import React, { useState } from "react";
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+    document.documentElement.classList.toggle("dark");
+  };
+
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <nav
+      id="navbar-container"
+      className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-[#4A494A] dark:border-gray-700"
+    >
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
-            <button
-              id="burger-button"
-              data-drawer-target="logo-sidebar"
-              data-drawer-toggle="logo-sidebar"
-              aria-controls="logo-sidebar"
-              type="button"
-              className="inline-flex items-center p-2 text-sm text-white rounded-lg sm:hidden "
-            >
-              <span className="sr-only">Open sidebar</span>
-              <svg
-                className="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  clipRule="evenodd"
-                  fillRule="evenodd"
-                  d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                ></path>
-              </svg>
-            </button>
             <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-9">
               <img
                 src="https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1"
@@ -51,12 +37,6 @@ export default function Navbar() {
           </div>
 
           <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center">
-            <label
-              htmlFor="default-search"
-              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-            >
-              Search
-            </label>
             <div className="relative w-full flex items-center">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
@@ -79,19 +59,37 @@ export default function Navbar() {
                 type="search"
                 id="default-search"
                 placeholder="Buscar personas, comentarios, palabras..."
-                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2 rounded-full bg-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
+                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2 rounded-full bg-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:border-gray-600 dark:placeholder-white dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500"
               />
             </div>
           </form>
+
           <div className="flex items-center">
+            {/* Botón de Modo Oscuro */}
+            <button
+              id="dark-mode-toggle"
+              onClick={toggleDarkMode}
+              className="text-sm p-2 rounded-full focus:ring-0 focus:outline-none bg-gray-200 dark:bg-[#4A494A] dark:text-white"
+            >
+              {darkMode ? (
+                <i
+                  className="fa-solid fa-sun text-yellow-400 rounded-full w-6 h-5"
+                  aria-hidden="true"
+                ></i>
+              ) : (
+                <i
+                  className="fa-solid fa-moon text-gray-600 dark:text-gray-200 rounded-full w-6 h-5"
+                  aria-hidden="true"
+                ></i>
+              )}
+            </button>
+
             <div className="relative flex items-center ms-3">
               <a
                 id="user-button"
-                type="button"
                 className="flex text-sm border-3 rounded-full w-11 h-11 overflow-hidden hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500 transition-all duration-300"
                 aria-expanded={isDropdownOpen ? "true" : "false"}
                 onClick={toggleDropdown}
-                data-dropdown-toggle="dropdown-user"
               >
                 <span className="sr-only">Open user menu</span>
                 <img
@@ -100,8 +98,6 @@ export default function Navbar() {
                   alt="user photo"
                 />
               </a>
-
-              {/* Dropdown de usuario */}
               {isDropdownOpen && (
                 <div
                   className="absolute top-full right-0 mt-2 z-50 w-48 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600"
@@ -121,11 +117,8 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
-                        <i
-                          id="user-panel-icon"
-                          class="fa-solid fa-user mr-2"
-                        ></i>{" "}
-                        Panel de perfil
+                        <i className="fa-solid fa-user mr-2"></i> Panel de
+                        perfil
                       </a>
                     </li>
                     <li>
@@ -133,11 +126,7 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
-                        <i
-                          id="user-setting-icon"
-                          class="fa-solid fa-gear mr-2"
-                        ></i>{" "}
-                        Configuración
+                        <i className="fa-solid fa-gear mr-2"></i> Configuración
                       </a>
                     </li>
                     <li>
@@ -145,10 +134,7 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
-                        <i
-                          id="user-resources-icon"
-                          class="fa-solid fa-screwdriver-wrench mr-2"
-                        ></i>{" "}
+                        <i className="fa-solid fa-screwdriver-wrench mr-2"></i>{" "}
                         Mis Recursos
                       </a>
                     </li>
@@ -157,10 +143,7 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
-                        <i
-                          id="user-help-icon"
-                          class="fa-solid fa-circle-question mr-2"
-                        ></i>{" "}
+                        <i className="fa-solid fa-circle-question mr-2"></i>{" "}
                         Ayuda
                       </a>
                     </li>
@@ -169,11 +152,8 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
-                        <i
-                          id="user-upgrade-icon"
-                          class="fa-solid fa-circle-up mr-2"
-                        ></i>{" "}
-                        Mejorar Plan
+                        <i className="fa-solid fa-circle-up mr-2"></i> Mejorar
+                        Plan
                       </a>
                     </li>
                     <li>
@@ -181,10 +161,7 @@ export default function Navbar() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
-                        <i
-                          id="user-logout-icon"
-                          class="fa-solid fa-right-from-bracket mr-2"
-                        ></i>
+                        <i className="fa-solid fa-right-from-bracket mr-2"></i>{" "}
                         Sign out
                       </a>
                     </li>
