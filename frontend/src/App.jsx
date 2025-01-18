@@ -9,8 +9,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Perfil />}>
           <Route path="editar-perfil" element={<EditarPerfil />} />
-          <Route path="seguidos" element={<Seguidores titulo={"Seguidos"} boton={false} />} />
-          <Route path="seguidores" element={<Seguidores titulo={"Seguidores"} boton={true} />} />
+          <Route path="seguidos" element={<Seguidores url={"seguidos"} titulo={"Seguidos"} boton={false} />} />
+          <Route path="seguidores" element={<Seguidores url={"seguidores"} titulo={"Seguidores"} boton={true} />} />
         </Route>
       </Routes>
     </>

@@ -1,10 +1,39 @@
-{
+{ 
+    "datos": [
+        {"nombre": "Anderson" },
+        {"nombreUsuario": "And_f12" }
+    ],
+    "seguidos": [
+        { "id": "1", "nombre": "María Fernanda ", "nombreUsuario": "María_F" },
+        { "id": "2", "nombre": "Juan Carlos ", "nombreUsuario": "Juan_C" },
+        { "id": "3", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "4", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" },
+        { "id": "5", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "6", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" },
+        { "id": "7", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "8", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" }
+
+    ],
+    "seguidores": [
+        { "id": "1", "nombre": "María Fernanda Gómez", "nombreUsuario": "María_F" },
+        { "id": "2", "nombre": "Juan Carlos Pérez", "nombreUsuario": "Juan_C" },
+        { "id": "3", "nombre": "Ana Isabel Martínez", "nombreUsuario": "Ana_I" },
+        { "id": "4", "nombre": "David Alejandro Rodríguez", "nombreUsuario": "David_A" },
+        { "id": "5", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "6", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" },
+        { "id": "7", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "8", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" }
+    ],
     "posts": [
         { "id": "1", "nombre": "Anderson", "comentario": "¡Hola!" },
-        { "id": "2", "nombre": "Anderson", "comentario": "¿Como se encuentran todos hoy?" }
+        { "id": "2", "nombre": "Anderson", "comentario": "¿Como se encuentran todos hoy?" },
+        { "id": "3", "nombre": "Anderson", "comentario": "¡Buenos dias, feliz mañana!" },
+        { "id": "4", "nombre": "Anderson", "comentario": "¿Ya desayunaron?" }
     ],
     "comments": [
         { "id": "1", "nombre": "Pedro Martinez", "comentario": "¿Alguien sabe como cambiar el fondo de pantalla en linux?" },
-        { "id": "2", "nombre": "Laura Gurrero", "comentario": "Me voy de vacaciones" }
+        { "id": "2", "nombre": "Laura Gurrero", "comentario": "Me voy de vacaciones" },
+        { "id": "3", "nombre": "Pedro Martinez", "comentario": "Estoy de vacaciones" },
+        { "id": "4", "nombre": "Laura Gurrero", "comentario": "Estoy de vuelta, compartire fotos del viaje" }
     ]
 }

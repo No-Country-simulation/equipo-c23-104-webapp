@@ -21,7 +21,7 @@ const Perfil = () => {
         getPost("posts");
     }, []);
 
-    console.log(postLista);
+    // console.log(postLista);
 
     return (
         <>
@@ -40,8 +40,8 @@ const Perfil = () => {
                         <div className="flex gap-x-3">
                             {/* <p><span className="font-semibold">10</span> Siguiendo</p>
                             <p><span className="font-semibold">20</span> Seguidores</p> */}
-                            <Link to="seguidos"><span className="font-semibold">10</span>Siguiendo</Link>
-                            <Link to="seguidores"><span className="font-semibold">20</span>Seguidores</Link>
+                            <Link to="seguidos" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">10</span>Siguiendo</Link>
+                            <Link to="seguidores" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">20</span>Seguidores</Link>
                         </div>
                     </div>
                     <nav className="mt-2 flex border-b border-[#A19FA1]">
