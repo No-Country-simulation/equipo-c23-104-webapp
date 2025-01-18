@@ -5,7 +5,7 @@ const EditarPerfil = () => {
     return (
         <section className="fixed top-0 w-full h-full flex items-center justify-center overflow-hidden bg-[#4a494ada] backdrop-blur-[2px]">
             <div className="w-96 p-4 flex flex-col justify-center rounded-xl bg-white max-[450px]:w-full max-[450px]:h-full max-[450px]:rounded-none">
-                <div className="flex items-center justify-between max-[450px]:relative max-[450px]:top-[-5rem]">
+                <div className="flex items-center justify-between max-[450px]:absolute max-[450px]:top-4 max-[450px]:w-[calc(100%-2rem)]">
                     <div className="flex items-center gap-1">
                         <Link to="/" className="w-7 h-7 flex items-center justify-center text-2xl font-extralight rounded-full hover:bg-[#A19FA1]">⬅️</Link>
                         <h2>Editar Perfil</h2>
