@@ -3,16 +3,13 @@ import React, { useState } from "react";
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
-
   const toggleDarkMode = () => {
     setDarkMode((prevMode) => !prevMode);
     document.documentElement.classList.toggle("dark");
   };
-
   return (
     <nav
       id="navbar-container"
@@ -35,7 +32,6 @@ export default function Navbar() {
               </span>
             </a>
           </div>
-
           <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center">
             <div className="relative w-full flex items-center">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -63,9 +59,7 @@ export default function Navbar() {
               />
             </div>
           </form>
-
           <div className="flex items-center">
-            {/* Botón de Modo Oscuro */}
             <button
               id="dark-mode-toggle"
               onClick={toggleDarkMode}
@@ -83,7 +77,6 @@ export default function Navbar() {
                 ></i>
               )}
             </button>
-
             <div className="relative flex items-center ms-3">
               <a
                 id="user-button"
@@ -98,76 +91,79 @@ export default function Navbar() {
                   alt="user photo"
                 />
               </a>
-              {isDropdownOpen && (
-                <div
-                  className="absolute top-full right-0 mt-2 z-50 w-48 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600"
-                  id="dropdown-user"
-                >
-                  <div className="px-4 py-3">
-                    <p className="text-sm text-gray-900 dark:text-white">
-                      Lionel Messi
-                    </p>
-                    <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300">
-                      messi@test.com
-                    </p>
-                  </div>
-                  <ul className="py-1">
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <i className="fa-solid fa-user mr-2"></i> Panel de
-                        perfil
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <i className="fa-solid fa-gear mr-2"></i> Configuración
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <i className="fa-solid fa-screwdriver-wrench mr-2"></i>{" "}
-                        Mis Recursos
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <i className="fa-solid fa-circle-question mr-2"></i>{" "}
-                        Ayuda
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <i className="fa-solid fa-circle-up mr-2"></i> Mejorar
-                        Plan
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <i className="fa-solid fa-right-from-bracket mr-2"></i>{" "}
-                        Sign out
-                      </a>
-                    </li>
-                  </ul>
+              <div
+                id="dropdown-user"
+                className={`absolute top-full right-0 mt-3 z-50 w-48 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
+                  isDropdownOpen
+                    ? "scale-100 opacity-100"
+                    : "scale-95 opacity-0 pointer-events-none"
+                }`}
+              >
+                <div className="px-4 py-3">
+                  <p className="ml-8 text-sm text-gray-900 dark:text-white">
+                    Lionel Messi
+                  </p>
+                  <p className="ml-8 text-sm font-medium text-gray-900 truncate dark:text-gray-300">
+                    messi@test.com
+                  </p>
                 </div>
-              )}
+                <ul className="py-1">
+                  <li>
+                    <a
+                      href="#"
+                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                    >
+                      <i className="fa-solid fa-user mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      Panel de perfil
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                    >
+                      <i className="fa-solid fa-gear mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      Configuración
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                    >
+                      <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      Mis Recursos
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                    >
+                      <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      Ayuda
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                    >
+                      <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      Mejorar Plan
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                    >
+                      <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      Sign out
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
