@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Publications from "./components/Publications";
 
-const App = () => {
+export default function App() {
+  const [isTextVisible, setIsTextVisible] = useState(true);
+  const toggleTextVisibility = () => {
+    setIsTextVisible((prevState) => !prevState);
+  };
+
   return (
     <>
-      <Navbar />
-      <Sidebar />
+      <Navbar toggleTextVisibility={toggleTextVisibility} />
+      <Sidebar
+        isTextVisible={isTextVisible}
+        toggleTextVisibility={toggleTextVisibility}
+      />
       <Publications />
     </>
   );
-};
-
-export default App;
+}

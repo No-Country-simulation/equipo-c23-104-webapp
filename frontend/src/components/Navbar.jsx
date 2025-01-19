@@ -1,24 +1,39 @@
 import React, { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ toggleTextVisibility }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // Nuevo estado
+
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
+
   const toggleDarkMode = () => {
     setDarkMode((prevMode) => !prevMode);
     document.documentElement.classList.toggle("dark");
   };
+
+  const toggleSidebarCollapse = () => {
+    setIsSidebarCollapsed((prevState) => !prevState);
+  };
+
   return (
     <nav
       id="navbar-container"
-      className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500"
+      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500 border border-[#A19FA1]"
     >
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
-            <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-9">
+            <button
+              onClick={toggleTextVisibility}
+              className="px-3 py-2 mr-2 ml-1 rounded text-sm border hover:border-transparent font-medium bg-white dark:text-white hover:bg-[#00bf00] group dark:hover:bg-gray-600 transition-all duration-200 focus:outline-none"
+            >
+              <i className="fa-solid fa-bars text-[#00bf00] group-hover:text-white"></i>
+            </button>
+
+            <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-0">
               <img
                 src="https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1"
                 className="h-8 me-3 mr-1 rounded-full"
@@ -26,7 +41,9 @@ export default function Navbar() {
               />
               <span
                 id="page-name"
-                className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white hidden md:inline"
+                className={`self-center text-3xl font-semibold whitespace-nowrap dark:text-white hidden md:inline ${
+                  isSidebarCollapsed ? "hidden" : ""
+                }`}
               >
                 Parolu!
               </span>
