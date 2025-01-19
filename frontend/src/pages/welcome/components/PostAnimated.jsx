@@ -15,22 +15,26 @@ export default function PostAnimated(props) {
     };
 
     return (
-        <div className='bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto z-10'>
+        <div className='bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto z-10 border'>
             <div className="flex items-center justify-start border-b-2 border-gray-300 pb-4">
                 <img src={image} alt="" className="w-16 h-16 rounded-full" />
                 <div className="ml-4 w-full text-start">
-                    <p className="text-2xl lg:text-2xl font-bold text-gray-700">{nombre}</p>
+                    <p className="text-xl lg:text-2xl font-bold text-gray-700">{nombre}</p>
                     <p className="text-sm text-gray-500">{`1h ago`}</p>
                 </div>
             </div>
             <TypeAnimation
-                className="text-2xl lg:text-7xl text-gray-700 mt-5 w-full text-start"
-                sequence={sequenceArray}
-                wrapper="span"
-                speed={10}
-                style={{ fontSize: '1.5rem', display: 'inline-block' }}
-                repeat={Infinity}
-            />
+    className="text-2xl lg:text-7xl text-gray-700 mt-5 w-full text-start"
+    sequence={sequenceArray}
+    wrapper="span"
+    speed={10}
+    style={{ 
+        fontSize: window.innerWidth <= 768 ? '1.2rem' : '1.5rem', 
+        display: 'inline-block' 
+    }}
+    repeat={Infinity}
+/>
+
             <div className="flex justify-start items-center mt-5 space-x-6">
                 <button 
                     className="flex items-center text-gray-700 hover:text-red-600 focus:outline-none"
