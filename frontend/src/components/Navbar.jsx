@@ -112,65 +112,65 @@ export default function Navbar({ toggleTextVisibility }) {
                 }`}
               >
                 <div className="px-4 py-3">
-                  <p className="ml-8 text-sm text-gray-900 dark:text-white">
+                  <p className="ml-8 text-[13px] text-gray-900 dark:text-white">
                     Lionel Messi
                   </p>
-                  <p className="ml-8 text-sm font-medium text-gray-900 truncate dark:text-gray-300">
+                  <p className="ml-8 text-[12px] font-medium text-gray-900 truncate dark:text-gray-300">
                     messi@test.com
                   </p>
                 </div>
-                <ul className="py-1">
+                <ul className="space-y-0">
                   <li>
                     <a
                       href="#"
-                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-user mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      <i className="fa-solid fa-user mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Panel de perfil
                     </a>
                   </li>
                   <li>
                     <a
                       href="#"
-                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-gear mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      <i className="fa-solid fa-gear mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Configuración
                     </a>
                   </li>
                   <li>
                     <a
                       href="#"
-                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Mis Recursos
                     </a>
                   </li>
                   <li>
                     <a
                       href="#"
-                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Ayuda
                     </a>
                   </li>
                   <li>
                     <a
                       href="#"
-                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Mejorar Plan
                     </a>
                   </li>
                   <li>
                     <a
                       href="#"
-                      className="m-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 mb-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] transition-all duration-300 group-hover:text-white"></i>{" "}
+                      <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Sign out
                     </a>
                   </li>
