@@ -4,127 +4,214 @@ export default function Sidebar({ isTextVisible }) {
   return (
     <aside
       id="logo-sidebar"
-      className={`fixed top-0 left-0 z-40 h-screen pt-20 bg-white sm:translate-x-0 dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500 ${
-        isTextVisible ? "w-80" : "w-16"
+      className={`fixed top-0 left-0 z-40 h-screen pt-20 bg-white sm:translate-x-0 dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500 border border-[#A19FA1] ${
+        isTextVisible ? "w-64" : "w-16"
       }`}
       aria-label="Sidebar"
     >
       <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-[#4A494A] mt-4 transition-all duration-500">
-        <ul className="space-y-2 font-medium">
-          <li className="ml-1">
-            <a
-              href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black hover:bg-gray-100 dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
-            >
-              <span className="">
-                <i id="house-icon" className="fa-solid fa-house"></i>
-                {isTextVisible && <span className="ml-3">Inicio</span>}
-              </span>
+        <ul className="space-y-0 font-medium ">
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
+            <a className="" href="#" title={!isTextVisible ? "Inicio" : ""}>
+              <i className="fa-solid fa-house text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform overflow-hidden ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0 w-auto"
+                      : "opacity-0 translate-x-[-10px] w-0"
+                  }`}
+                >
+                  Inicio
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
-            <a
-              href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black hover:bg-gray-100 dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
-            >
-              <span className="flex-1 whitespace-nowrap">
-                <i id="explorer-icon" className="fa-brands fa-searchengin"></i>
-                {isTextVisible && <span className="ml-3">Explorar</span>}
-              </span>
+          <li
+            className={` flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
+            <a className="" href="#" title={!isTextVisible ? "Explorar" : ""}>
+              <i className="fa-brands fa-searchengin ml-0.5 text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Explorar
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
             <a
+              className=""
               href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
+              title={!isTextVisible ? "Comunidades" : ""}
             >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i id="users-icon" className="fa-solid fa-users"></i>
-                {isTextVisible && <span className="ml-2">Comunidades</span>}
-              </span>
+              <i className="fa-solid fa-users text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-2 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Comunidades
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
-            <a
-              href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
-            >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i
-                  id="microphone-icon"
-                  className="fa-solid fa-microphone-lines"
-                ></i>
-                {isTextVisible && <span className="ml-4">Practicar</span>}
-              </span>
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
+            <a className="" href="#" title={!isTextVisible ? "Practicar" : ""}>
+              <i className="fa-solid fa-microphone-lines ml-0.5 text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Practicar
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
-            <a
-              href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
-            >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i
-                  id="resources-icon"
-                  className="fa-solid fa-screwdriver-wrench"
-                ></i>
-                {isTextVisible && <span className="ml-3">Recursos</span>}
-              </span>
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-200 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
+            <a className="" href="#" title={!isTextVisible ? "Recursos" : ""}>
+              <i className="fa-solid fa-screwdriver-wrench text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Recursos
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
-            <a
-              href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
-            >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i id="message-icon" className="fa-solid fa-envelope"></i>
-                {isTextVisible && <span className="ml-3">Mensajes</span>}
-              </span>
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-200 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
+            <a className="" href="#" title={!isTextVisible ? "Mensajes" : ""}>
+              <i className="fa-solid fa-envelope text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Mensajes
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-200 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
             <a
+              className=""
               href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
+              title={!isTextVisible ? "Notificaciones" : ""}
             >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i id="notifications-icon" className="fa-solid fa-bell"></i>
-                {isTextVisible && <span className="ml-3">Notificaciones</span>}
-              </span>
+              <i className="fa-solid fa-bell text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Notificaciones
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
-            <a
-              href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
-            >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i id="premium-icon" className="fa-solid fa-medal"></i>
-                {isTextVisible && <span className="ml-3">Premium</span>}
-              </span>
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
+            <a className="" href="#" title={!isTextVisible ? "Premium" : ""}>
+              <i className="fa-solid fa-medal text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Premium
+                </span>
+              )}
             </a>
           </li>
-          <li className="ml-1">
+          <li
+            className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
+              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+            }`}
+          >
             <a
+              className=""
               href="#"
-              className="flex items-center px-3 py-2 text-gray-900 rounded dark:text-white dark:hover:border-white dark:hover:text-black dark:hover:bg-white group text-sm hover:text-black hover:font-bold"
+              title={!isTextVisible ? "Cerrar Sesión" : ""}
             >
-              <span className="flex-1 ms-2 whitespace-nowrap">
-                <i
-                  id="logout-icon"
-                  className="fa-solid fa-right-from-bracket"
-                ></i>
-                {isTextVisible && <span className="ml-3">Cerrar sesión</span>}
-              </span>
+              <i className="fa-solid fa-right-from-bracket ml-0.5 text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
+              {isTextVisible && (
+                <span
+                  className={`ml-3 text-[#4A494A] group-hover:text-white dark:text-white transition-all duration-200 ease-in-out transform ${
+                    isTextVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 w-0 overflow-hidden"
+                  }`}
+                >
+                  Cerrar Sesión
+                </span>
+              )}
             </a>
           </li>
         </ul>
-
         <button
-          id="create-button"
+          title={!isTextVisible ? "Crear" : ""}
           type="button"
-          className="focus:outline-none text-white dark:border-white focus:ring-4 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 w-56 mt-3 hover:shadow-lg transition-all duration-300"
+          className={`border hover:border-transparent bg-[#00bf00] text-white dark:hover:border-white font-medium rounded transition-all duration-200 ${
+            isTextVisible
+              ? "w-56 h-auto px-3 py-2 mt-3 text-[13px]"
+              : "w-10 h-10 mt-3 flex items-center justify-center text-[10px] rounded-full"
+          }`}
         >
           <i className="fa-solid fa-plus"></i> {isTextVisible && "Crear"}
         </button>

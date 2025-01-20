@@ -1,31 +1,12 @@
 .contenedor-publicaciones {
   width: 500px;
 }
-#user-logout-icon,
-#user-upgrade-icon,
-#user-help-icon,
-#user-resources-icon,
-#user-setting-icon,
-#user-panel-icon,
-#logout-icon,
-#premium-icon,
-#notifications-icon,
-#message-icon,
-#resources-icon,
-#microphone-icon,
-#users-icon,
-#explorer-icon,
-#house-icon,
-#page-name {
-  color: #00bf00;
-}
 #user-button,
 #default-search {
   border: 2px solid #00bf00;
 }
-#burger-button,
+
 #create-publications,
-#create-button-publications,
-#create-button {
+#create-button-publications {
   background-color: #00bf00;
 }
