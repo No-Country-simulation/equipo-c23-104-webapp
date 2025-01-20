@@ -16,5 +16,10 @@ public class Constants {
             "api/auth/password-reset",
             "api/profile/id/.*",
             "api/profile/email/.*",
-            "api/profile/user/.*");
+            "api/profile/user/.*",
+            "swagger-ui.html",
+            "swagger-ui/.*",
+            "v3/api-docs",
+            "swagger.json/.*"
+    );
 }
