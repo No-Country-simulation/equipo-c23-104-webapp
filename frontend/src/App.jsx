@@ -5,18 +5,22 @@ import Publications from "./components/Publications";
 
 export default function App() {
   const [isTextVisible, setIsTextVisible] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const toggleTextVisibility = () => {
     setIsTextVisible((prevState) => !prevState);
   };
 
   return (
     <>
-      <Navbar toggleTextVisibility={toggleTextVisibility} />
+      <Navbar
+        toggleTextVisibility={toggleTextVisibility}
+        setSearchQuery={setSearchQuery}
+      />
       <Sidebar
         isTextVisible={isTextVisible}
         toggleTextVisibility={toggleTextVisibility}
       />
-      <Publications />
+      <Publications searchQuery={searchQuery} />
     </>
   );
 }

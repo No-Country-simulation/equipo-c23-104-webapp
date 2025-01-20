@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-export default function Navbar({ toggleTextVisibility }) {
+export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [searchQuery, setSearchQueryState] = useState("");
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -16,6 +17,12 @@ export default function Navbar({ toggleTextVisibility }) {
 
   const toggleSidebarCollapse = () => {
     setIsSidebarCollapsed((prevState) => !prevState);
+  };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setSearchQueryState(value);
   };
 
   return (
@@ -33,7 +40,7 @@ export default function Navbar({ toggleTextVisibility }) {
               <i className="fa-solid fa-bars text-[#00bf00] dark:text-white group-hover:text-white"></i>
             </button>
             <a href="#" className="flex ms-2 md:me-24 ml-0 items-center ">
-              <i class="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
+              <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
               <span
                 id="page-name"
                 className={`self-center text-3xl font-semibold whitespace-nowrap text-[#00bf00] dark:text-white hidden md:inline  ${
@@ -68,6 +75,8 @@ export default function Navbar({ toggleTextVisibility }) {
                 id="default-search"
                 placeholder="Buscar personas, comentarios, palabras..."
                 className="block w-full p-2 pl-8 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
             </div>
           </form>
