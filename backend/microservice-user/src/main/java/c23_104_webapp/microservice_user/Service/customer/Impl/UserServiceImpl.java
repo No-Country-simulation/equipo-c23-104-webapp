@@ -1,5 +1,6 @@
 package c23_104_webapp.microservice_user.Service.customer.Impl;
 
+import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Entities.User;
 import c23_104_webapp.microservice_user.Exception.ApiException;
@@ -15,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +64,31 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 new ApiException("User not found for the given username", HttpStatus.BAD_REQUEST));
 
         return buildUserInfoResponse(user);
+    }
+
+    @Override
+    @Transactional
+    public UserInfoResponse editUserProfile(EditProfileRequest editProfileRequest) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        // TODO: Improve the logic for the method to edit a user.
+
+        if(editProfileRequest.nameEdit() != null){
+            user.setName(editProfileRequest.nameEdit());
+        }
+        if(editProfileRequest.descriptionEdit() != null){
+            user.setDescription(editProfileRequest.descriptionEdit());
+        }
+        if(editProfileRequest.urlProfileEdit() != null){
+            user.setUrlProfile(editProfileRequest.urlProfileEdit());
+        }
+
+        userRepository.save(user);
+
+        return buildUserInfoResponse(user);
+
     }
 
     private UserInfoResponse buildUserInfoResponse(User user) {
