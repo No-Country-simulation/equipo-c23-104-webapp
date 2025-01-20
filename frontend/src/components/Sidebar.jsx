@@ -13,10 +13,14 @@ export default function Sidebar({ isTextVisible }) {
         <ul className="space-y-0 font-medium ">
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
-            <a className="" href="#" title={!isTextVisible ? "Inicio" : ""}>
+            <a
+              className="flex items-center w-full h-full"
+              href="#"
+              title={!isTextVisible ? "Inicio" : ""}
+            >
               <i className="fa-solid fa-house text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
               {isTextVisible && (
                 <span
@@ -33,10 +37,14 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={` flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
-            <a className="" href="#" title={!isTextVisible ? "Explorar" : ""}>
+            <a
+              className="flex items-center w-full h-full"
+              href="#"
+              title={!isTextVisible ? "Explorar" : ""}
+            >
               <i className="fa-brands fa-searchengin ml-0.5 text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
               {isTextVisible && (
                 <span
@@ -53,11 +61,11 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
             <a
-              className=""
+              className="flex items-center w-full h-full"
               href="#"
               title={!isTextVisible ? "Comunidades" : ""}
             >
@@ -77,10 +85,14 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
-            <a className="" href="#" title={!isTextVisible ? "Practicar" : ""}>
+            <a
+              className="flex items-center w-full h-full"
+              href="#"
+              title={!isTextVisible ? "Practicar" : ""}
+            >
               <i className="fa-solid fa-microphone-lines ml-0.5 text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
               {isTextVisible && (
                 <span
@@ -97,10 +109,14 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-200 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
-            <a className="" href="#" title={!isTextVisible ? "Recursos" : ""}>
+            <a
+              className="flex items-center w-full h-full"
+              href="#"
+              title={!isTextVisible ? "Recursos" : ""}
+            >
               <i className="fa-solid fa-screwdriver-wrench text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
               {isTextVisible && (
                 <span
@@ -117,10 +133,14 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-200 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
-            <a className="" href="#" title={!isTextVisible ? "Mensajes" : ""}>
+            <a
+              className="flex items-center w-full h-full"
+              href="#"
+              title={!isTextVisible ? "Mensajes" : ""}
+            >
               <i className="fa-solid fa-envelope text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
               {isTextVisible && (
                 <span
@@ -137,11 +157,11 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-200 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
             <a
-              className=""
+              className="flex items-center w-full h-full"
               href="#"
               title={!isTextVisible ? "Notificaciones" : ""}
             >
@@ -161,10 +181,14 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
-            <a className="" href="#" title={!isTextVisible ? "Premium" : ""}>
+            <a
+              className="flex items-center w-full h-full"
+              href="#"
+              title={!isTextVisible ? "Premium" : ""}
+            >
               <i className="fa-solid fa-medal text-[#00bf00] dark:text-white transition-all duration-100 group-hover:text-white"></i>
               {isTextVisible && (
                 <span
@@ -181,11 +205,11 @@ export default function Sidebar({ isTextVisible }) {
           </li>
           <li
             className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-              isTextVisible ? "w-auto h-auto" : "w-10 h-10 rounded-full"
+              isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
             }`}
           >
             <a
-              className=""
+              className="flex items-center w-full h-full"
               href="#"
               title={!isTextVisible ? "Cerrar Sesión" : ""}
             >
