@@ -21,24 +21,19 @@ export default function Navbar({ toggleTextVisibility }) {
   return (
     <nav
       id="navbar-container"
-      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500 border border-[#A19FA1]"
+      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#A19FA1] transition-all duration-500 border border-[#A19FA1]"
     >
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
             <button
               onClick={toggleTextVisibility}
-              className="px-3 py-2 mr-2 ml-1 rounded text-sm border hover:border-transparent font-medium bg-white dark:text-white hover:bg-[#00bf00] group dark:hover:bg-gray-600 transition-all duration-200 focus:outline-none"
+              className="px-2.5 py-2 mr-2 ml-2 rounded text-sm border hover:border-transparent font-medium dark:bg-transparent bg-transparent  dark:text-white hover:bg-[#00bf00] group dark:hover:bg-[#00bf00] dark:hover:border-white transition-all duration-200 focus:outline-none"
             >
               <i className="fa-solid fa-bars text-[#00bf00] group-hover:text-white"></i>
             </button>
-
-            <a href="https://flowbite.com" className="flex ms-2 md:me-24 ml-0">
-              <img
-                src="https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1"
-                className="h-8 me-3 mr-1 rounded-full"
-                alt="FlowBite Logo"
-              />
+            <a href="#" className="flex ms-2 md:me-24 ml-0 items-center ">
+              <i class="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
               <span
                 id="page-name"
                 className={`self-center text-3xl font-semibold whitespace-nowrap dark:text-white hidden md:inline ${
@@ -50,10 +45,10 @@ export default function Navbar({ toggleTextVisibility }) {
             </a>
           </div>
           <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center">
-            <div className="relative w-full flex items-center">
+            <div className="relative w-full flex items-center group">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
-                  className="w-3 h-3 text-green-300 hover:text-green-500"
+                  className="w-3 h-3 text-[#00bf00] group-hover:text-white dark:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -72,7 +67,7 @@ export default function Navbar({ toggleTextVisibility }) {
                 type="search"
                 id="default-search"
                 placeholder="Buscar personas, comentarios, palabras..."
-                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2 rounded-full bg-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:border-gray-600 dark:placeholder-white dark:text-white dark:hover:border-green-600 dark:hover:shadow-lg dark:focus:ring-0 dark:focus:border-green-500"
+                className="block w-full p-2 pl-8 text-xs text-gray-900 border-2 rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
               />
             </div>
           </form>
