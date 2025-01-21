@@ -1,19 +1,16 @@
 import 'react';
 
-
-const Login = () => {
+const Register = () => {
     return (
-        <div className="flex min-h-screen">
-            <div className="w-1/2 bg-gray-200 flex items-center justify-center">
-                <img src="../src/assets/fondo.jpg" alt="Login Image" className="w-full h-full object-center object-cover" />
+        <div className="flex flex-col md:flex-row min-h-screen">
+            <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
+                <img src="../src/assets/fondo.jpg" alt="Register Image" className="w-full h-full object-center object-cover" />
             </div>
           
-            <div className="w-1/2 flex items-start justify-center bg-white pt-10">
-
+            <div className="w-full md:w-1/2 flex items-center justify-center bg-white py-10">
                 <div className="w-full max-w-md p-8">
-
-                    
-                    <div className="mb-32 flex items-center gap-2">
+       
+                <div className="mb-32 flex items-center gap-2">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 66 66" fill="none">
                             <rect width="66" height="66" rx="6" fill="#202427"/>
@@ -41,25 +38,33 @@ const Login = () => {
 
 
                     <form className="w-full">
-                        <h2 className="text-4xl mb-4">Login</h2>
+                        <h2 className="text-4xl mb-4">Register</h2>
+                        <div className="mb-4">
+                            <label className="block text-gray-700">Nombre de Usuario</label>
+                            <input
+                                type="text"
+                                className="w-full px-3 py-2 border border-gray-300 rounded"
+                                placeholder="Ingrese su nombre de usuario"
+                            />
+                        </div>
                         <div className="mb-4">
                             <label className="block text-gray-700">Email</label>
                             <input
                                 type="email"
                                 className="w-full px-3 py-2 border border-gray-300 rounded"
-                                placeholder="Enter your email"
+                                placeholder="Ingrese su email"
                             />
                         </div>
                         <div className="mb-6">
-                            <label className="block text-gray-700">Password</label>
+                            <label className="block text-gray-700">Contraseña</label>
                             <input
                                 type="password"
                                 className="w-full px-3 py-2 border border-gray-300 rounded"
-                                placeholder="Enter your password"
+                                placeholder="Ingrese su contraseña"
                             />
                         </div>
                         <button type="submit" className="w-full bg-lime-600 text-white py-2 rounded hover:bg-lime-700">
-                            Login
+                            Registrar
                         </button>
                     </form>
                 </div>
@@ -68,4 +73,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
