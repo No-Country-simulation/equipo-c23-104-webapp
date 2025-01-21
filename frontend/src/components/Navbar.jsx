@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQueryState] = useState("");
@@ -10,13 +11,13 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
+  const toggleSubmenu = () => {
+    setIsSubmenuOpen((prevState) => !prevState);
+  };
+
   const toggleDarkMode = () => {
     setDarkMode((prevMode) => !prevMode);
     document.documentElement.classList.toggle("dark");
-  };
-
-  const toggleSidebarCollapse = () => {
-    setIsSidebarCollapsed((prevState) => !prevState);
   };
 
   const handleSearchChange = (e) => {
@@ -132,7 +133,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-user mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Panel de perfil
@@ -141,7 +142,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-gear mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Configuración
@@ -150,7 +151,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Mis Recursos
@@ -159,7 +160,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Ayuda
@@ -168,24 +169,68 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Mejorar Plan
                     </a>
                   </li>
+                </ul>
+                <div className="pt-1 pb-2 mt-2">
+                  <a
+                    href="#"
+                    className="text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                  >
+                    <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
+                    Cerrar Sesión
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <button
+              onClick={toggleSubmenu}
+              className="inline-flex items-center  p-2 text-sm font-medium text-gray-900 bg-white rounded-lg hover:bg-gray-100 dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              <svg
+                className="w-5 h-5 ml-1"
+                fill="currentColor"
+                viewBox="0 0 4 15"
+              >
+                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+              </svg>
+            </button>
+            {isSubmenuOpen && (
+              <div className="absolute right-0 mt-4 w-44 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600">
+                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 mb-2 rounded border border-transparent block px-4 py-2 text-sm text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
-                      Sign out
+                      Idioma
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Modo
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Ayuda
                     </a>
                   </li>
                 </ul>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
