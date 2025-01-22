@@ -3,13 +3,13 @@ import { initReactI18next } from "react-i18next";
 
 import translationES from "./language/es/translation.json";
 import translationEN from "./language/en/translation.json";
-//import translationPT from "./language/pt/translation.json";
+import translationPT from "./language/pt/translation.json";
 
 export default i18next.use(initReactI18next).init({
   resources: {
     es: { translation: translationES },
     en: { translation: translationEN },
-    //pt: { translation: translationPT },
+    pt: { translation: translationPT },
   },
   lng: "es",
   fallbackLng: "es",
