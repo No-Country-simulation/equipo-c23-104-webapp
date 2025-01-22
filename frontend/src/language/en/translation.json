@@ -14,5 +14,13 @@
   "portuguese": "Portuguese",
   "esperanto": "Esperanto",
   "french": "French",
-  "german": "German"
+  "german": "German",
+  "home": "Home",
+  "explorer": "Explorer",
+  "community": "Community",
+  "practice": "Practice",
+  "resources": "Resources",
+  "message": "Message",
+  "notifications": "Notifications",
+  "create": "Create"
 }

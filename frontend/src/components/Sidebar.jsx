@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar({ isTextVisible }) {
+  const { t, i18n } = useTranslation();
   return (
     <aside
       id="logo-sidebar"
@@ -30,7 +32,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 translate-x-[-10px] w-0"
                   }`}
                 >
-                  Inicio
+                  {t("home")}
                 </span>
               )}
             </a>
@@ -54,7 +56,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Explorar
+                  {t("explorer")}
                 </span>
               )}
             </a>
@@ -78,7 +80,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Comunidades
+                  {t("community")}
                 </span>
               )}
             </a>
@@ -102,7 +104,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Practicar
+                  {t("practice")}
                 </span>
               )}
             </a>
@@ -126,7 +128,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Recursos
+                  {t("resources")}
                 </span>
               )}
             </a>
@@ -150,7 +152,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Mensajes
+                  {t("message")}
                 </span>
               )}
             </a>
@@ -174,7 +176,7 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Notificaciones
+                  {t("notifications")}
                 </span>
               )}
             </a>
@@ -222,14 +224,14 @@ export default function Sidebar({ isTextVisible }) {
                       : "opacity-0 -translate-x-2 w-0 overflow-hidden"
                   }`}
                 >
-                  Cerrar Sesión
+                  {t("logout")}
                 </span>
               )}
             </a>
           </li>
         </ul>
         <button
-          title={!isTextVisible ? "Crear" : ""}
+          title={!isTextVisible ? t("create") : ""}
           type="button"
           className={`border hover:border-transparent bg-[#00bf00] text-white dark:hover:border-white font-medium rounded transition-all duration-200 ${
             isTextVisible
@@ -237,7 +239,7 @@ export default function Sidebar({ isTextVisible }) {
               : "w-10 h-10 mt-3 flex items-center justify-center text-[10px] rounded-full"
           }`}
         >
-          <i className="fa-solid fa-plus"></i> {isTextVisible && "Crear"}
+          <i className="fa-solid fa-plus"></i> {isTextVisible && t("create")}
         </button>
       </div>
     </aside>
