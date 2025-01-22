@@ -6,6 +6,7 @@ import translationEN from "./language/en/translation.json";
 import translationPT from "./language/pt/translation.json";
 import translationESP from "./language/esp/translation.json";
 import translationFR from "./language/fr/translation.json";
+import translationGER from "./language/ger/translation.json";
 
 export default i18next.use(initReactI18next).init({
   resources: {
@@ -14,6 +15,7 @@ export default i18next.use(initReactI18next).init({
     pt: { translation: translationPT },
     esp: { translation: translationESP },
     fr: { translation: translationFR },
+    ger: { translation: translationGER },
   },
   lng: "es",
   fallbackLng: "es",

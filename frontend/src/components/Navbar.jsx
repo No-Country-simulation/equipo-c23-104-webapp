@@ -325,7 +325,7 @@ export default function Navbar({
                         </li>
                         <li>
                           <a
-                            href="#"
+                            onClick={() => handleChangeLanguage("ger")}
                             className="flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
                             <img
