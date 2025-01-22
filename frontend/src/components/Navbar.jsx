@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
-export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
+export default function Navbar({
+  toggleTextVisibility,
+  setSearchQuery,
+  handleChangeLanguage,
+}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
@@ -58,6 +63,8 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
     };
   }, []);
 
+  const { t, i18n } = useTranslation();
+
   return (
     <nav
       id="navbar-container"
@@ -106,7 +113,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
               <input
                 type="search"
                 id="default-search"
-                placeholder="Buscar personas, comentarios, palabras..."
+                placeholder={t("search")}
                 className="block w-full p-2 pl-8 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -152,7 +159,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       className="text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-user mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
-                      Panel de perfil
+                      {t("profile")}
                     </a>
                   </li>
                   <li>
@@ -161,7 +168,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-gear mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
-                      Configuración
+                      {t("settings")}
                     </a>
                   </li>
                   <li>
@@ -170,7 +177,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
-                      Mis Recursos
+                      {t("my-resources")}
                     </a>
                   </li>
                   <li>
@@ -179,7 +186,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
-                      Ayuda
+                      {t("help")}
                     </a>
                   </li>
                   <li>
@@ -188,7 +195,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
-                      Mejorar Plan
+                      {t("upgrade")}
                     </a>
                   </li>
                 </ul>
@@ -198,7 +205,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                     className="text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                   >
                     <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
-                    Cerrar Sesión
+                    {t("logout")}
                   </a>
                 </div>
               </div>
@@ -225,7 +232,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
               >
                 <ul className="space-y-0">
                   <li>
-                    <button
+                    <a
                       href="#"
                       onClick={toggleLanguageMenu}
                       className="flex items-center w-36 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px]"
@@ -244,8 +251,8 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                           d="M5 1 1 5l4 4"
                         />
                       </svg>
-                      Idiomas
-                    </button>
+                      {t("language")}
+                    </a>
                     <div
                       ref={languageMenuRef}
                       className={`absolute right-full top-[-1px] mr-[1px] w-40 py-3 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
@@ -257,7 +264,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                         <li>
                           <a
-                            href="#"
+                            onClick={() => handleChangeLanguage("es")}
                             className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
                             <img
@@ -265,12 +272,12 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                               alt="Español"
                               className="w-5 h-3 mr-3"
                             />
-                            Español
+                            {t("spanish")}
                           </a>
                         </li>
                         <li>
                           <a
-                            href="#"
+                            onClick={() => handleChangeLanguage("en")}
                             className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
                             <img
@@ -278,12 +285,12 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                               alt="Inglés"
                               className="w-5 h-3 mr-3"
                             />
-                            Inglés
+                            {t("english")}
                           </a>
                         </li>
                         <li>
                           <a
-                            href="#"
+                            onClick={() => handleChangeLanguage("pt")}
                             className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
                             <img
@@ -291,7 +298,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                               alt="Portugués"
                               className="w-5 h-3 mr-3"
                             />
-                            Portugués
+                            {t("portuguese")}
                           </a>
                         </li>
                         <li>
@@ -300,7 +307,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                             className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
                             🌍
-                            <span className="ml-3">Esperanto</span>
+                            <span className="ml-3">{t("esperanto")}</span>
                           </a>
                         </li>
                         <li>
@@ -313,7 +320,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                               alt="Francés"
                               className="w-5 h-3 mr-3"
                             />
-                            Francés
+                            {t("french")}
                           </a>
                         </li>
                         <li>
@@ -326,7 +333,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                               alt="Alemán"
                               className="w-5 h-3 mr-3"
                             />
-                            Alemán
+                            {t("german")}
                           </a>
                         </li>
                       </ul>
@@ -342,12 +349,12 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       {darkMode ? (
                         <>
                           <i className="fa-solid fa-sun mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
-                          <span>Modo Claro</span>
+                          <span> {t("light")}</span>
                         </>
                       ) : (
                         <>
                           <i className="fa-solid fa-moon mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
-                          <span>Modo Oscuro</span>
+                          <span> {t("dark")}</span>
                         </>
                       )}
                     </a>
@@ -358,7 +365,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       className="text-[12px] mx-2 my-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
-                      Ayuda
+                      {t("help")}
                     </a>
                   </li>
                 </ul>
