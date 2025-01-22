@@ -25,7 +25,7 @@ const Perfil = () => {
 
     return (
         <>
-            <section>
+            <section className="overflow-x-hidden">
                 <div className="w-7/12 min-w-96 m-auto border border-[#A19FA1]">
                     <div className="w-full h-40 bg-[#A19FA1]" />
                     <div className="flex justify-between p-4">
@@ -37,9 +37,11 @@ const Perfil = () => {
                     <div className="px-6">
                         <h2 className="text-2xl font-semibold">Anderson Forero</h2>
                         <p>@And_f12</p>
-                        <div className="flex gap-x-2">
-                            <p><span className="font-semibold">10</span> Siguiendo</p>
-                            <p><span className="font-semibold">20</span> Seguidores</p>
+                        <div className="flex gap-x-3">
+                            {/* <p><span className="font-semibold">10</span> Siguiendo</p>
+                            <p><span className="font-semibold">20</span> Seguidores</p> */}
+                            <Link to="seguidos"><span className="font-semibold">10</span>Siguiendo</Link>
+                            <Link to="seguidores"><span className="font-semibold">20</span>Seguidores</Link>
                         </div>
                     </div>
                     <nav className="mt-2 flex border-b border-[#A19FA1]">

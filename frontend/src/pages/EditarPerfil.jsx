@@ -4,8 +4,8 @@ import perfilImagen from "../assets/perfil-icono.png";
 const EditarPerfil = () => {
     return (
         <section className="fixed top-0 w-full h-full flex items-center justify-center overflow-hidden bg-[#4a494ada] backdrop-blur-[2px]">
-            <div className="w-2/5 min-w-64 p-4 rounded-xl bg-white">
-                <div className="flex items-center justify-between">
+            <div className="w-96 p-4 flex flex-col justify-center rounded-xl bg-white max-[450px]:w-full max-[450px]:h-full max-[450px]:rounded-none">
+                <div className="flex items-center justify-between max-[450px]:relative max-[450px]:top-[-5rem]">
                     <div className="flex items-center gap-1">
                         <Link to="/" className="w-7 h-7 flex items-center justify-center text-2xl font-extralight rounded-full hover:bg-[#A19FA1]">⬅️</Link>
                         <h2>Editar Perfil</h2>
@@ -18,7 +18,7 @@ const EditarPerfil = () => {
                 <form className="flex flex-col gap-4">
                     <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder="Nombre completo" />
                     <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder="@Nombre_de_usuario" />
-                    <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder="Biografía" />
+                    {/* <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder="Biografía" /> */}
                 </form>
             </div>
         </section>
