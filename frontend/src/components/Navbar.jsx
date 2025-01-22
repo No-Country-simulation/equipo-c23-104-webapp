@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,6 +18,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
 
   const toggleLanguageMenu = () => {
     setIsLanguageMenuOpen((prevState) => !prevState);
+    setIsSubmenuOpen(true);
   };
 
   const toggleDarkMode = () => {
@@ -30,6 +31,32 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
     setSearchQuery(value);
     setSearchQueryState(value);
   };
+
+  const dropdownRef = useRef(null);
+  const submenuRef = useRef(null);
+  const languageMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+      if (submenuRef.current && !submenuRef.current.contains(event.target)) {
+        setIsSubmenuOpen(false);
+      }
+      if (
+        languageMenuRef.current &&
+        !languageMenuRef.current.contains(event.target)
+      ) {
+        setIsLanguageMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav
@@ -87,7 +114,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
             </div>
           </form>
           <div className="flex items-center">
-            <div className="relative flex items-center ms-3">
+            <div ref={dropdownRef} className="relative flex items-center ms-3">
               <a
                 id="user-button"
                 href="#"
@@ -176,7 +203,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                 </div>
               </div>
             </div>
-            <div className="relative flex items-center ms-3">
+            <div ref={submenuRef} className="relative flex items-center ms-3">
               <button
                 onClick={toggleSubmenu}
                 className="flex items-center justify-center rounded-full p-2 text-sm font-medium border-1 border-transparent hover:border-transparent text-gray-900 bg-white hover:bg-[#00bf00] group dark:hover:border-white dark:text-white dark:bg-[#4A494A] dark:hover:bg-[#00bf00] transition-all duration-300"
@@ -201,7 +228,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                     <button
                       href="#"
                       onClick={toggleLanguageMenu}
-                      className="flex items-center w-32 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px]"
+                      className="flex items-center w-36 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px]"
                     >
                       <svg
                         className="w-2.5 h-2.5 me-3 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"
@@ -219,61 +246,87 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                       </svg>
                       Idiomas
                     </button>
-
                     <div
+                      ref={languageMenuRef}
                       className={`absolute right-full top-[-1px] mr-[1px] w-40 py-3 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
                         isLanguageMenuOpen
                           ? "scale-100 opacity-100"
                           : "scale-95 opacity-0 pointer-events-none"
                       }`}
                     >
-                      <ul className="py- text-sm text-gray-700 dark:text-gray-200">
+                      <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                         <li>
                           <a
                             href="#"
-                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                            className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
-                            🇪🇸 Español
+                            <img
+                              src="https://flagcdn.com/w40/es.png"
+                              alt="Español"
+                              className="w-5 h-3 mr-3"
+                            />
+                            Español
                           </a>
                         </li>
                         <li>
                           <a
                             href="#"
-                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                            className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
-                            🇬🇧 Inglés
+                            <img
+                              src="https://flagcdn.com/w40/gb.png"
+                              alt="Inglés"
+                              className="w-5 h-3 mr-3"
+                            />
+                            Inglés
                           </a>
                         </li>
                         <li>
                           <a
                             href="#"
-                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                            className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
-                            🇵🇹 Portugués
+                            <img
+                              src="https://flagcdn.com/w40/pt.png"
+                              alt="Portugués"
+                              className="w-5 h-3 mr-3"
+                            />
+                            Portugués
                           </a>
                         </li>
                         <li>
                           <a
                             href="#"
-                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                            className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
-                            🌍 Esperanto
+                            🌍
+                            <span className="ml-3">Esperanto</span>
                           </a>
                         </li>
                         <li>
                           <a
                             href="#"
-                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                            className="flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
-                            🇫🇷 Francés
+                            <img
+                              src="https://flagcdn.com/w40/fr.png"
+                              alt="Francés"
+                              className="w-5 h-3 mr-3"
+                            />
+                            Francés
                           </a>
                         </li>
                         <li>
                           <a
                             href="#"
-                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                            className="flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                           >
-                            🇩🇪 Alemán
+                            <img
+                              src="https://flagcdn.com/w40/de.png"
+                              alt="Alemán"
+                              className="w-5 h-3 mr-3"
+                            />
+                            Alemán
                           </a>
                         </li>
                       </ul>
