@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQueryState] = useState("");
@@ -13,6 +14,10 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
 
   const toggleSubmenu = () => {
     setIsSubmenuOpen((prevState) => !prevState);
+  };
+
+  const toggleLanguageMenu = () => {
+    setIsLanguageMenuOpen((prevState) => !prevState);
   };
 
   const toggleDarkMode = () => {
@@ -82,10 +87,10 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
             </div>
           </form>
           <div className="flex items-center">
-            {/* Dropdown de Usuario */}
             <div className="relative flex items-center ms-3">
               <a
                 id="user-button"
+                href="#"
                 className="flex border-3 rounded-full w-11 h-11 overflow-hidden hover:shadow-lg focus:ring-0 focus:outline-none dark:hover:shadow-lg dark:focus:ring-0 transition-all duration-300"
                 aria-expanded={isDropdownOpen ? "true" : "false"}
                 onClick={toggleDropdown}
@@ -171,8 +176,6 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                 </div>
               </div>
             </div>
-
-            {/* Dropdown de Opciones */}
             <div className="relative flex items-center ms-3">
               <button
                 onClick={toggleSubmenu}
@@ -187,7 +190,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                 </svg>
               </button>
               <div
-                className={`absolute top-full right-0 mt-4 py-2 z-50 w-44 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
+                className={`absolute top-full right-0 mt-[15px] py-2 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
                   isSubmenuOpen
                     ? "scale-100 opacity-100"
                     : "scale-95 opacity-0 pointer-events-none"
@@ -195,17 +198,91 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
               >
                 <ul className="space-y-0">
                   <li>
-                    <a
+                    <button
                       href="#"
-                      className="text-[12px] mx-2 mt-0 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      onClick={toggleLanguageMenu}
+                      className="flex items-center w-32 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px]"
                     >
-                      <i className="fa-solid fa-globe mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
-                      Idioma
-                    </a>
+                      <svg
+                        className="w-2.5 h-2.5 me-3 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 6 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M5 1 1 5l4 4"
+                        />
+                      </svg>
+                      Idiomas
+                    </button>
+
+                    <div
+                      className={`absolute right-full top-[-1px] mr-[1px] w-40 py-3 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
+                        isLanguageMenuOpen
+                          ? "scale-100 opacity-100"
+                          : "scale-95 opacity-0 pointer-events-none"
+                      }`}
+                    >
+                      <ul className="py- text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                          >
+                            🇪🇸 Español
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                          >
+                            🇬🇧 Inglés
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                          >
+                            🇵🇹 Portugués
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                          >
+                            🌍 Esperanto
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                          >
+                            🇫🇷 Francés
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                          >
+                            🇩🇪 Alemán
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </li>
                   <li>
                     <a
                       id="dark-mode-toggle"
+                      href="#"
                       onClick={toggleDarkMode}
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
@@ -225,7 +302,7 @@ export default function Navbar({ toggleTextVisibility, setSearchQuery }) {
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className="text-[12px] mx-2 my-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>{" "}
                       Ayuda
