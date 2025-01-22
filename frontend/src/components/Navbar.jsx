@@ -158,7 +158,7 @@ export default function Navbar({
                       href="#"
                       className="text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-user mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
+                      <i className="fa-solid fa-user mr-3 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
                       {t("profile")}
                     </a>
                   </li>
@@ -167,7 +167,7 @@ export default function Navbar({
                       href="#"
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-all duration-100 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
-                      <i className="fa-solid fa-gear mr-2 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
+                      <i className="fa-solid fa-gear mr-3 text-[#00bf00] dark:text-white transition-all duration-300 group-hover:text-white"></i>
                       {t("settings")}
                     </a>
                   </li>
