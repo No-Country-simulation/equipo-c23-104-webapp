@@ -1,15 +1,16 @@
-
-import Register from "./pages/registrar"
-import Login from "./pages/login"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/login';
+import Registrar from './pages/registrar';
 
 function App() {
-
   return (
-    <>
-      <Register/>
-      <Login/>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/registrar" element={<Registrar />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

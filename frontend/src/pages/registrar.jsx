@@ -1,4 +1,5 @@
 import  { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [formValues, setFormValues] = useState({
@@ -108,6 +109,10 @@ const Register = () => {
                         <button type="submit" className="w-full bg-lime-600 text-white py-2 rounded hover:bg-lime-700">
                             Registrar
                         </button>
+                        <div className="mt-4 text-center">
+                            <span className="text-gray-700">¿Ya tienes cuenta? </span>
+                            <Link to="/login" className="text-lime-600 hover:underline">Inicia sesión</Link>
+                        </div>
                     </form>
                 </div>
             </div>
