@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 export default function App() {
   const [isTextVisible, setIsTextVisible] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showText, setShowText] = useState(true);
   const { t, i18n } = useTranslation();
 
   const toggleTextVisibility = () => {
@@ -15,7 +16,11 @@ export default function App() {
   };
 
   const handleChangeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
+    setShowText(false);
+    setTimeout(() => {
+      i18n.changeLanguage(lang);
+      setShowText(true);
+    }, 300);
   };
 
   return (
@@ -24,13 +29,14 @@ export default function App() {
         toggleTextVisibility={toggleTextVisibility}
         setSearchQuery={setSearchQuery}
         handleChangeLanguage={handleChangeLanguage}
+        showText={showText}
       />
       <Sidebar
         isTextVisible={isTextVisible}
         toggleTextVisibility={toggleTextVisibility}
-        handleChangeLanguage={handleChangeLanguage}
+        showText={showText}
       />
-      <Publications searchQuery={searchQuery} />
+      <Publications searchQuery={searchQuery} showText={showText} />
     </>
   );
 }

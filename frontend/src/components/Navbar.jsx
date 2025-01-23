@@ -5,6 +5,7 @@ export default function Navbar({
   toggleTextVisibility,
   setSearchQuery,
   handleChangeLanguage,
+  showText,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -12,7 +13,6 @@ export default function Navbar({
   const [darkMode, setDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQueryState] = useState("");
-  const [showText, setShowText] = useState(true);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -64,17 +64,7 @@ export default function Navbar({
     };
   }, []);
 
-  const handleLanguageChange = (lang) => {
-    setShowText(false);
-    handleChangeLanguage(lang);
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setShowText(true), 300);
-    return () => clearTimeout(timeout);
-  }, [showText]);
-
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <nav
@@ -194,15 +184,6 @@ export default function Navbar({
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
-                    >
-                      <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
-                      {t("help")}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
                       className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
                     >
                       <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
@@ -277,7 +258,7 @@ export default function Navbar({
                       <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                         <li>
                           <a
-                            onClick={() => handleLanguageChange("es")}
+                            onClick={() => handleChangeLanguage("es")}
                             className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}
@@ -292,7 +273,7 @@ export default function Navbar({
                         </li>
                         <li>
                           <a
-                            onClick={() => handleLanguageChange("en")}
+                            onClick={() => handleChangeLanguage("en")}
                             className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}
@@ -307,7 +288,7 @@ export default function Navbar({
                         </li>
                         <li>
                           <a
-                            onClick={() => handleLanguageChange("pt")}
+                            onClick={() => handleChangeLanguage("pt")}
                             className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}
@@ -322,7 +303,7 @@ export default function Navbar({
                         </li>
                         <li>
                           <a
-                            onClick={() => handleLanguageChange("esp")}
+                            onClick={() => handleChangeLanguage("esp")}
                             className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}
@@ -333,7 +314,7 @@ export default function Navbar({
                         </li>
                         <li>
                           <a
-                            onClick={() => handleLanguageChange("fr")}
+                            onClick={() => handleChangeLanguage("fr")}
                             className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}
@@ -348,7 +329,7 @@ export default function Navbar({
                         </li>
                         <li>
                           <a
-                            onClick={() => handleLanguageChange("ger")}
+                            onClick={() => handleChangeLanguage("ger")}
                             className={`flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900  ease-in-out  transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}

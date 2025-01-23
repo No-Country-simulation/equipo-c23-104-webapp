@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function Sidebar({ isTextVisible }) {
-  const { t, i18n } = useTranslation();
+export default function Sidebar({ isTextVisible, showText }) {
+  const { t } = useTranslation();
+
   return (
     <aside
       id="logo-sidebar"
@@ -19,7 +20,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Inicio" : ""}
             >
@@ -43,7 +46,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Explorar" : ""}
             >
@@ -67,7 +72,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Comunidades" : ""}
             >
@@ -91,7 +98,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Practicar" : ""}
             >
@@ -115,7 +124,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Recursos" : ""}
             >
@@ -139,7 +150,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Mensajes" : ""}
             >
@@ -163,7 +176,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Notificaciones" : ""}
             >
@@ -187,7 +202,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Premium" : ""}
             >
@@ -211,7 +228,9 @@ export default function Sidebar({ isTextVisible }) {
             }`}
           >
             <a
-              className="flex items-center w-full h-full"
+              className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
               href="#"
               title={!isTextVisible ? "Cerrar Sesión" : ""}
             >
@@ -239,7 +258,16 @@ export default function Sidebar({ isTextVisible }) {
               : "w-10 h-10 mt-3 flex items-center justify-center text-[10px] rounded-full"
           }`}
         >
-          <i className="fa-solid fa-plus"></i> {isTextVisible && t("create")}
+          <i className="fa-solid fa-plus"></i>
+          {isTextVisible && (
+            <span
+              className={`ml-2 transition-opacity duration-500 ease-in-out ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {t("create")}
+            </span>
+          )}
         </button>
       </div>
     </aside>
