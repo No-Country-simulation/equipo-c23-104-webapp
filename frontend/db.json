@@ -1,8 +1,7 @@
 { 
-    "datos": [
-        {"nombre": "Anderson" },
-        {"nombreUsuario": "And_f12" }
-    ],
+    "datos": {
+        "nombre": "Anderson Forero", "nombreUsuario": "And_f12", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeOxXfSiTgja7b5zix_siA6wqf4I4R2o-fYQ&s"
+    },
     "siguiendo": [
         { "id": "1", "img": "https://robohash.org/1?set=set4", "nombre": "María Fernanda ", "nombreUsuario": "María_F" },
         { "id": "2", "img": "https://robohash.org/2", "nombre": "Juan Carlos ", "nombreUsuario": "Juan_C" },
@@ -33,7 +32,7 @@
     "comments": [
         { "id": "1", "nombre": "Pedro Martinez", "comentario": "¿Alguien sabe como cambiar el fondo de pantalla en linux?" },
         { "id": "2", "nombre": "Laura Gurrero", "comentario": "Me voy de vacaciones" },
-        { "id": "3", "nombre": "Pedro Martinez", "comentario": "Estoy de vacaciones" },
+        { "id": "3", "nombre": "Pedro Martinez", "comentario": "Camino al cine" },
         { "id": "4", "nombre": "Laura Gurrero", "comentario": "Estoy de vuelta, compartire fotos del viaje" }
     ]
 }
