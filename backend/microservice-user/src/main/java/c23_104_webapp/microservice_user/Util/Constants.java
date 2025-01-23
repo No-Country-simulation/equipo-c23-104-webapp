@@ -11,6 +11,7 @@ public class Constants {
             "health",
             "api/users/register",
             "api/users/login",
+            "api/users/check-blacklist",
             "api/auth/password-reset/send-otp",
             "api/auth/password-reset/verify-otp",
             "api/auth/password-reset",
