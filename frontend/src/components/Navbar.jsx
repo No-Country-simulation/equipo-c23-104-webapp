@@ -350,7 +350,7 @@ export default function Navbar({
                       id="dark-mode-toggle"
                       href="#"
                       onClick={toggleDarkMode}
-                      className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                      className={`text-[12px] mx-2 rounded border border-transparent block px-3 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                         showText ? "opacity-100" : "opacity-0"
                       }`}
                     >
