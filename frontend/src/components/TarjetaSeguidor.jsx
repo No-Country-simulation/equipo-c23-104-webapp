@@ -6,10 +6,10 @@ const TarjetaSeguidor = ({seguidor, boton}) => {
         axios.delete(`http://localhost:3000/siguiendo/${seguidor.id}`)
             .then((response) => {
                 console.log(response)
-                const boton = document.getElementById(seguidor.id);
-                boton.classList.remove("bg-[#06BF00]");
-                boton.classList.add("text-[#A19FA1]", "border", "border-[#A19FA1]");
-                boton.textContent = "Dejado de seguir";
+                const button = document.getElementById(seguidor.id);
+                button.classList.remove("bg-[#06BF00]", "text-white");
+                button.classList.add("text-[#A19FA1]", "border", "border-[#A19FA1]");
+                button.textContent = "Dejado de seguir";
             })
             .catch((error) => {
                 console.error("Error", error);

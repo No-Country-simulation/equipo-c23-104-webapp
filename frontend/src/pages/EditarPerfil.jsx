@@ -1,13 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import perfilImagen from "../assets/perfil-icono.png";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { PerfilContexto } from "../context/PerfilContext";
+import axios from "axios";
 
 const EditarPerfil = () => {
-    const { datosUsurio } = useContext(PerfilContexto);
+    const { datosUsurio, getDatosUsuario } = useContext(PerfilContexto);
+    const [ nombre, setNombre ] = useState("");
+    const [ nombreUsuario, setNombreUsuario ] = useState("");
+    const navigate = useNavigate();
 
     const controladorEvento = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
+
+        const datos = {
+            nombre,
+            nombreUsuario
+        };
+
+        axios.patch('http://localhost:3000/datos/1', datos)
+            .then(response => {
+                console.log('Usuario actualizado:', response.data);
+                getDatosUsuario();
+                navigate(-1);
+            })
+            .catch(error => {
+                console.error('Error al actualizar usuario:', error);
+                window.alert("Hubo un error, vuelva a intentarlo");
+            });
     };
 
     return (
@@ -23,11 +43,11 @@ const EditarPerfil = () => {
                 <div className="w-32 h-32 my-4 mx-auto bg-[#4A494A] border-2 border-[#A19FA1] rounded-full overflow-hidden">
                     <img src={datosUsurio.img || perfilImagen} alt="perfil-icono" />
                 </div>
-                <form className="flex flex-col gap-4 *:outline-none">
-                    <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder={datosUsurio.nombre} required />
-                    <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder={`@${datosUsurio.nombreUsuario}`} required />
+                <form onSubmit={controladorEvento} className="flex flex-col gap-4 *:outline-none">
+                    <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder={datosUsurio.nombre} required />
+                    <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" value={nombreUsuario} onChange={(e) => setNombreUsuario(e.target.value)} placeholder={`@${datosUsurio.nombreUsuario}`} required />
                     {/* <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder="Biografía" /> */}
-                    <input className="h-8 px-3 flex items-center absolute top-4 right-4 text-white font-medium bg-[#06BF00] rounded-3xl hover:cursor-pointer" type="submit" value="Guardar" onClick={controladorEvento} />
+                    <input className="h-8 px-3 flex items-center absolute top-4 right-4 text-white font-medium bg-[#06BF00] rounded-3xl hover:cursor-pointer" type="submit" value="Guardar" />
                 </form>
             </div>
         </section>

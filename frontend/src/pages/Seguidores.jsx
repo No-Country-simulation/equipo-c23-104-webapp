@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Seguidores = ({url, titulo, boton}) => {
-    // npx json-server db.json  
 
     const [seguidores, setSeguidores] = useState([]);
         

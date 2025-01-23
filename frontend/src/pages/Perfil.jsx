@@ -4,7 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { PerfilContexto } from "../context/PerfilContext";
-
+// npx json-server db.json  
 const Perfil = () => {
     const [postLista, setPostLista] = useState([]);
     const { datosUsurio } = useContext(PerfilContexto);

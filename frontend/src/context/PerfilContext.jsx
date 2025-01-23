@@ -7,7 +7,7 @@ const PerfilContextoProvider = (props) => {
     const [datosUsurio, setDatosUsurio] = useState({});
 
     const getDatosUsuario = () => {
-        axios.get(`http://localhost:3000/datos`)
+        axios.get(`http://localhost:3000/datos/1`)
             .then(response => {
                 setDatosUsurio(response.data);
             })
@@ -21,7 +21,7 @@ const PerfilContextoProvider = (props) => {
     }, []);
 
     return (
-        <PerfilContexto.Provider value={{datosUsurio}}>
+        <PerfilContexto.Provider value={{datosUsurio, getDatosUsuario}}>
             {props.children}
         </PerfilContexto.Provider>
     )
