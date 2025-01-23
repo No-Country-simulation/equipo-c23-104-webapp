@@ -10,4 +10,5 @@ public interface UserService {
     UserInfoResponse getUserInfoByHandleUsername(String handleUsername);
     UserInfoResponse editUserProfile(EditProfileRequest editProfileRequest);
     UserInfoResponse joinCommunity(String community);
+    void leaveCommunity(String community);
 }

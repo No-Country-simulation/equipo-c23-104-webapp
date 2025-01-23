@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -103,6 +102,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         userRepository.save(user);
 
         return buildUserInfoResponse(user);
+    }
+
+    @Override
+    public void leaveCommunity(String community) {
+        User user = this.getUserLogged();
+
+        if (!user.getCommunities().contains(community)) {
+            throw new ApiException("The user is not part of this community", HttpStatus.BAD_REQUEST);
+        }
+
+        user.getCommunities().remove(community);
+        user.setCommunities(user.getCommunities());
+        userRepository.save(user);
+
     }
 
     private UserInfoResponse buildUserInfoResponse(User user) {
