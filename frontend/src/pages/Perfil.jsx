@@ -40,7 +40,7 @@ const Perfil = () => {
                         <div className="flex gap-x-3">
                             {/* <p><span className="font-semibold">10</span> Siguiendo</p>
                             <p><span className="font-semibold">20</span> Seguidores</p> */}
-                            <Link to="seguidos" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">10</span>Siguiendo</Link>
+                            <Link to="siguiendo" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">10</span>Siguiendo</Link>
                             <Link to="seguidores" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">20</span>Seguidores</Link>
                         </div>
                     </div>

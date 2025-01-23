@@ -3,7 +3,7 @@
         {"nombre": "Anderson" },
         {"nombreUsuario": "And_f12" }
     ],
-    "seguidos": [
+    "siguiendo": [
         { "id": "1", "nombre": "María Fernanda ", "nombreUsuario": "María_F" },
         { "id": "2", "nombre": "Juan Carlos ", "nombreUsuario": "Juan_C" },
         { "id": "3", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
