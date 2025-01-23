@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from './components/Post';
-import CreatePost from './components/NewPost';
+import NewPost from './components/NewPost';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -22,7 +22,7 @@ export default function Home() {
     <div>
       <div className='container m-auto md:w-1/2 my-20'>
         <div className='grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2 h-full'>
-          <CreatePost/>
+          <NewPost/>
           {posts.map((post) => (
             <Post
               key={post.id}

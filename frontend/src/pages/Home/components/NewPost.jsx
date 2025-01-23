@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function CreatePost({ onPost }) {
+export default function NewPost({ onPost }) {
     const [postText, setPostText] = useState('');
     const [image, setImage] = useState('');
 
@@ -42,7 +42,7 @@ export default function CreatePost({ onPost }) {
             <textarea
                 className="w-full p-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
                 rows="4"
-                placeholder="Escribe algo..."
+                placeholder="¿En qué estás pensando?"
                 value={postText}
                 onChange={handleInputChange}
             ></textarea>
