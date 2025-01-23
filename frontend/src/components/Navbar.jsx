@@ -13,6 +13,7 @@ export default function Navbar({
   const [darkMode, setDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQueryState] = useState("");
+  const [filter, setFilter] = useState("recomendados");
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -80,7 +81,7 @@ export default function Navbar({
             >
               <i className="fa-solid fa-bars text-[#00bf00] dark:text-white group-hover:text-white"></i>
             </button>
-            <a href="#" className="flex ms-2 md:me-24 ml-0 items-center ">
+            <a href="#" className="flex ms-2 ml-0 items-center ">
               <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
               <span
                 id="page-name"
@@ -92,35 +93,49 @@ export default function Navbar({
               </span>
             </a>
           </div>
-          <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center">
-            <div className="relative w-full flex items-center group">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg
-                  className="w-3 h-3 text-[#00bf00] group-hover:text-white dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
+          <div className="px-3">
+            <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center flex-col">
+              <div className="relative w-full flex items-center group">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg
+                    className="w-3 h-3 text-[#00bf00] group-hover:text-white dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  placeholder={t("search")}
+                  className="block w-full p-2 pl-8 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
               </div>
-              <input
-                type="search"
-                id="default-search"
-                placeholder={t("search")}
-                className="block w-full p-2 pl-8 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-            </div>
-          </form>
+              <div className="container mx-auto flex justify-center items-center gap-4 mt-2">
+                <button className="text-[12px] mx-2 mt-2 rounded border border-transparent hover:border-transparent bg-[#00bf00] text-white block px-4 py-2  transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white">
+                  {t("recommended")}
+                </button>
+                <button className="text-[12px] mx-2 mt-2 rounded border border-transparent hover:border-transparent bg-[#00bf00] block px-4 py-2 text-white transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white">
+                  {t("trending")}
+                </button>
+                <button className="text-[12px] mx-2 mt-2 rounded border border-transparent hover:border-transparent bg-[#00bf00] block px-4 py-2 text-white transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white">
+                  {t("news")}
+                </button>
+              </div>
+            </form>
+          </div>
+
           <div className="flex items-center">
             <div ref={dropdownRef} className="relative flex items-center ms-3">
               <a
