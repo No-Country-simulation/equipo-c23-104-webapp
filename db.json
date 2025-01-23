@@ -1,0 +1,154 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "username": "Juan Pérez",
+      "views": 120,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
+      "publicationDate": "2025-01-20",
+      "content": "Exploring the beauty of nature today!",
+      "likes": 180,
+      "commentsCount": 12
+    },
+    {
+      "id": "2",
+      "username": "Ana Gómez",
+      "views": 240,
+      "profilePictureUrl": "https://www.colgateprofesional.com.gt/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/retrato-mujer-afroamericana-hermosa-sonriendo.jpg",
+      "publicationDate": "2025-01-18",
+      "content": "A quick recipe for a delicious homemade pizza.",
+      "likes": 310,
+      "commentsCount": 25
+    },
+    {
+      "id": "3",
+      "username": "Carlos Díaz",
+      "views": 310,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS-q3KGyZ3gvJx_IJJfEPh4AmbBBC4pIAGOQ&s",
+      "publicationDate": "2025-01-15",
+      "content": "Sharing my latest travel adventures from Italy!",
+      "likes": 450,
+      "commentsCount": 40
+    },
+    {
+      "id": "4",
+      "username": "Laura Martínez",
+      "views": 150,
+      "profilePictureUrl": "https://drgoodprice.com/wp-content/uploads/2024/04/dr-good-sonrisa-de-gratitud_gratitude-smile.webp",
+      "publicationDate": "2025-01-19",
+      "content": "Tips to improve your productivity while working from home.",
+      "likes": 230,
+      "commentsCount": 18
+    },
+    {
+      "id": "5",
+      "username": "Pedro Fernández",
+      "views": 90,
+      "profilePictureUrl": "https://www.colgateprofesional.com.mx/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/estudiante-femenina-joven-sonriendo-despreocupada-de-cerca.jpg",
+      "publicationDate": "2025-01-21",
+      "content": "A relaxing weekend spent with family and friends.",
+      "likes": 125,
+      "commentsCount": 8
+    },
+    {
+      "id": "6",
+      "username": "Lucía Rodríguez",
+      "views": 280,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
+      "publicationDate": "2025-01-17",
+      "content": "Learning a new language can be so rewarding!",
+      "likes": 310,
+      "commentsCount": 27
+    },
+    {
+      "id": "7",
+      "username": "Marcos López",
+      "views": 340,
+      "profilePictureUrl": "https://www.colgateprofesional.com.gt/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/retrato-mujer-afroamericana-hermosa-sonriendo.jpg",
+      "publicationDate": "2025-01-16",
+      "content": "Top 5 must-read books for the new year.",
+      "likes": 500,
+      "commentsCount": 50
+    },
+    {
+      "id": "8",
+      "username": "Clara García",
+      "views": 200,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS-q3KGyZ3gvJx_IJJfEPh4AmbBBC4pIAGOQ&s",
+      "publicationDate": "2025-01-14",
+      "content": "How I built my dream garden in just one month.",
+      "likes": 290,
+      "commentsCount": 20
+    },
+    {
+      "id": "9",
+      "username": "David Hernández",
+      "views": 400,
+      "profilePictureUrl": "https://drgoodprice.com/wp-content/uploads/2024/04/dr-good-sonrisa-de-gratitud_gratitude-smile.webp",
+      "publicationDate": "2025-01-13",
+      "content": "Fitness journey update: New milestones achieved!",
+      "likes": 600,
+      "commentsCount": 75
+    },
+    {
+      "id": "10",
+      "username": "Sofía Morales",
+      "views": 170,
+      "profilePictureUrl": "https://www.colgateprofesional.com.mx/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/estudiante-femenina-joven-sonriendo-despreocupada-de-cerca.jpg",
+      "publicationDate": "2025-01-12",
+      "content": "Sharing my favorite coffee spots in the city.",
+      "likes": 210,
+      "commentsCount": 14
+    },
+    {
+      "id": "11",
+      "username": "Raúl Jiménez",
+      "views": 220,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
+      "publicationDate": "2025-01-11",
+      "content": "DIY craft ideas to try this weekend.",
+      "likes": 270,
+      "commentsCount": 22
+    },
+    {
+      "id": "12",
+      "username": "Eva Sánchez",
+      "views": 90,
+      "profilePictureUrl": "https://www.colgateprofesional.com.gt/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/retrato-mujer-afroamericana-hermosa-sonriendo.jpg",
+      "publicationDate": "2025-01-10",
+      "content": "My latest artwork: What do you think?",
+      "likes": 110,
+      "commentsCount": 7
+    },
+    {
+      "id": "13",
+      "username": "Tomás Romero",
+      "views": 350,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS-q3KGyZ3gvJx_IJJfEPh4AmbBBC4pIAGOQ&s",
+      "publicationDate": "2025-01-09",
+      "content": "Top 10 travel hacks for budget-friendly adventures.",
+      "likes": 430,
+      "commentsCount": 35
+    },
+    {
+      "id": "14",
+      "username": "Isabel Pérez",
+      "views": 400,
+      "profilePictureUrl": "https://drgoodprice.com/wp-content/uploads/2024/04/dr-good-sonrisa-de-gratitud_gratitude-smile.webp",
+      "publicationDate": "2025-01-08",
+      "content": "Reflections on personal growth and goals for the year.",
+      "likes": 520,
+      "commentsCount": 55
+    },
+    {
+      "id": "15",
+      "username": "Juanita Cruz",
+      "views": 180,
+      "profilePictureUrl": "https://www.colgateprofesional.com.mx/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/estudiante-femenina-joven-sonriendo-despreocupada-de-cerca.jpg",
+      "publicationDate": "2025-01-07",
+      "content": "An easy guide to start meditating daily.",
+      "likes": 250,
+      "commentsCount": 16
+    }
+  ]
+}
