@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -34,9 +35,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserInfoResponse getLoggedInUserDetails() {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+        User user = this.getUserLogged();
 
         return buildUserInfoResponse(user);
     }
@@ -70,8 +69,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Transactional
     public UserInfoResponse editUserProfile(EditProfileRequest editProfileRequest) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+        User user = this.getUserLogged();
 
         // TODO: Improve the logic for the method to edit a user.
 
@@ -91,12 +89,34 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     }
 
+    @Override
+    @Transactional
+    public UserInfoResponse joinCommunity(String community) {
+        User user = this.getUserLogged();
+
+        if (user.getCommunities().contains(community)) {
+            throw new ApiException("User is already part of the community", HttpStatus.BAD_REQUEST);
+        }
+
+        user.getCommunities().add(community);
+        user.setCommunities(user.getCommunities());
+        userRepository.save(user);
+
+        return buildUserInfoResponse(user);
+    }
+
     private UserInfoResponse buildUserInfoResponse(User user) {
         return new UserInfoResponse(user.getId(),
                                     user.getName(),
                                     user.getHandleUsername(),
                                     user.getEmail(),
                                     user.getDescription(),
-                                    user.getUrlProfile());
+                                    user.getUrlProfile(),
+                                    user.getCommunities());
+    }
+
+    private User getUserLogged() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
     }
 }

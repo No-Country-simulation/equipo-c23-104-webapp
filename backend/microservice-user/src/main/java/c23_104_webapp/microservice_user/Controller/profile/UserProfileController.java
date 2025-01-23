@@ -4,6 +4,7 @@ import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Service.customer.UserService;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,11 @@ public class UserProfileController {
     @PatchMapping("/edit")
     public ResponseEntity<UserInfoResponse> editUserProfile(@RequestBody EditProfileRequest editProfileRequest){
         return ResponseEntity.ok(userService.editUserProfile(editProfileRequest));
+    }
+
+    @PatchMapping("/join-community")
+    public ResponseEntity<UserInfoResponse> joinCommunity(@RequestBody @NotBlank String community){
+        return ResponseEntity.ok(userService.joinCommunity(community));
     }
 
 }
