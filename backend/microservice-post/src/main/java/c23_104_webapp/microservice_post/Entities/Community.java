@@ -24,4 +24,6 @@ public class Community {
     private String name;
 
     private Set<String> username = new HashSet<>();
+    @Column(nullable = false)
+    private Long memberCount;
 }

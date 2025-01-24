@@ -1,6 +1,6 @@
 package c23_104_webapp.microservice_post.Service.customer.Impl;
 
-import c23_104_webapp.microservice_post.DTO.response.community.CommunityDTO;
+import c23_104_webapp.microservice_post.DTO.response.customer.CommunityDTO;
 import c23_104_webapp.microservice_post.Entities.Community;
 import c23_104_webapp.microservice_post.Exception.ApiException;
 import c23_104_webapp.microservice_post.Repositories.APIClient.UserAPIClient;
@@ -15,6 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,8 +27,27 @@ public class CommunityServiceImpl implements CommunityService {
     private final UserAPIClient userAPIClient;
 
     @Override
-    public CommunityDTO getCommunities() {
-        return null;
+    public List<CommunityDTO> getCommunities() {
+        List<Community> communities = communityRepository.findAll();
+        List<CommunityDTO> communityDTOS = new ArrayList<>();
+
+        if(communities.isEmpty()){
+            throw new ApiException("Communities not found",HttpStatus.BAD_REQUEST);
+        }
+
+        for(Community community: communities){
+            communityDTOS.add(CommunityDTO.fromCommunity(community));
+        }
+
+        return communityDTOS;
+    }
+
+    @Override
+    public CommunityDTO findCommunityById(Long id) {
+        Community community = communityRepository.findById(id)
+                .orElseThrow(() ->new ApiException("Community not found",HttpStatus.BAD_REQUEST));
+
+        return CommunityDTO.fromCommunity(community);
     }
 
     @Override
@@ -53,6 +75,8 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         community.getUsername().add(username);
+        // TODO: Implement a TRIGGER in the database to update the number of members and avoid using .size().
+        community.setMemberCount((long) community.getUsername().size());
         communityRepository.save(community);
 
     }
@@ -82,6 +106,8 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         community.getUsername().remove(username);
+        // TODO: Implement a TRIGGER in the database to update the number of members and avoid using .size().
+        community.setMemberCount((long) community.getUsername().size());
         communityRepository.save(community);
     }
 

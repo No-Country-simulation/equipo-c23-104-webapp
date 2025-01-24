@@ -30,7 +30,7 @@ public class SecurityFilterChainConfig {
                         sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("health").permitAll()
+                        .requestMatchers("health","api/community/all","api/community/id/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

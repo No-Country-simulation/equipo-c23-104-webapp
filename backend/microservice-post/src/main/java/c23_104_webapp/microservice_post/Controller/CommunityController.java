@@ -1,12 +1,15 @@
-package c23_104_webapp.microservice_post.Controller.community;
+package c23_104_webapp.microservice_post.Controller;
 
 import c23_104_webapp.microservice_post.DTO.response.GenericResponse;
+import c23_104_webapp.microservice_post.DTO.response.customer.CommunityDTO;
 import c23_104_webapp.microservice_post.Entities.Community;
 import c23_104_webapp.microservice_post.Service.customer.CommunityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +33,16 @@ public class CommunityController {
     public ResponseEntity<GenericResponse> leaveCommunity(@PathVariable Long id){
         communityService.leaveCommunity(id);
         return ResponseEntity.ok(new GenericResponse("Left the community successfully"));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CommunityDTO>> getCommunities(){
+        return ResponseEntity.ok(communityService.getCommunities());
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<CommunityDTO> findCommunity(@PathVariable Long id){
+        return ResponseEntity.ok(communityService.findCommunityById(id));
     }
 
 }

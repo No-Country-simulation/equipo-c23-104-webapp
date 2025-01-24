@@ -1,4 +1,4 @@
-package c23_104_webapp.microservice_post.Controller.post;
+package c23_104_webapp.microservice_post.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
