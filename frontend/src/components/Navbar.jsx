@@ -45,20 +45,17 @@ export default function Navbar({
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-      if (submenuRef.current && !submenuRef.current.contains(event.target)) {
-        setIsSubmenuOpen(false);
-      }
       if (
         languageMenuRef.current &&
-        !languageMenuRef.current.contains(event.target)
+        !languageMenuRef.current.contains(event.target) &&
+        submenuRef.current &&
+        !submenuRef.current.contains(event.target)
       ) {
+        setIsDropdownOpen(false);
+        setIsSubmenuOpen(false);
         setIsLanguageMenuOpen(false);
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -79,11 +76,13 @@ export default function Navbar({
             className="flex-1 flex items-center justify-start rtl:justify-end"
           >
             <button
+              id="ocultar-mostrar"
               onClick={toggleTextVisibility}
-              className="px-2.5 py-2 mr-2 ml-1 rounded text-sm border hover:border-transparent font-medium dark:bg-transparent bg-transparent  dark:text-white hover:bg-[#00bf00] group dark:hover:bg-[#00bf00] dark:hover:border-white transition-all duration-200 focus:outline-none"
+              className="hidden md:block px-3 py-2 rounded text-sm border hover:border-transparent font-medium dark:bg-transparent bg-transparent dark:text-white hover:bg-[#00bf00] group dark:hover:bg-[#00bf00] dark:hover:border-white transition-all duration-200 focus:outline-none"
             >
               <i className="fa-solid fa-bars text-[#00bf00] dark:text-white group-hover:text-white"></i>
             </button>
+
             <a href="#" className="flex mr-3 items-center ">
               <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
               <span
@@ -164,25 +163,186 @@ export default function Navbar({
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className={`text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                        showText ? "opacity-100" : "opacity-0"
+                      }`}
                     >
                       <i className="fa-solid fa-user mr-3 text-[#00bf00] dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
                       {t("profile")}
                     </a>
                   </li>
-                  <li>
+                  <li ref={submenuRef}>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      onClick={toggleSubmenu}
+                      className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                        showText ? "opacity-100" : "opacity-0"
+                      }`}
                     >
                       <i className="fa-solid fa-gear mr-3 text-[#00bf00] dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
                       {t("settings")}
                     </a>
+                    <div
+                      className={`absolute right-full top-24 mx-0.5 py-2 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
+                        isSubmenuOpen
+                          ? "scale-100 opacity-100"
+                          : "scale-95 opacity-0 pointer-events-none"
+                      }`}
+                    >
+                      <ul className="space-y-0">
+                        <li>
+                          <a
+                            href="#"
+                            onClick={toggleLanguageMenu}
+                            className={`flex items-center w-36 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-opacity duration-500 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[12px] ${
+                              showText ? "opacity-100" : "opacity-0"
+                            }`}
+                          >
+                            <svg
+                              className="w-2.5 h-2.5 me-3 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 6 10"
+                            >
+                              <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 1 1 5l4 4"
+                              />
+                            </svg>
+                            {t("language")}
+                          </a>
+                          <div
+                            ref={languageMenuRef}
+                            className={`absolute right-full top-[-1px] mx-0.5 w-40 py-2 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
+                              isLanguageMenuOpen
+                                ? "scale-100 opacity-100"
+                                : "scale-95 opacity-0 pointer-events-none"
+                            }`}
+                          >
+                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
+                              <li>
+                                <a
+                                  onClick={() => handleChangeLanguage("es")}
+                                  className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                                    showText ? "opacity-100" : "opacity-0"
+                                  }`}
+                                >
+                                  <img
+                                    src="https://flagcdn.com/w40/es.png"
+                                    alt="Español"
+                                    className="w-5 h-3 mr-3"
+                                  />
+                                  {t("spanish")}
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  onClick={() => handleChangeLanguage("en")}
+                                  className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                                    showText ? "opacity-100" : "opacity-0"
+                                  }`}
+                                >
+                                  <img
+                                    src="https://flagcdn.com/w40/gb.png"
+                                    alt="Inglés"
+                                    className="w-5 h-3 mr-3"
+                                  />
+                                  {t("english")}
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  onClick={() => handleChangeLanguage("pt")}
+                                  className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                                    showText ? "opacity-100" : "opacity-0"
+                                  }`}
+                                >
+                                  <img
+                                    src="https://flagcdn.com/w40/pt.png"
+                                    alt="Portugués"
+                                    className="w-5 h-3 mr-3"
+                                  />
+                                  {t("portuguese")}
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  onClick={() => handleChangeLanguage("esp")}
+                                  className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                                    showText ? "opacity-100" : "opacity-0"
+                                  }`}
+                                >
+                                  🌍
+                                  <span className="ml-3">{t("esperanto")}</span>
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  onClick={() => handleChangeLanguage("fr")}
+                                  className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                                    showText ? "opacity-100" : "opacity-0"
+                                  }`}
+                                >
+                                  <img
+                                    src="https://flagcdn.com/w40/fr.png"
+                                    alt="Francés"
+                                    className="w-5 h-3 mr-3"
+                                  />
+                                  {t("french")}
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  onClick={() => handleChangeLanguage("ger")}
+                                  className={`flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900  ease-in-out  transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                                    showText ? "opacity-100" : "opacity-0"
+                                  }`}
+                                >
+                                  <img
+                                    src="https://flagcdn.com/w40/de.png"
+                                    alt="Alemán"
+                                    className="w-5 h-3 mr-3"
+                                  />
+                                  {t("german")}
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li>
+                          <a
+                            id="dark-mode-toggle"
+                            href="#"
+                            onClick={toggleDarkMode}
+                            className={`text-[12px] mx-2 rounded border border-transparent block px-3 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                              showText ? "opacity-100" : "opacity-0"
+                            }`}
+                          >
+                            {darkMode ? (
+                              <>
+                                <i className="fa-solid fa-sun mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
+                                <span> {t("light")}</span>
+                              </>
+                            ) : (
+                              <>
+                                <i className="fa-solid fa-moon mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
+                                <span> {t("dark")}</span>
+                              </>
+                            )}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </li>
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                        showText ? "opacity-100" : "opacity-0"
+                      }`}
                     >
                       <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
                       {t("my-resources")}
@@ -191,187 +351,12 @@ export default function Navbar({
                   <li>
                     <a
                       href="#"
-                      className="text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
+                      className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                        showText ? "opacity-100" : "opacity-0"
+                      }`}
                     >
                       <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
                       {t("upgrade")}
-                    </a>
-                  </li>
-                </ul>
-                <div className="pt-1 pb-2 mt-2">
-                  <a
-                    href="#"
-                    className="text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white"
-                  >
-                    <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-500 group-hover:text-white"></i>{" "}
-                    {t("logout")}
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div ref={submenuRef} className="relative flex items-center ms-3">
-              <button
-                onClick={toggleSubmenu}
-                className="flex items-center justify-center rounded-full p-2 text-sm font-medium border-1 border-transparent hover:border-transparent text-gray-900 bg-white hover:bg-[#00bf00] group dark:hover:border-white dark:text-white dark:bg-[#4A494A] dark:hover:bg-[#00bf00] transition-opacity duration-500"
-              >
-                <svg
-                  className="w-4 h-4 text-[#00bf00] dark:text-white group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 4 15"
-                >
-                  <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                </svg>
-              </button>
-              <div
-                className={`absolute top-full right-0 mt-[15px] py-2 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
-                  isSubmenuOpen
-                    ? "scale-100 opacity-100"
-                    : "scale-95 opacity-0 pointer-events-none"
-                }`}
-              >
-                <ul className="space-y-0">
-                  <li>
-                    <a
-                      href="#"
-                      onClick={toggleLanguageMenu}
-                      className={`flex items-center w-36 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-opacity duration-500 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
-                        showText ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      <svg
-                        className="w-2.5 h-2.5 me-3 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 6 10"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 1 1 5l4 4"
-                        />
-                      </svg>
-                      {t("language")}
-                    </a>
-                    <div
-                      ref={languageMenuRef}
-                      className={`absolute right-full top-[-1px] mr-[1px] w-40 py-3 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
-                        isLanguageMenuOpen
-                          ? "scale-100 opacity-100"
-                          : "scale-95 opacity-0 pointer-events-none"
-                      }`}
-                    >
-                      <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
-                        <li>
-                          <a
-                            onClick={() => handleChangeLanguage("es")}
-                            className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                              showText ? "opacity-100" : "opacity-0"
-                            }`}
-                          >
-                            <img
-                              src="https://flagcdn.com/w40/es.png"
-                              alt="Español"
-                              className="w-5 h-3 mr-3"
-                            />
-                            {t("spanish")}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleChangeLanguage("en")}
-                            className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                              showText ? "opacity-100" : "opacity-0"
-                            }`}
-                          >
-                            <img
-                              src="https://flagcdn.com/w40/gb.png"
-                              alt="Inglés"
-                              className="w-5 h-3 mr-3"
-                            />
-                            {t("english")}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleChangeLanguage("pt")}
-                            className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                              showText ? "opacity-100" : "opacity-0"
-                            }`}
-                          >
-                            <img
-                              src="https://flagcdn.com/w40/pt.png"
-                              alt="Portugués"
-                              className="w-5 h-3 mr-3"
-                            />
-                            {t("portuguese")}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleChangeLanguage("esp")}
-                            className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                              showText ? "opacity-100" : "opacity-0"
-                            }`}
-                          >
-                            🌍
-                            <span className="ml-3">{t("esperanto")}</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleChangeLanguage("fr")}
-                            className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                              showText ? "opacity-100" : "opacity-0"
-                            }`}
-                          >
-                            <img
-                              src="https://flagcdn.com/w40/fr.png"
-                              alt="Francés"
-                              className="w-5 h-3 mr-3"
-                            />
-                            {t("french")}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleChangeLanguage("ger")}
-                            className={`flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900  ease-in-out  transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                              showText ? "opacity-100" : "opacity-0"
-                            }`}
-                          >
-                            <img
-                              src="https://flagcdn.com/w40/de.png"
-                              alt="Alemán"
-                              className="w-5 h-3 mr-3"
-                            />
-                            {t("german")}
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <a
-                      id="dark-mode-toggle"
-                      href="#"
-                      onClick={toggleDarkMode}
-                      className={`text-[12px] mx-2 rounded border border-transparent block px-3 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
-                        showText ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      {darkMode ? (
-                        <>
-                          <i className="fa-solid fa-sun mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
-                          <span> {t("light")}</span>
-                        </>
-                      ) : (
-                        <>
-                          <i className="fa-solid fa-moon mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
-                          <span> {t("dark")}</span>
-                        </>
-                      )}
                     </a>
                   </li>
                   <li>
@@ -386,6 +371,17 @@ export default function Navbar({
                     </a>
                   </li>
                 </ul>
+                <div className="pt-1 pb-2 mt-2">
+                  <a
+                    href="#"
+                    className={`text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                      showText ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-500 group-hover:text-white"></i>{" "}
+                    {t("logout")}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -394,28 +390,36 @@ export default function Navbar({
           <div className="flex items-center justify-between rtl:justify-end my-1">
             <a
               href="#"
-              className="relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+              className={`relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
             >
               <i className="fa-solid fa-hand-holding-heart mr-2 text-[#00bf00] dark:text-white"></i>
               {t("foryou")}
             </a>
             <a
               href="#"
-              className="relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+              className={`relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
             >
               <i className="fa-solid fa-arrow-trend-up mr-2 text-[#00bf00] dark:text-white"></i>
               {t("trend")}
             </a>
             <a
               href="#"
-              className="relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+              className={`relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
             >
               <i className="fa-solid fa-newspaper mr-2 text-[#00bf00] dark:text-white"></i>
               {t("news")}
             </a>
             <a
               href="#"
-              className="relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+              className={`relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
+                showText ? "opacity-100" : "opacity-0"
+              }`}
             >
               <i class="fa-solid fa-clock-rotate-left mr-2 text-[#00bf00] dark:text-white"></i>
               {t("recent")}
