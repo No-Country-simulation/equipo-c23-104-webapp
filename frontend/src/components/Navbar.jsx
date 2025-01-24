@@ -73,15 +73,18 @@ export default function Navbar({
       className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1]"
     >
       <div className="px-3 pt-2 pb-1 lg:px-5 lg:pl-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center justify-start rtl:justify-end">
+        <div className="flex  justify-between items-center">
+          <div
+            id="caja-01"
+            className="flex-1 flex items-center justify-start rtl:justify-end"
+          >
             <button
               onClick={toggleTextVisibility}
               className="px-2.5 py-2 mr-2 ml-1 rounded text-sm border hover:border-transparent font-medium dark:bg-transparent bg-transparent  dark:text-white hover:bg-[#00bf00] group dark:hover:bg-[#00bf00] dark:hover:border-white transition-all duration-200 focus:outline-none"
             >
               <i className="fa-solid fa-bars text-[#00bf00] dark:text-white group-hover:text-white"></i>
             </button>
-            <a href="#" className="flex ms-2 ml-0 items-center ">
+            <a href="#" className="flex mr-3 items-center ">
               <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
               <span
                 id="page-name"
@@ -93,7 +96,7 @@ export default function Navbar({
               </span>
             </a>
           </div>
-          <div className="px-3">
+          <div id="caja-02" className="flex-1 flex justify-center">
             <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center flex-col">
               <div className="relative w-full flex items-center group">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -117,38 +120,15 @@ export default function Navbar({
                   type="search"
                   id="default-search"
                   placeholder={t("search")}
-                  className="block w-full p-2 pl-8 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[10px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
+                  className="block w-full p-2 pl-7 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[11px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
                   value={searchQuery}
                   onChange={handleSearchChange}
                 />
               </div>
-              <div className="container mx-auto flex justify-center items-center gap-4">
-                <a
-                  href="#"
-                  className="relative text-[11px] mt-1 rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-2 mx-2 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
-                >
-                  <i className="fa-solid fa-hand-holding-heart mr-2 text-[#00bf00] dark:text-white"></i>
-                  {t("foryou")}
-                </a>
-                <a
-                  href="#"
-                  className="relative text-[11px] mt-1 rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-2 mx-2 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
-                >
-                  <i className="fa-solid fa-arrow-trend-up mr-2 text-[#00bf00] dark:text-white"></i>
-                  {t("trend")}
-                </a>
-                <a
-                  href="#"
-                  className="relative text-[11px] mt-1 rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-2 mx-2 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
-                >
-                  <i className="fa-solid fa-newspaper mr-2 text-[#00bf00] dark:text-white"></i>
-                  {t("news")}
-                </a>
-              </div>
             </form>
           </div>
 
-          <div className="flex items-center">
+          <div id="caja-03" className="flex-1 flex justify-end">
             <div ref={dropdownRef} className="relative flex items-center ms-3">
               <a
                 id="user-button"
@@ -408,6 +388,38 @@ export default function Navbar({
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="flex items-start justify-center">
+          <div className="flex items-center justify-between rtl:justify-end my-1">
+            <a
+              href="#"
+              className="relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+            >
+              <i className="fa-solid fa-hand-holding-heart mr-2 text-[#00bf00] dark:text-white"></i>
+              {t("foryou")}
+            </a>
+            <a
+              href="#"
+              className="relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+            >
+              <i className="fa-solid fa-arrow-trend-up mr-2 text-[#00bf00] dark:text-white"></i>
+              {t("trend")}
+            </a>
+            <a
+              href="#"
+              className="relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+            >
+              <i className="fa-solid fa-newspaper mr-2 text-[#00bf00] dark:text-white"></i>
+              {t("news")}
+            </a>
+            <a
+              href="#"
+              className="relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+            >
+              <i class="fa-solid fa-clock-rotate-left mr-2 text-[#00bf00] dark:text-white"></i>
+              {t("recent")}
+            </a>
           </div>
         </div>
       </div>

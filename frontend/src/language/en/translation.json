@@ -23,7 +23,8 @@
   "message": "Message",
   "notifications": "Notifications",
   "create": "Create",
-  "foryou": "For You",
+  "foryou": "For you",
   "trend": "Trend",
-  "news": "News"
+  "news": "News",
+  "recent": "Recents"
 }
