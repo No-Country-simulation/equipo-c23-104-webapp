@@ -22,5 +22,8 @@
   "resources": "Resources",
   "message": "Message",
   "notifications": "Notifications",
-  "create": "Create"
+  "create": "Create",
+  "foryou": "For You",
+  "trend": "Trend",
+  "news": "News"
 }

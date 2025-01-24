@@ -70,10 +70,10 @@ export default function Navbar({
   return (
     <nav
       id="navbar-container"
-      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#A19FA1] transition-all duration-500 border border-[#A19FA1]"
+      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1]"
     >
-      <div className="px-3 py-3 lg:px-5 lg:pl-3">
-        <div className="flex items-center justify-between">
+      <div className="px-3 pt-2 pb-1 lg:px-5 lg:pl-3">
+        <div className="flex items-start justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
             <button
               onClick={toggleTextVisibility}
@@ -122,16 +122,28 @@ export default function Navbar({
                   onChange={handleSearchChange}
                 />
               </div>
-              <div className="container mx-auto flex justify-center items-center gap-4 mt-2">
-                <button className="text-[12px] mx-2 mt-2 rounded border border-transparent hover:border-transparent bg-[#00bf00] text-white block px-4 py-2  transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white">
-                  {t("recommended")}
-                </button>
-                <button className="text-[12px] mx-2 mt-2 rounded border border-transparent hover:border-transparent bg-[#00bf00] block px-4 py-2 text-white transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white">
-                  {t("trending")}
-                </button>
-                <button className="text-[12px] mx-2 mt-2 rounded border border-transparent hover:border-transparent bg-[#00bf00] block px-4 py-2 text-white transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white">
+              <div className="container mx-auto flex justify-center items-center gap-4">
+                <a
+                  href="#"
+                  className="relative text-[11px] mt-1 rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-2 mx-2 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+                >
+                  <i className="fa-solid fa-hand-holding-heart mr-2 text-[#00bf00] dark:text-white"></i>
+                  {t("foryou")}
+                </a>
+                <a
+                  href="#"
+                  className="relative text-[11px] mt-1 rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-2 mx-2 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+                >
+                  <i className="fa-solid fa-arrow-trend-up mr-2 text-[#00bf00] dark:text-white"></i>
+                  {t("trend")}
+                </a>
+                <a
+                  href="#"
+                  className="relative text-[11px] mt-1 rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-2 mx-2 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full"
+                >
+                  <i className="fa-solid fa-newspaper mr-2 text-[#00bf00] dark:text-white"></i>
                   {t("news")}
-                </button>
+                </a>
               </div>
             </form>
           </div>
@@ -141,7 +153,7 @@ export default function Navbar({
               <a
                 id="user-button"
                 href="#"
-                className="flex border-3 rounded-full w-11 h-11 overflow-hidden hover:shadow-lg focus:ring-0 focus:outline-none dark:hover:shadow-lg dark:focus:ring-0 transition-all duration-300"
+                className="flex border-3 rounded-full w-10 h-10 overflow-hidden hover:shadow-lg focus:ring-0 focus:outline-none dark:hover:shadow-lg dark:focus:ring-0 transition-all duration-300"
                 aria-expanded={isDropdownOpen ? "true" : "false"}
                 onClick={toggleDropdown}
               >
@@ -223,7 +235,7 @@ export default function Navbar({
                 className="flex items-center justify-center rounded-full p-2 text-sm font-medium border-1 border-transparent hover:border-transparent text-gray-900 bg-white hover:bg-[#00bf00] group dark:hover:border-white dark:text-white dark:bg-[#4A494A] dark:hover:bg-[#00bf00] transition-opacity duration-500"
               >
                 <svg
-                  className="w-5 h-5 text-[#00bf00] dark:text-white group-hover:text-white"
+                  className="w-4 h-4 text-[#00bf00] dark:text-white group-hover:text-white"
                   fill="currentColor"
                   viewBox="0 0 4 15"
                 >
