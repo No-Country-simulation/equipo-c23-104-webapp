@@ -1,6 +1,5 @@
 package c23_104_webapp.microservice_user.Controller.profile;
 
-import c23_104_webapp.microservice_user.DTO.GenericResponse;
 import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Service.customer.UserService;
@@ -42,15 +41,16 @@ public class UserProfileController {
         return ResponseEntity.ok(userService.editUserProfile(editProfileRequest));
     }
 
-    @PatchMapping("/join-community")
-    public ResponseEntity<UserInfoResponse> joinCommunity(@RequestBody @NotBlank String community){
-        return ResponseEntity.ok(userService.joinCommunity(community));
+    @PostMapping("/join-community")
+    public ResponseEntity<Void> joinCommunity(@RequestBody @NotBlank String community){
+        userService.joinCommunity(community);
+        return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/leave-community")
-    public ResponseEntity<GenericResponse> leaveCommunity(@RequestBody @NotBlank String community){
+    @PostMapping("/leave-community")
+    public ResponseEntity<Void> leaveCommunity(@RequestBody @NotBlank String community){
         userService.leaveCommunity(community);
-        return ResponseEntity.ok(new GenericResponse("You left the community successfully"));
+        return ResponseEntity.noContent().build();
     }
 
 }

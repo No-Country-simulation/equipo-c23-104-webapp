@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     @Transactional
-    public UserInfoResponse joinCommunity(String community) {
+    public void joinCommunity(String community) {
         User user = this.getUserLogged();
 
         if (user.getCommunities().contains(community)) {
@@ -101,10 +101,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         user.setCommunities(user.getCommunities());
         userRepository.save(user);
 
-        return buildUserInfoResponse(user);
     }
 
     @Override
+    @Transactional
     public void leaveCommunity(String community) {
         User user = this.getUserLogged();
 
