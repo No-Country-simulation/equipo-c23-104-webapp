@@ -1,5 +1,6 @@
 package c23_104_webapp.microservice_user.Service.authentication.Impl;
 
+import c23_104_webapp.microservice_user.Entities.User;
 import c23_104_webapp.microservice_user.Service.authentication.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -47,6 +48,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        extraClaims.put("userId", ((User) userDetails).getId());
         return buildToken(extraClaims, userDetails, expiration);
     }
 

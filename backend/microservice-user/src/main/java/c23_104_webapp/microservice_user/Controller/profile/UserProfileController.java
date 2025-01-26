@@ -1,6 +1,7 @@
 package c23_104_webapp.microservice_user.Controller.profile;
 
 import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
+import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoForPostResponse;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Service.customer.UserService;
 import jakarta.validation.constraints.Email;
@@ -8,6 +9,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +38,11 @@ public class UserProfileController {
     @GetMapping("/user/{handleUsername}")
     public ResponseEntity<UserInfoResponse> getUserInfoByHandleUsername(@PathVariable String handleUsername) {
         return ResponseEntity.ok(userService.getUserInfoByHandleUsername(handleUsername));
+    }
+
+    @GetMapping("/usersInfoForPost")
+    public ResponseEntity<List<UserInfoForPostResponse>> getUsersInfoForPost(@RequestParam("userIds") ArrayList<Long> userIds){
+        return ResponseEntity.ok(userService.getUsersInfoForPost(userIds));
     }
 
     @PatchMapping("/edit")

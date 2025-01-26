@@ -1,6 +1,7 @@
 package c23_104_webapp.microservice_user.Service.customer.Impl;
 
 import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
+import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoForPostResponse;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Entities.User;
 import c23_104_webapp.microservice_user.Exception.ApiException;
@@ -15,6 +16,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -86,6 +91,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         return buildUserInfoResponse(user);
 
+    }
+
+    @Override
+    public List<UserInfoForPostResponse> getUsersInfoForPost(ArrayList<Long> userIds) {
+        List<User> users = userRepository.findAllById(userIds);
+
+        return users.stream()
+                .map(user -> new UserInfoForPostResponse(user.getId(), user.getName(),
+                        user.getHandleUsername(), user.getEmail(), user.getUrlProfile()))
+                .collect(Collectors.toList());
     }
 
     @Override
