@@ -13,4 +13,6 @@ public interface TokenService {
     boolean isTokenValid(String token, UserDetails userDetails);
 
     boolean isTokenExpired(String token);
+
+    Long extractUserId(String token);
 }

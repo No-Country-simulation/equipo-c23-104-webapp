@@ -1,4 +1,33 @@
 package c23_104_webapp.microservice_post.Entities;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Entity
+@Builder
+@Table(name = "post")
 public class Post {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(nullable = false)
+    private Long idUser;
+    @Column(nullable = false)
+    private String content;
+    private LocalDateTime postDate;
+    @ElementCollection
+    private List<String> imgUrls;
+    @Column(nullable = false)
+    private Long interactionCount = 0L;
+    @ManyToOne
+    private Community community;
+
 }

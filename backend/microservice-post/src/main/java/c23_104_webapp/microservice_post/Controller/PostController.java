@@ -1,15 +1,38 @@
 package c23_104_webapp.microservice_post.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import c23_104_webapp.microservice_post.DTO.request.PostRequest;
+import c23_104_webapp.microservice_post.DTO.response.GenericResponse;
+import c23_104_webapp.microservice_post.DTO.response.customer.PostDTO;
+import c23_104_webapp.microservice_post.Service.customer.PostService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/post")
 public class PostController {
+
+    private final PostService postService;
 
     @GetMapping
     public String healthCheck() {
         return "API is working in post";
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<GenericResponse> createPost(@RequestBody @Valid PostRequest postRequest) {
+        postService.createPost(postRequest);
+        return ResponseEntity.ok(new GenericResponse("Post created successfully"));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Page<PostDTO>> getPosts(Pageable pageable){
+        Page<PostDTO> postsPage = postService.getPosts(pageable);
+        return ResponseEntity.ok(postsPage);
+    }
+
 }

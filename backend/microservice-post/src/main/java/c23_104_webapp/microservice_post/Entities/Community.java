@@ -1,9 +1,6 @@
 package c23_104_webapp.microservice_post.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
@@ -15,6 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Builder
+@Table(name = "community")
 public class Community {
 
     @Id
@@ -23,7 +21,13 @@ public class Community {
     @Column(nullable = false)
     private String name;
 
-    private Set<String> username = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(
+            name = "community_users",
+            joinColumns = @JoinColumn(name = "community_id")
+    )
+    @Column(name = "user_id")
+    private Set<Long> idUsers = new HashSet<>();
     @Column(nullable = false)
-    private Long memberCount;
+    private Long memberCount = 0L;
 }

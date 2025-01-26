@@ -5,13 +5,12 @@ import c23_104_webapp.microservice_post.Entities.Community;
 import c23_104_webapp.microservice_post.Exception.ApiException;
 import c23_104_webapp.microservice_post.Repositories.APIClient.UserAPIClient;
 import c23_104_webapp.microservice_post.Repositories.CommunityRepository;
+import c23_104_webapp.microservice_post.Security.UserContext;
 import c23_104_webapp.microservice_post.Service.customer.CommunityService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +24,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     private final CommunityRepository communityRepository;
     private final UserAPIClient userAPIClient;
+    private final UserContext userContext;
 
     @Override
     public List<CommunityDTO> getCommunities() {
@@ -68,21 +68,22 @@ public class CommunityServiceImpl implements CommunityService {
             throw new ApiException("Error joining community: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        String username = this.getUsernameFromUserLogged();
+        Long userId = this.getUserIdFromUserLogged();
 
-        if(community.getUsername().contains(username)){
+        if(community.getIdUsers().contains(userId)){
             throw new ApiException("User is already part of the community", HttpStatus.BAD_REQUEST);
         }
 
-        community.getUsername().add(username);
+        community.getIdUsers().add(userId);
         // TODO: Implement a TRIGGER in the database to update the number of members and avoid using .size().
-        community.setMemberCount((long) community.getUsername().size());
+        community.setMemberCount((long) community.getIdUsers().size());
         communityRepository.save(community);
 
     }
 
     public void fallBackJoinCommunity(Long id, Throwable throwable) {
         log.error("Fallback triggered for joinCommunity. Community ID: {}. Error: {}", id, throwable.getMessage(), throwable);
+        // TODO: Verify error messages, it is thrown when a user already belongs to a community but it is not a service error.
         throw new ApiException("Unable to join community due to an issue with the user service.", HttpStatus.SERVICE_UNAVAILABLE);
     }
 
@@ -99,15 +100,15 @@ public class CommunityServiceImpl implements CommunityService {
             throw new ApiException("Error leaving community: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        String username = this.getUsernameFromUserLogged();
+        Long userId = this.getUserIdFromUserLogged();
 
-        if(!community.getUsername().contains(username)){
+        if(!community.getIdUsers().contains(userId)){
             throw new ApiException("The user is not part of this community", HttpStatus.BAD_REQUEST);
         }
 
-        community.getUsername().remove(username);
+        community.getIdUsers().remove(userId);
         // TODO: Implement a TRIGGER in the database to update the number of members and avoid using .size().
-        community.setMemberCount((long) community.getUsername().size());
+        community.setMemberCount((long) community.getIdUsers().size());
         communityRepository.save(community);
     }
 
@@ -116,9 +117,8 @@ public class CommunityServiceImpl implements CommunityService {
         throw new ApiException("Unable to leave community due to an issue with the user service.", HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    private String getUsernameFromUserLogged(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null ? authentication.getName() : null;
+    private Long getUserIdFromUserLogged(){
+        return userContext.getUserId();
     }
 
 

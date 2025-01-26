@@ -49,6 +49,12 @@ public class TokenServiceImpl implements TokenService {
         return extractExpiration(token).before(new Date());
     }
 
+    @Override
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("userId", Long.class);
+    }
+
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }

@@ -1,10 +1,14 @@
 package c23_104_webapp.microservice_post.Repositories.APIClient;
 
 import c23_104_webapp.microservice_post.DTO.response.authentication.UserDetailsDTO;
+import c23_104_webapp.microservice_post.DTO.response.customer.UserInfoResponse;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @FeignClient(name = "microservice-user")
 public interface UserAPIClient {
@@ -23,4 +27,10 @@ public interface UserAPIClient {
 
     @PostMapping("/api/profile/leave-community")
     void leaveCommunity(@RequestBody @NotBlank String community);
+
+    @GetMapping("/api/profile/id/{id}")
+    UserInfoResponse getUserInfoById(@PathVariable("id") Long id);
+
+    @GetMapping("/api/profile/usersInfoForPost")
+    List<UserInfoResponse> getUserInfoByIds(@RequestParam("userIds") List<Long> userIds);
 }

@@ -31,6 +31,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
     private final UserDetailsService userDetailsService;
     private final UserAPIClient userServiceClient;
+    private final UserContext userContext;
 
     @Value("${jwt.header}")
     private String authHeader;
@@ -67,6 +68,13 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
             String token = authHeaderValue.substring(authPrefix.length());
             String userEmail = tokenService.extractUsername(token);
+            Long userId = tokenService.extractUserId(token);
+
+            if(userId != null){
+                userContext.setUserId(userId);
+            } else {
+                throw new ApiException("User ID in token not found ", HttpStatus.BAD_REQUEST);
+            }
 
             if (userEmail != null) {
                 UserDetails user = userDetailsService.loadUserByUsername(userEmail);
