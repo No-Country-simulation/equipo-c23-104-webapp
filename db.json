@@ -36,7 +36,7 @@
       "views": 150,
       "profilePictureUrl": "https://drgoodprice.com/wp-content/uploads/2024/04/dr-good-sonrisa-de-gratitud_gratitude-smile.webp",
       "publicationDate": "2025-01-19",
-      "content": "Tips to improve your productivity while working from home.",
+      "content": "Working from home has become the norm for many people, and while it offers flexibility, it can also present its own set of challenges. One of the best ways to stay productive in a home office is to create a dedicated workspace. It doesn't have to be a separate room, but having a specific area designated for work can help you mentally transition into work mode. Another key to productivity is establishing a solid routine. Waking up at the same time every day, getting ready as if you were going to the office, and taking regular breaks are all habits that can increase your efficiency. Furthermore, staying organized by making daily to-do lists and using productivity tools like time trackers or task management apps can ensure that you stay on top of deadlines and don't feel overwhelmed.",
       "likes": 230,
       "commentsCount": 18
     },
@@ -46,7 +46,7 @@
       "views": 90,
       "profilePictureUrl": "https://www.colgateprofesional.com.mx/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/estudiante-femenina-joven-sonriendo-despreocupada-de-cerca.jpg",
       "publicationDate": "2025-01-21",
-      "content": "A relaxing weekend spent with family and friends.",
+      "content": "This past weekend was the perfect escape from the daily grind. I spent some quality time with my family and close friends, which was a refreshing break. We started the weekend with a simple brunch at a local café, enjoying delicious pastries and catching up on each other's lives. Later in the day, we decided to take a short hike in the nearby mountains. The fresh air and beautiful scenery were exactly what we needed to clear our minds. We ended the weekend with a cozy dinner at home, laughing and reminiscing about old times. It was a reminder of how important it is to step away from work and spend time with the people who matter most.",
       "likes": 125,
       "commentsCount": 8
     },
@@ -56,7 +56,7 @@
       "views": 280,
       "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
       "publicationDate": "2025-01-17",
-      "content": "Learning a new language can be so rewarding!",
+      "content": "Learning a new language has been one of the most rewarding experiences I've had in recent years. It's not just about memorizing vocabulary and grammar rules—it's about immersing yourself in a new culture and way of thinking. The process of learning has its challenges, especially in the beginning, but every small victory, like understanding a conversation or reading a book in the new language, makes it all worthwhile. One of the best ways to stay motivated is by practicing every day, even if it's just for a few minutes. Watching movies or listening to music in the language you're learning can also be a fun and effective way to improve. I’ve come to realize that language learning is a journey that opens up new perspectives and connects you with people from different backgrounds.",
       "likes": 310,
       "commentsCount": 27
     },
@@ -66,7 +66,7 @@
       "views": 340,
       "profilePictureUrl": "https://www.colgateprofesional.com.gt/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/retrato-mujer-afroamericana-hermosa-sonriendo.jpg",
       "publicationDate": "2025-01-16",
-      "content": "Top 5 must-read books for the new year.",
+      "content": "The start of a new year is always a great opportunity to set new goals and pick up new habits. One of my personal goals for this year is to read more books, so I’ve put together a list of the top 5 must-read books that I believe will inspire and challenge me. First on the list is 'The Alchemist' by Paulo Coelho, a timeless tale of self-discovery and the pursuit of one's dreams. Next, 'Sapiens: A Brief History of Humankind' by Yuval Noah Harari offers a thought-provoking exploration of human history and how we got to where we are today. For those looking for something more philosophical, 'The Power of Now' by Eckhart Tolle is a great read that focuses on mindfulness and living in the present moment. I've also included 'Educated' by Tara Westover, a memoir that tells the inspiring story of a woman who overcame her difficult upbringing to pursue education. Lastly, 'The Four Agreements' by Don Miguel Ruiz provides valuable lessons on how to live a life of freedom and happiness. I’m really excited to dive into these books and grow both intellectually and personally this year.",
       "likes": 500,
       "commentsCount": 50
     },
@@ -149,6 +149,71 @@
       "content": "An easy guide to start meditating daily.",
       "likes": 250,
       "commentsCount": 16
+    },
+    {
+      "username": "Tu Nombre",
+      "views": 0,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
+      "publicationDate": "2025-01-27",
+      "content": "abc",
+      "likes": 0,
+      "commentsCount": 0,
+      "id": "ryL7aCo"
+    },
+    {
+      "username": "Tu Nombre",
+      "views": 0,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
+      "publicationDate": "2025-01-27",
+      "content": "def",
+      "likes": 0,
+      "commentsCount": 0,
+      "id": "LzIbKv5"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Juan Pérez",
+      "email": "juan.perez@example.com",
+      "profilePictureUrl": "https://drgoodprice.com/wp-content/uploads/2024/04/dr-good-sonrisa-de-gratitud_gratitude-smile.webp",
+      "communities": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Ana Gómez",
+      "email": "ana.gomez@example.com",
+      "profilePictureUrl": "https://www.colgateprofesional.com.mx/content/dam/cp-sites/oral-care/professional/global/es/thumbnails/estudiante-femenina-joven-sonriendo-despreocupada-de-cerca.jpg",
+      "communities": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Carlos Díaz",
+      "email": "carlos.diaz@example.com",
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS-q3KGyZ3gvJx_IJJfEPh4AmbBBC4pIAGOQ&s",
+      "communities": [
+        1
+      ]
+    }
+  ],
+  "communities": [
+    {
+      "id": 1,
+      "name": "Inglés"
+    },
+    {
+      "id": 2,
+      "name": "Español"
+    },
+    {
+      "id": 3,
+      "name": "Francés"
     }
   ]
 }

@@ -11,7 +11,7 @@ export default function Home() {
     axios
       .get('http://localhost:3000/posts')
       .then((response) => {
-        setPosts(response.data); // Guardamos las publicaciones en el estado
+        setPosts(response.data.reverse()); // Guardamos las publicaciones en el estado
       })
       .catch((error) => {
         console.error('Error fetching posts:', error);
