@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import EmojiPicker from "emoji-picker-react";
 import "./style.css";
 
 export default function Publications({ searchQuery }) {
@@ -7,6 +8,9 @@ export default function Publications({ searchQuery }) {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [publications, setPublications] = useState([]);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [commentText, setCommentText] = useState("");
 
   const handleCreatePublication = (e) => {
     e.preventDefault();
@@ -14,6 +18,7 @@ export default function Publications({ searchQuery }) {
       title,
       description,
       image,
+      comments: [],
     };
     setPublications([newPublication, ...publications]);
     setIsModalOpen(false);
@@ -22,16 +27,30 @@ export default function Publications({ searchQuery }) {
     setImage(null);
   };
 
-  // Filtrar las publicaciones según el searchQuery
-  const filteredPublications = publications.filter((publication) => {
-    return (
+  const handleAddComment = (index) => {
+    if (!commentText.trim()) return;
+
+    const updatedPublications = [...publications];
+    if (!updatedPublications[index].comments) {
+      updatedPublications[index].comments = [];
+    }
+    updatedPublications[index].comments.push(commentText);
+    setPublications(updatedPublications);
+    setCommentText("");
+  };
+
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  const filteredPublications = publications.filter(
+    (publication) =>
       publication.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       publication.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
+  );
 
   return (
-    <article className="p-4 sm:ml-64 lg:ml-96 max-w-5xl mx-auto  flex justify-center items-center contenedor-article">
+    <article className="p-4 sm:ml-64 lg:ml-96 max-w-5xl mx-auto flex justify-center items-center contenedor-article">
       <div className="py-8 px-16 border-r border-l border-gray-100 rounded dark:border-gray-700 mt-14 w-full">
         {publications.length > 0 && (
           <h2 className="text-sm font-medium text-gray-900 dark:text-white mb-4 text-center">
@@ -43,7 +62,7 @@ export default function Publications({ searchQuery }) {
           <button
             id="create-button-publications"
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-3  text-white rounded-full hover:shadow-lg"
+            className="px-4 py-3 text-white rounded-full hover:shadow-lg"
           >
             <i className="fa-solid fa-plus"></i>
           </button>
@@ -135,20 +154,81 @@ export default function Publications({ searchQuery }) {
                 key={index}
                 className="contenedor-publicaciones w-96 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 mx-auto"
               >
-                {publication.image && (
-                  <img
-                    className="rounded-t-lg w-full h-56 object-cover"
-                    src={URL.createObjectURL(publication.image)}
-                    alt={`Publication Image ${index + 1}`}
-                  />
-                )}
-                <div className="p-5">
-                  <h5 className="text-sm font-bold text-gray-900 dark:text-white">
+                <div
+                  onClick={() => toggleExpand(index)}
+                  className="cursor-pointer p-5 dark:bg-[#4A494A] "
+                >
+                  {publication.image && (
+                    <img
+                      className="rounded-t-lg w-full h-56 object-cover"
+                      src={URL.createObjectURL(publication.image)}
+                      alt={`Publication ${index + 1}`}
+                    />
+                  )}
+                  <h5 className="text-sm font-bold text-gray-900 dark:text-white mt-2">
                     {publication.title}
                   </h5>
                   <p className="text-xs text-gray-700 dark:text-gray-400 mt-2">
                     {publication.description}
                   </p>
+                  <h6 className="text-[11px] font-semibold text-gray-900 dark:text-white mt-2">
+                    Ver {publication.comments?.length || 0} comentarios
+                  </h6>
+                </div>
+                {expandedIndex === index && (
+                  <div className=" p-4 border-t dark:bg-[#4A494A] ">
+                    {publication.comments?.map((comment, i) => (
+                      <p
+                        key={i}
+                        className="text-[11px] text-gray-700 dark:text-gray-400 mt-1"
+                      >
+                        - {comment}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                <div className="p-4 border-t relative dark:bg-[#4A494A] ">
+                  <form
+                    className="relative flex items-center"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleAddComment(index);
+                    }}
+                  >
+                    <input
+                      name="comment"
+                      type="text"
+                      placeholder="Agregar comentario..."
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      className="block w-full p-2 pr-10 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded bg-white placeholder:text-[11px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
+                    />
+                    <button
+                      type="button"
+                      className="text-[11px] absolute right-32 top-1/2 transform -translate-y-1/2 bg-transparent border-none outline-none focus:outline-none hover:bg-transparent"
+                      onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                    >
+                      😀
+                    </button>
+
+                    <button
+                      type="submit"
+                      className="flex justify-center items-center px-5 bg-[#00bf00] text-white text-[12px] rounded ml-2 border hover:border-transparent"
+                    >
+                      <i className="fa-solid fa-paper-plane mr-1.5 text-[10px]"></i>
+                      Comentar
+                    </button>
+                  </form>
+                  {showEmojiPicker && (
+                    <div className="absolute bottom-12 left-0 z-10 bg-white shadow-lg rounded-lg p-2">
+                      <EmojiPicker
+                        onEmojiClick={(emojiData) => {
+                          setCommentText((prev) => prev + emojiData.emoji);
+                          setShowEmojiPicker(false);
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             ))
