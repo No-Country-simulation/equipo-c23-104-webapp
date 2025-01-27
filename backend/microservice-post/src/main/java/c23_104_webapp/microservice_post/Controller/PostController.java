@@ -52,4 +52,10 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostsByIdUser(pageable));
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<GenericResponse> deletePost(@PathVariable Long id){
+        postService.deletePost(id);
+        return ResponseEntity.ok(new GenericResponse("Post deleted"));
+    }
+
 }

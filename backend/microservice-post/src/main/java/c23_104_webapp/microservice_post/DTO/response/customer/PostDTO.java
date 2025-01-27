@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -19,6 +20,7 @@ public class PostDTO {
     private String username;
     private String urlProfile;
     private String content;
+    private LocalDateTime postDate;
     private List<String> imgUrls;
     private Long interactionCount;
     private String communityName;
@@ -34,6 +36,7 @@ public class PostDTO {
                 userInfoResponse.username(),
                 userInfoResponse.urlProfile(),
                 post.getContent(),
+                post.getPostDate(),
                 post.getImgUrls(),
                 post.getInteractionCount(),
                 post.getCommunity().getName()

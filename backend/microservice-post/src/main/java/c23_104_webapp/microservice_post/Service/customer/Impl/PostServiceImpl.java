@@ -21,10 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -117,6 +114,19 @@ public class PostServiceImpl implements PostService {
         }
 
         return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
+    }
+
+    @Override
+    @Transactional
+    public void deletePost(Long id) {
+        Long idUser = this.getUserIdFromUserLogged();
+        Optional<Post> post = postRepository.findByIdAndIdUser(id,idUser);
+
+        if(post.isPresent()){
+            postRepository.deleteByIdAndIdUser(id,idUser);
+        } else {
+            throw new ApiException("Post not found or not belonging to the user",HttpStatus.BAD_REQUEST);
+        }
     }
 
     public Page<PostDTO> fallbackGetPosts(Pageable pageable, Throwable t) {

@@ -13,4 +13,5 @@ public interface PostService {
     Page<PostDTO> getPostsByCommunity(Pageable pageable, Long communityId);
     Page<PostDTO> getPostsByCommunityNames(List<String> names, Pageable pageable);
     Page<PostDTO> getPostsByIdUser(Pageable pageable);
+    void deletePost(Long id);
 }
