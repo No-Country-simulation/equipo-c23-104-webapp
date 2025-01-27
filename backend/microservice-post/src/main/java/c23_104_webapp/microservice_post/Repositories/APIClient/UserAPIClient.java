@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @FeignClient(name = "microservice-user")
 public interface UserAPIClient {
@@ -20,7 +19,7 @@ public interface UserAPIClient {
     ResponseEntity<UserDetailsDTO> getUserDetails(@PathVariable("username") String username);
 
     @GetMapping("/health")
-    public String healthCheck();
+    String healthCheck();
 
     @PostMapping("/api/profile/join-community")
     void joinCommunity(@RequestBody @NotBlank String community);

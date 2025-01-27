@@ -43,10 +43,6 @@ public class PostServiceImpl implements PostService {
     public void createPost(PostRequest postRequest) {
         Long idUser = this.getUserIdFromUserLogged();
 
-        if(idUser == null){
-            throw new ApiException("User not found", HttpStatus.BAD_REQUEST);
-        }
-
         boolean isUserInCommunity = communityRepository.isUserInCommunity(postRequest.community().getId(), idUser);
 
         if(isUserInCommunity){
@@ -62,7 +58,6 @@ public class PostServiceImpl implements PostService {
     @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
     public Page<PostDTO> getPosts(Pageable pageable) {
         Page<Post> postsPage = postRepository.findAll(pageable);
-        List<PostDTO> postDTOS = new ArrayList<>();
 
         Set<Long> userIds = postsPage.getContent().stream()
                 .map(Post::getIdUser)
@@ -70,16 +65,55 @@ public class PostServiceImpl implements PostService {
 
         List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
 
-        Map<Long, UserInfoResponse> userInfoMap = userInfoList.stream()
-                .collect(Collectors.toMap(UserInfoResponse::id , userInfo -> userInfo));
+        List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
 
-        for (Post post : postsPage.getContent()) {
-            UserInfoResponse userInfoResponse = userInfoMap.get(post.getIdUser());
-            if (userInfoResponse != null) {
-                postDTOS.add(PostDTO.fromPost(post, userInfoResponse));
-            } else {
-                postDTOS.add(PostDTO.fromPost(post, null));
-            }
+        return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
+    }
+
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
+    public Page<PostDTO> getPostsByCommunity(Pageable pageable,Long communityId) {
+        Page<Post> postsPage = postRepository.findByCommunityId(communityId,pageable);
+
+        Set<Long> userIds = postsPage.getContent().stream()
+                .map(Post::getIdUser)
+                .collect(Collectors.toSet());
+
+        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+
+        List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
+
+        return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
+    }
+
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
+    public Page<PostDTO> getPostsByCommunityNames(List<String> names, Pageable pageable) {
+        Page<Post> postsPage = postRepository.findByCommunityNameIn(names,pageable);
+
+        Set<Long> userIds = postsPage.getContent().stream()
+                .map(Post::getIdUser)
+                .collect(Collectors.toSet());
+
+        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+
+        List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
+
+        return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
+    }
+
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
+    public Page<PostDTO> getPostsByIdUser(Pageable pageable) {
+        Long idUser = this.getUserIdFromUserLogged();
+
+        Page<Post> postsPage = postRepository.findByIdUser(idUser,pageable);
+        List<PostDTO> postDTOS = new ArrayList<>();
+
+        UserInfoResponse userInfoResponse = userAPIClient.getUserInfoById(idUser);
+
+        for(Post post:postsPage){
+            postDTOS.add(PostDTO.fromPost(post,userInfoResponse));
         }
 
         return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
@@ -101,8 +135,32 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    private List<PostDTO> buildPostDTOsFromPosts(Page<Post> postsPage,List<UserInfoResponse> userInfoResponses){
+        List<PostDTO> postDTOS = new ArrayList<>();
+
+        Map<Long, UserInfoResponse> userInfoMap = userInfoResponses.stream()
+                .collect(Collectors.toMap(UserInfoResponse::id , userInfo -> userInfo));
+
+        for (Post post : postsPage.getContent()) {
+            UserInfoResponse userInfoResponse = userInfoMap.get(post.getIdUser());
+            if (userInfoResponse != null) {
+                postDTOS.add(PostDTO.fromPost(post, userInfoResponse));
+            } else {
+                postDTOS.add(PostDTO.fromPost(post, null));
+            }
+        }
+
+        return postDTOS;
+    }
+
     private Long getUserIdFromUserLogged(){
-        return userContext.getUserId();
+        Long idUser = userContext.getUserId();
+
+        if(idUser == null){
+            throw new ApiException("User not found",HttpStatus.BAD_REQUEST);
+        }
+
+        return idUser;
     }
 
 }
