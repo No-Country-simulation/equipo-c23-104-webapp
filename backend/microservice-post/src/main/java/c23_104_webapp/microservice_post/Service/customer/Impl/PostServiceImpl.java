@@ -101,13 +101,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
-    public Page<PostDTO> getPostsByIdUser(Pageable pageable) {
-        Long idUser = this.getUserIdFromUserLogged();
+    public Page<PostDTO> getPostsByIdUser(Pageable pageable,String username) {
+        UserInfoResponse userInfoResponse = userAPIClient.getUserInfoByHandleUsername(username);
 
-        Page<Post> postsPage = postRepository.findByIdUser(idUser,pageable);
+        Page<Post> postsPage = postRepository.findByIdUser(userInfoResponse.id(),pageable);
         List<PostDTO> postDTOS = new ArrayList<>();
-
-        UserInfoResponse userInfoResponse = userAPIClient.getUserInfoById(idUser);
 
         for(Post post:postsPage){
             postDTOS.add(PostDTO.fromPost(post,userInfoResponse));
@@ -127,6 +125,25 @@ public class PostServiceImpl implements PostService {
         } else {
             throw new ApiException("Post not found or not belonging to the user",HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
+    public Page<PostDTO> findPostsWithUserInteraction(Pageable pageable,String username) {
+        UserInfoResponse userInfoResponse = userAPIClient.getUserInfoByHandleUsername(username);
+
+        Page<Post> postsPage  = postRepository.findPostsWithUserInteraction(userInfoResponse.id(),pageable);
+
+        Set<Long> userIds = postsPage.getContent().stream()
+                .map(Post::getIdUser)
+                .collect(Collectors.toSet());
+
+        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+
+        List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
+
+        return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
+
     }
 
     public Page<PostDTO> fallbackGetPosts(Pageable pageable, Throwable t) {

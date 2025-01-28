@@ -30,6 +30,9 @@ public interface UserAPIClient {
     @GetMapping("/api/profile/id/{id}")
     UserInfoResponse getUserInfoById(@PathVariable("id") Long id);
 
+    @GetMapping("/api/profile/user/{handleUsername}")
+    UserInfoResponse getUserInfoByHandleUsername(@PathVariable("handleUsername") String handleUsername);
+
     @GetMapping("/api/profile/usersInfoForPost")
     List<UserInfoResponse> getUserInfoByIds(@RequestParam("userIds") List<Long> userIds);
 }

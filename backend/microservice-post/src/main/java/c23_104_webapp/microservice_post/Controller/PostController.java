@@ -47,9 +47,14 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostsByCommunityNames(name,pageable));
     }
 
-    @GetMapping("/my-posts")
-    public ResponseEntity<Page<PostDTO>> getPostsByUser(Pageable pageable){
-        return ResponseEntity.ok(postService.getPostsByIdUser(pageable));
+    @GetMapping("/{username}")
+    public ResponseEntity<Page<PostDTO>> getPostsByUser(Pageable pageable,@PathVariable String username){
+        return ResponseEntity.ok(postService.getPostsByIdUser(pageable,username));
+    }
+
+    @GetMapping("/interactions/{username}")
+    public ResponseEntity<Page<PostDTO>> findPostsWithUserInteraction(Pageable pageable,@PathVariable String username){
+        return ResponseEntity.ok(postService.findPostsWithUserInteraction(pageable,username));
     }
 
     @DeleteMapping("/delete/{id}")
