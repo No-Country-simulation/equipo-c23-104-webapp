@@ -1,61 +1,79 @@
-import  { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "../../axiosConfig.js"; // Asegúrate de tener configurada la base URL en axiosConfig
 
 const Register = () => {
     const [formValues, setFormValues] = useState({
-        username: '',
-        email: '',
-        password: '',
+        username: "",
+        email: "",
+        password: "",
     });
 
     const [errors, setErrors] = useState({});
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-        setErrors({ ...errors, [name]: '' }); 
+        setErrors({ ...errors, [name]: "" });
     };
 
     const validate = () => {
         const newErrors = {};
-        if (!formValues.username) newErrors.username = 'El nombre de usuario es obligatorio';
+        if (!formValues.username) newErrors.username = "El nombre de usuario es obligatorio";
         if (!formValues.email) {
-            newErrors.email = 'El email es obligatorio';
+            newErrors.email = "El email es obligatorio";
         } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-            newErrors.email = 'Por favor ingrese un email válido';
+            newErrors.email = "Por favor ingrese un email válido";
         }
         if (!formValues.password) {
-            newErrors.password = 'La contraseña es obligatoria';
+            newErrors.password = "La contraseña es obligatoria";
         } else if (formValues.password.length < 6) {
-            newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
+            newErrors.password = "La contraseña debe tener al menos 6 caracteres";
         }
         return newErrors;
     };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
         } else {
-            console.log('Formulario enviado:', formValues);
-  
+            try {
+                // Cambié la URL a '/users' ya que es el endpoint adecuado para agregar usuarios en JSON Server
+                await axios.post("/users", formValues);  
+                setSuccessMessage("Usuario registrado con éxito");
+                setFormValues({ username: "", email: "", password: "" }); // Limpiar el formulario
+                setErrorMessage("");
+            } catch (error) {
+                console.error("Error al registrar usuario:", error);
+                if (error.response?.data?.error) {
+                    setErrorMessage(error.response.data.error);
+                } else {
+                    setErrorMessage("Hubo un error al registrar. Intenta de nuevo.");
+                }
+            }
         }
     };
-
+    
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
                 <img src="../src/assets/fondo.jpg" alt="Register Image" className="w-full h-full object-center object-cover" />
             </div>
-          
+
             <div className="w-full md:w-1/2 flex items-center justify-center bg-white py-10">
                 <div className="w-full max-w-md p-8">
                     <div className="mb-32 flex items-center gap-2">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 66 66" fill="none">
-                                <rect width="66" height="66" rx="6" fill="#202427"/>
-                                <path d="M16 54L25.9264 33M25.9264 33L35.8527 12C52.6034 20.6471 50.7422 26.2059 44.5383 35.4706C39.5751 42.8824 30.0623 36.9118 25.9264 33Z" stroke="#65A30D" strokeWidth="5"/>
+                                <rect width="66" height="66" rx="6" fill="#202427" />
+                                <path
+                                    d="M16 54L25.9264 33M25.9264 33L35.8527 12C52.6034 20.6471 50.7422 26.2059 44.5383 35.4706C39.5751 42.8824 30.0623 36.9118 25.9264 33Z"
+                                    stroke="#65A30D"
+                                    strokeWidth="5"
+                                />
                             </svg>
                         </div>
                         <div>
@@ -66,6 +84,8 @@ const Register = () => {
 
                     <form className="w-full" onSubmit={handleSubmit}>
                         <h2 className="text-4xl mb-4">Register</h2>
+                        {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
+                        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
 
                         <div className="mb-4">
                             <label className="block text-gray-700">Nombre de Usuario</label>
@@ -74,7 +94,7 @@ const Register = () => {
                                 name="username"
                                 value={formValues.username}
                                 onChange={handleChange}
-                                className={`w-full px-3 py-2 border ${errors.username ? 'border-red-500' : 'border-gray-300'} rounded`}
+                                className={`w-full px-3 py-2 border ${errors.username ? "border-red-500" : "border-gray-300"} rounded`}
                                 placeholder="Ingrese su nombre de usuario"
                             />
                             {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
@@ -87,7 +107,7 @@ const Register = () => {
                                 name="email"
                                 value={formValues.email}
                                 onChange={handleChange}
-                                className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded`}
+                                className={`w-full px-3 py-2 border ${errors.email ? "border-red-500" : "border-gray-300"} rounded`}
                                 placeholder="Ingrese su email"
                             />
                             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -100,7 +120,7 @@ const Register = () => {
                                 name="password"
                                 value={formValues.password}
                                 onChange={handleChange}
-                                className={`w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded`}
+                                className={`w-full px-3 py-2 border ${errors.password ? "border-red-500" : "border-gray-300"} rounded`}
                                 placeholder="Ingrese su contraseña"
                             />
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
