@@ -31,5 +31,6 @@ public class Post {
     private List<Interaction> interactions;
     @ManyToOne
     private Community community;
+    private Boolean isDeleted;
 
 }

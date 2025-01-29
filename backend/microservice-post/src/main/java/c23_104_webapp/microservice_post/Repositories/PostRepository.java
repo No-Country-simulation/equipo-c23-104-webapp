@@ -13,11 +13,10 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post,Long> {
-    Page<Post> findByCommunityId(Long communityId,Pageable pageable);
-    Page<Post> findByCommunityNameIn(List<String> names, Pageable pageable);
-    Page<Post> findByIdUser(Long idUser, Pageable pageable);
-    Optional<Post> findByIdAndIdUser(Long id, Long idUser);
-    void deleteByIdAndIdUser(Long id, Long idUser);
-    @Query("SELECT p FROM Post p JOIN p.interactions i WHERE i.idUser = :userId")
+    Page<Post> findByCommunityIdAndIsDeletedFalse(Long communityId, Pageable pageable);
+    Page<Post> findByCommunityNameInAndIsDeletedFalse(List<String> names, Pageable pageable);
+    Page<Post> findByIdUserAndIsDeletedFalse(Long idUser, Pageable pageable);
+    Optional<Post> findByIdAndIdUserAndIsDeletedFalse(Long id, Long idUser);
+    @Query("SELECT p FROM Post p JOIN p.interactions i WHERE i.idUser = :userId AND p.isDeleted = false")
     Page<Post> findPostsWithUserInteraction(@Param("userId") Long userId, Pageable pageable);
 }

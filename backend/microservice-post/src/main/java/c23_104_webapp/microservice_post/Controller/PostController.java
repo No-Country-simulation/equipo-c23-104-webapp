@@ -57,7 +57,7 @@ public class PostController {
         return ResponseEntity.ok(postService.findPostsWithUserInteraction(pageable,username));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PatchMapping("/delete/{id}")
     public ResponseEntity<GenericResponse> deletePost(@PathVariable Long id){
         postService.deletePost(id);
         return ResponseEntity.ok(new GenericResponse("Post deleted"));

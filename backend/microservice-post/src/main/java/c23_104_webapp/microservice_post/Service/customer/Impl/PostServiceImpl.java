@@ -56,21 +56,23 @@ public class PostServiceImpl implements PostService {
     public Page<PostDTO> getPosts(Pageable pageable) {
         Page<Post> postsPage = postRepository.findAll(pageable);
 
+        Page<Post> filteredPostsPage = filterDeletedPosts(postsPage);
+
         Set<Long> userIds = postsPage.getContent().stream()
                 .map(Post::getIdUser)
                 .collect(Collectors.toSet());
 
         List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
 
-        List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
+        List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(filteredPostsPage, userInfoList);
 
-        return new PageImpl<>(postDTOS, pageable, postsPage.getTotalElements());
+        return new PageImpl<>(postDTOS, pageable, filteredPostsPage.getTotalElements());
     }
 
     @Override
     @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
     public Page<PostDTO> getPostsByCommunity(Pageable pageable,Long communityId) {
-        Page<Post> postsPage = postRepository.findByCommunityId(communityId,pageable);
+        Page<Post> postsPage = postRepository.findByCommunityIdAndIsDeletedFalse(communityId,pageable);
 
         Set<Long> userIds = postsPage.getContent().stream()
                 .map(Post::getIdUser)
@@ -86,7 +88,7 @@ public class PostServiceImpl implements PostService {
     @Override
     @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetPosts")
     public Page<PostDTO> getPostsByCommunityNames(List<String> names, Pageable pageable) {
-        Page<Post> postsPage = postRepository.findByCommunityNameIn(names,pageable);
+        Page<Post> postsPage = postRepository.findByCommunityNameInAndIsDeletedFalse(names,pageable);
 
         Set<Long> userIds = postsPage.getContent().stream()
                 .map(Post::getIdUser)
@@ -104,7 +106,7 @@ public class PostServiceImpl implements PostService {
     public Page<PostDTO> getPostsByIdUser(Pageable pageable,String username) {
         UserInfoResponse userInfoResponse = userAPIClient.getUserInfoByHandleUsername(username);
 
-        Page<Post> postsPage = postRepository.findByIdUser(userInfoResponse.id(),pageable);
+        Page<Post> postsPage = postRepository.findByIdUserAndIsDeletedFalse(userInfoResponse.id(),pageable);
         List<PostDTO> postDTOS = new ArrayList<>();
 
         for(Post post:postsPage){
@@ -118,10 +120,12 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public void deletePost(Long id) {
         Long idUser = this.getUserIdFromUserLogged();
-        Optional<Post> post = postRepository.findByIdAndIdUser(id,idUser);
+        Optional<Post> post = postRepository.findByIdAndIdUserAndIsDeletedFalse(id,idUser);
 
         if(post.isPresent()){
-            postRepository.deleteByIdAndIdUser(id,idUser);
+            Post existingPost = post.get();
+            existingPost.setIsDeleted(true);
+            postRepository.save(existingPost);
         } else {
             throw new ApiException("Post not found or not belonging to the user",HttpStatus.BAD_REQUEST);
         }
@@ -158,8 +162,8 @@ public class PostServiceImpl implements PostService {
                 .imgUrls(postRequest.imgUrls())
                 .interactionCount(0L)
                 .community(postRequest.community())
+                .isDeleted(false)
                 .build();
-
     }
 
     private List<PostDTO> buildPostDTOsFromPosts(Page<Post> postsPage,List<UserInfoResponse> userInfoResponses){
@@ -188,6 +192,13 @@ public class PostServiceImpl implements PostService {
         }
 
         return idUser;
+    }
+
+    private Page<Post> filterDeletedPosts(Page<Post> postsPage) {
+        List<Post> filteredPosts = postsPage.getContent().stream()
+                .filter(post -> !post.getIsDeleted())
+                .collect(Collectors.toList());
+        return new PageImpl<>(filteredPosts, postsPage.getPageable(), postsPage.getTotalElements());
     }
 
 }
