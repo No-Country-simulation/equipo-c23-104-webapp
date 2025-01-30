@@ -67,9 +67,9 @@ export default function Navbar({
   return (
     <nav
       id="navbar-container"
-      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1]"
+      className="fixed top-0 z-50 w-full bg-white rounded dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1]"
     >
-      <div className="px-3 pt-2 pb-1 lg:px-5 lg:pl-3">
+      <div className="px-3 pt-2 pb-0 lg:px-5 lg:pl-3">
         <div className="flex  justify-between items-center">
           <div
             id="caja-01"

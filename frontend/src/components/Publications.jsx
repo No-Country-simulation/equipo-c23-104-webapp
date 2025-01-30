@@ -171,9 +171,14 @@ export default function Publications({ searchQuery }) {
                   <p className="text-xs text-gray-700 dark:text-gray-400 mt-2">
                     {publication.description}
                   </p>
-                  <h6 className="text-[11px] font-semibold text-gray-900 dark:text-white mt-2">
-                    Ver {publication.comments?.length || 0} comentarios
-                  </h6>
+                  {publication.comments?.length > 0 && (
+                    <h6
+                      id="ver-comentarios"
+                      className="text-[11px] font-semibold text-gray-900 dark:text-white mt-2"
+                    >
+                      Ver {publication.comments.length} comentarios
+                    </h6>
+                  )}
                 </div>
                 {expandedIndex === index && (
                   <div className=" p-4 border-t dark:bg-[#4A494A] ">

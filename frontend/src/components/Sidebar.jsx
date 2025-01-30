@@ -7,7 +7,7 @@ export default function Sidebar({ isTextVisible, showText }) {
   return (
     <aside
       id="logo-sidebar"
-      className={`fixed top-0 left-0 z-40 h-screen pt-20 bg-white sm:translate-x-0 dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500 border border-[#A19FA1] ${
+      className={`fixed top-0 left-0 z-40 h-screen rounded pt-20 bg-white sm:translate-x-0 dark:bg-[#4A494A] dark:border-gray-700 transition-all duration-500 border border-[#A19FA1] ${
         isTextVisible ? "w-64" : "w-16"
       }`}
       aria-label="Sidebar"
