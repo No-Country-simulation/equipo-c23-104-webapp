@@ -29,7 +29,6 @@ export default function Publications({ searchQuery }) {
 
   const handleAddComment = (index) => {
     if (!commentText.trim()) return;
-
     const updatedPublications = [...publications];
     if (!updatedPublications[index].comments) {
       updatedPublications[index].comments = [];
@@ -37,6 +36,12 @@ export default function Publications({ searchQuery }) {
     updatedPublications[index].comments.push(commentText);
     setPublications(updatedPublications);
     setCommentText("");
+    setTimeout(() => {
+      const commentElements = document.querySelectorAll(".comment-item");
+      commentElements.forEach((el) => {
+        el.classList.add("opacity-100", "translate-y-0");
+      });
+    }, 100);
   };
 
   const toggleExpand = (index) => {
@@ -152,15 +157,15 @@ export default function Publications({ searchQuery }) {
             filteredPublications.map((publication, index) => (
               <div
                 key={index}
-                className="contenedor-publicaciones w-96 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 mx-auto"
+                className="contenedor-publicaciones w-96 bg-white rounded shadow-md dark:bg-gray-800 border border-[#A19FA1] mx-auto"
               >
                 <div
                   onClick={() => toggleExpand(index)}
-                  className="cursor-pointer p-5 dark:bg-[#4A494A] "
+                  className="cursor-pointer p-5 dark:bg-[#4A494A] rounded"
                 >
                   {publication.image && (
                     <img
-                      className="rounded-t-lg w-full h-56 object-cover"
+                      className="rounded w-full h-56 object-cover"
                       src={URL.createObjectURL(publication.image)}
                       alt={`Publication ${index + 1}`}
                     />
@@ -180,19 +185,24 @@ export default function Publications({ searchQuery }) {
                     </h6>
                   )}
                 </div>
-                {expandedIndex === index && (
-                  <div className=" p-4 border-t dark:bg-[#4A494A] ">
-                    {publication.comments?.map((comment, i) => (
-                      <p
-                        key={i}
-                        className="text-[11px] text-gray-700 dark:text-gray-400 mt-1"
-                      >
-                        - {comment}
-                      </p>
-                    ))}
-                  </div>
-                )}
-                <div className="p-4 border-t relative dark:bg-[#4A494A] ">
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    expandedIndex === index
+                      ? "max-h-60 opacity-100 p-4"
+                      : "max-h-0 opacity-0"
+                  } border-t border-[#A19FA1] dark:bg-[#4A494A]`}
+                >
+                  {publication.comments?.map((comment, i) => (
+                    <p
+                      key={i}
+                      className="comment-item text-[11px] text-gray-700 dark:text-gray-400 mt-1 transition-all duration-300 ease-in-out opacity-0 translate-y-2 animate-[fadeIn_0.3s_ease-in-out_forwards]"
+                    >
+                      - {comment}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="p-4 relative dark:bg-[#4A494A] border-t border-[#A19FA1]">
                   <form
                     className="relative flex items-center"
                     onSubmit={(e) => {
