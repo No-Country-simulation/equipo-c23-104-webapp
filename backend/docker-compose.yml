@@ -52,5 +52,21 @@ services:
     networks:
       - 'microservices-network'
 
+  microservice-comment:
+    build: ./microservice-comment
+    mem_limit: 512m
+    ports:
+      - "8084:8084"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-sv:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_comment?createDatabaseIfNotExist=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-sv
+      - mysql
+    networks:
+      - 'microservices-network'
+
 networks:
   microservices-network:
