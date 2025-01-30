@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const IMGBB_API_KEY = import.meta.env.REACT_APP_IMGBB_API_KEY;
+
 export default function NewPost({ onPost }) {
     const [postText, setPostText] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     // Manejar el cambio en el área de texto
@@ -15,7 +17,25 @@ export default function NewPost({ onPost }) {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setImage(URL.createObjectURL(file));
+            setImage(file);
+        }
+    };
+
+    // Subir imagen a ImgBB y obtener URL
+    const uploadImage = async () => {
+        if (!image) return null;
+        const formData = new FormData();
+        formData.append('image', image);
+
+        try {
+            const response = await axios.post(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            return response.data.data.url;
+        } catch (error) {
+            console.error('Error al subir la imagen:', error);
+            alert('Hubo un error al subir la imagen.');
+            return null;
         }
     };
 
@@ -26,23 +46,30 @@ export default function NewPost({ onPost }) {
             return;
         }
 
+        setIsLoading(true);
+        let imageUrl = null;
+        
+        if (image) {
+            imageUrl = await uploadImage();
+        }
+
         const newPost = {
             username: 'Tu Nombre', // Cambiar dinámicamente si es necesario
             views: 0,
             profilePictureUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s',
             publicationDate: new Date().toISOString().split('T')[0],
             content: postText,
+            imageUrl, // Agregar la URL de la imagen subida
             likes: 0,
             commentsCount: 0,
         };
 
         try {
-            setIsLoading(true);
             const response = await axios.post('http://localhost:3000/posts', newPost);
             alert('Publicación creada con éxito.');
-            //onPost(response.data); // Actualiza el estado o las publicaciones en el componente padre si es necesario
             setPostText('');
-            setImage('');
+            setImage(null);
+            if (onPost) onPost(response.data);
         } catch (error) {
             console.error('Error al crear la publicación:', error);
             alert('Hubo un error al intentar crear la publicación.');
@@ -73,7 +100,7 @@ export default function NewPost({ onPost }) {
                 </label>
                 {image && (
                     <img
-                        src={image}
+                        src={URL.createObjectURL(image)}
                         alt="Vista previa"
                         className="w-16 h-16 rounded-md ml-4 object-cover"
                     />

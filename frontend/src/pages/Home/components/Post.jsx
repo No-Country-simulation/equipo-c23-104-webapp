@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function Post(props) {
-    const { textos, image, nombre, publicationDate } = props;
+    const { textos, imagePerfil, nombre, publicationDate, imagenPost } = props;
     const [likes, setLikes] = useState(500);
     const [comments, setComments] = useState(120);
 
@@ -40,7 +40,7 @@ export default function Post(props) {
     return (
         <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto z-10 border">
             <div className="flex items-center justify-start border-b-2 border-gray-300 pb-4">
-                <img src={image} alt="" className="w-16 h-16 rounded-full" />
+                <img src={imagePerfil} alt="" className="w-16 h-16 rounded-full" />
                 <div className="ml-4 w-full text-start">
                     <p className="text-xl lg:text-2xl font-bold text-gray-700">{nombre}</p>
                     <p className="text-sm text-gray-500">{getRelativeTime(publicationDate)}</p>
@@ -49,6 +49,8 @@ export default function Post(props) {
             <p className="text-xl mt-5 lg:text-xl text-gray-700">
                 {textos}
             </p>
+            
+            <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3'/>
 
             <div className="flex justify-start items-center mt-5 space-x-6">
                 <button

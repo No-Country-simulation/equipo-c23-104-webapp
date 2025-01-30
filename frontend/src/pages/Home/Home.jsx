@@ -28,7 +28,8 @@ export default function Home() {
               key={post.id}
               nombre={post.username} // Usando la URL de la foto de perfil
               textos={[post.content]} // Pasamos el contenido como texto
-              image={post.profilePictureUrl} // Usamos la foto como imagen del post
+              imagePerfil={post.profilePictureUrl} // Usamos la foto como imagen del post
+              imagenPost={post.imageUrl} // Usamos la URL de la imagen del post
               publicationDate={post.publicationDate} // Usamos la fecha de creación del post
             />
           ))}

@@ -149,6 +149,17 @@
       "content": "An easy guide to start meditating daily.",
       "likes": 250,
       "commentsCount": 16
+    },
+    {
+      "username": "Tu Nombre",
+      "views": 0,
+      "profilePictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s",
+      "publicationDate": "2025-01-30",
+      "content": "hola",
+      "imageUrl": "https://i.ibb.co/203FKcrm/picture1.png",
+      "likes": 0,
+      "commentsCount": 0,
+      "id": "KQ5VvXn"
     }
   ],
   "users": [
