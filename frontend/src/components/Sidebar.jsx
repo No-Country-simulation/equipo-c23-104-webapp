@@ -92,9 +92,9 @@ export default function Sidebar({ isTextVisible, showText }) {
         <button
           title={t("create")}
           type="button"
-          className="bg-[#00bf00] text-white w-11 h-11 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
+          className="bg-[#00bf00] text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
         >
-          <i className="fa-solid fa-plus text-lg"></i>
+          <i className="fa-solid fa-plus text-[13px]"></i>
         </button>
       </nav>
     </>

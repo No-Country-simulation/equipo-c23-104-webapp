@@ -67,9 +67,9 @@ export default function Navbar({
   return (
     <nav
       id="navbar-container"
-      className="fixed top-0 z-50 w-full bg-white rounded dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1]"
+      className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1] dark:border-transparent"
     >
-      <div className="px-3 pt-2 pb-0 lg:px-5 lg:pl-3">
+      <div className="px-3 pt-2 pb-2 lg:px-5 lg:pl-3">
         <div className="flex  justify-between items-center">
           <div
             id="caja-01"
@@ -84,7 +84,7 @@ export default function Navbar({
             </button>
 
             <a href="#" className="flex mr-3 items-center ">
-              <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1"></i>
+              <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1 ml-3"></i>
               <span
                 id="page-name"
                 className={`self-center text-3xl font-semibold whitespace-nowrap text-[#00bf00] dark:text-white hidden md:inline  ${
@@ -387,43 +387,43 @@ export default function Navbar({
           </div>
         </div>
         <div className="flex items-start justify-center">
-          <div className="flex items-center justify-between rtl:justify-end my-1">
-            <a
-              href="#"
-              className={`relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
-                showText ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <i className="fa-solid fa-hand-holding-heart mr-2 text-[#00bf00] dark:text-white"></i>
-              {t("foryou")}
-            </a>
-            <a
-              href="#"
-              className={`relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
-                showText ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <i className="fa-solid fa-arrow-trend-up mr-2 text-[#00bf00] dark:text-white"></i>
-              {t("trend")}
-            </a>
-            <a
-              href="#"
-              className={`relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
-                showText ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <i className="fa-solid fa-newspaper mr-2 text-[#00bf00] dark:text-white"></i>
-              {t("news")}
-            </a>
-            <a
-              href="#"
-              className={`relative text-[12px]  rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white  dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
-                showText ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <i class="fa-solid fa-clock-rotate-left mr-2 text-[#00bf00] dark:text-white"></i>
-              {t("recent")}
-            </a>
+          <div className="hidden sm:flex items-center justify-between rtl:justify-end my-1">
+            {[
+              { icon: "fa-hand-holding-heart", label: t("foryou") },
+              { icon: "fa-arrow-trend-up", label: t("trend") },
+              { icon: "fa-newspaper", label: t("news") },
+              { icon: "fa-clock-rotate-left", label: t("recent") },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href="#"
+                className={`relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
+                  showText ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <i
+                  className={`fa-solid ${item.icon} mr-2 text-[#00bf00] dark:text-white`}
+                ></i>
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <div className="sm:hidden fixed top-[56px] left-0 w-full bg-white dark:bg-[#4A494A] border-b border-[#A19FA1]  flex justify-around py-2">
+            {[
+              { icon: "fa-hand-holding-heart", label: t("foryou") },
+              { icon: "fa-arrow-trend-up", label: t("trend") },
+              { icon: "fa-newspaper", label: t("news") },
+              { icon: "fa-clock-rotate-left", label: t("recent") },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href="#"
+                className="flex flex-col items-center text-gray-900 dark:text-white transition-all duration-200 hover:text-[#00bf00]"
+              >
+                <i className={`fa-solid ${item.icon} text-lg`}></i>
+                <span className="text-[10px]">{item.label}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
