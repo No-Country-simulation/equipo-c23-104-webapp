@@ -145,7 +145,7 @@ export default function Navbar({
               </a>
               <div
                 id="dropdown-user"
-                className={`absolute top-full right-0 mt-3 z-50 w-48 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
+                className={`absolute top-full right-[-10px] mt-3 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
                   isDropdownOpen
                     ? "scale-100 opacity-100"
                     : "scale-95 opacity-0 pointer-events-none"
@@ -183,7 +183,7 @@ export default function Navbar({
                       {t("settings")}
                     </a>
                     <div
-                      className={`absolute right-full top-24 mx-0.5 py-2 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
+                      className={`absolute right-full top-24 mx-0.5 py-2 z-50 w-36 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
                         isSubmenuOpen
                           ? "scale-100 opacity-100"
                           : "scale-95 opacity-0 pointer-events-none"
@@ -194,7 +194,7 @@ export default function Navbar({
                           <a
                             href="#"
                             onClick={toggleLanguageMenu}
-                            className={`flex items-center w-36 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-opacity duration-500 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[12px] ${
+                            className={`flex items-center w-34 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-opacity duration-500 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[12px] ${
                               showText ? "opacity-100" : "opacity-0"
                             }`}
                           >

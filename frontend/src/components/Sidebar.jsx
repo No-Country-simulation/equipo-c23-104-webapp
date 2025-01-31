@@ -23,7 +23,7 @@ export default function Sidebar({ isTextVisible, showText }) {
             ].map((item, index) => (
               <li
                 key={index}
-                className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[14px] ${
+                className={`flex items-center px-3 py-2 text-gray-900 rounded hover:bg-[#00bf00] transition-all duration-100 hover:text-white hover:shadow-inner group border border-transparent dark:text-white dark:hover:border-white dark:hover:text-white group text-[13px] ${
                   isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
                 }`}
               >
