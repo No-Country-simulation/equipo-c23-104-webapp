@@ -18,31 +18,21 @@ export default function Navbar({
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
-
   const toggleSubmenu = () => {
     setIsSubmenuOpen((prevState) => !prevState);
   };
-
   const toggleLanguageMenu = () => {
     setIsLanguageMenuOpen((prevState) => !prevState);
     setIsSubmenuOpen(true);
   };
-
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-    document.documentElement.classList.toggle("dark");
-  };
-
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
     setSearchQueryState(value);
   };
-
   const dropdownRef = useRef(null);
   const submenuRef = useRef(null);
   const languageMenuRef = useRef(null);
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -61,9 +51,28 @@ export default function Navbar({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
   const { t } = useTranslation();
-
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem("darkMode") === "true";
+    setDarkMode(savedDarkMode);
+    if (savedDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      if (newMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      localStorage.setItem("darkMode", newMode.toString());
+      return newMode;
+    });
+  };
   return (
     <nav
       id="navbar-container"
