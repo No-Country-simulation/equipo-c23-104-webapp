@@ -61,7 +61,7 @@ public class CommentServiceImpl implements CommentService {
                 .map(Comment::getIdUser)
                 .collect(Collectors.toSet());
 
-        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
 
         List<CommentResponse> commentResponses = this.buildCommentResponseFromComments(comments,userInfoList);
 
@@ -72,7 +72,7 @@ public class CommentServiceImpl implements CommentService {
         return new PageImpl<>(new ArrayList<>(), pageable, 0);
     }
 
-    private List<CommentResponse> buildCommentResponseFromComments(Page<Comment> comments,List<UserInfoResponse> userInfoResponses){
+    private List<CommentResponse> buildCommentResponseFromComments(Page<Comment> comments,Page<UserInfoResponse> userInfoResponses){
         List<CommentResponse> commentResponses = new ArrayList<>();
 
         Map<Long, UserInfoResponse> userInfoMap = userInfoResponses.stream()
