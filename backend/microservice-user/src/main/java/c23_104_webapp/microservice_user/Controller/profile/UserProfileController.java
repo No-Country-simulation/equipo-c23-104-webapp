@@ -7,6 +7,8 @@ import c23_104_webapp.microservice_user.Service.customer.UserService;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,9 +42,10 @@ public class UserProfileController {
         return ResponseEntity.ok(userService.getUserInfoByHandleUsername(handleUsername));
     }
 
-    @GetMapping("/usersInfoForPost")
-    public ResponseEntity<List<UserInfoForPostResponse>> getUsersInfoForPost(@RequestParam("userIds") ArrayList<Long> userIds){
-        return ResponseEntity.ok(userService.getUsersInfoForPost(userIds));
+    @GetMapping("/usersInfo")
+    public ResponseEntity<Page<UserInfoForPostResponse>> getUsersInfo(@RequestParam("userIds") ArrayList<Long> userIds,
+                                                                             Pageable pageable){
+        return ResponseEntity.ok(userService.getUsersInfo(userIds,pageable));
     }
 
     @PatchMapping("/edit")

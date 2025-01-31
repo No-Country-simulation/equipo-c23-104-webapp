@@ -58,11 +58,12 @@ public class PostServiceImpl implements PostService {
 
         Page<Post> filteredPostsPage = filterDeletedPosts(postsPage);
 
-        Set<Long> userIds = postsPage.getContent().stream()
+        Set<Long> userIds = filteredPostsPage.getContent().stream()
                 .map(Post::getIdUser)
                 .collect(Collectors.toSet());
 
-        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+
+        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
 
         List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(filteredPostsPage, userInfoList);
 
@@ -78,7 +79,7 @@ public class PostServiceImpl implements PostService {
                 .map(Post::getIdUser)
                 .collect(Collectors.toSet());
 
-        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
 
         List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
 
@@ -94,7 +95,7 @@ public class PostServiceImpl implements PostService {
                 .map(Post::getIdUser)
                 .collect(Collectors.toSet());
 
-        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
 
         List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
 
@@ -142,7 +143,7 @@ public class PostServiceImpl implements PostService {
                 .map(Post::getIdUser)
                 .collect(Collectors.toSet());
 
-        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
 
         List<PostDTO> postDTOS = this.buildPostDTOsFromPosts(postsPage,userInfoList);
 
@@ -158,7 +159,7 @@ public class PostServiceImpl implements PostService {
         return Post.builder()
                 .idUser(idUser)
                 .content(postRequest.content())
-                .postDate(LocalDateTime.now())
+                .date(LocalDateTime.now())
                 .imgUrls(postRequest.imgUrls())
                 .interactionCount(0L)
                 .community(postRequest.community())
@@ -166,7 +167,7 @@ public class PostServiceImpl implements PostService {
                 .build();
     }
 
-    private List<PostDTO> buildPostDTOsFromPosts(Page<Post> postsPage,List<UserInfoResponse> userInfoResponses){
+    private List<PostDTO> buildPostDTOsFromPosts(Page<Post> postsPage,Page<UserInfoResponse> userInfoResponses){
         List<PostDTO> postDTOS = new ArrayList<>();
 
         Map<Long, UserInfoResponse> userInfoMap = userInfoResponses.stream()

@@ -36,7 +36,7 @@ public class PostDTO {
                 userInfoResponse.username(),
                 userInfoResponse.urlProfile(),
                 post.getContent(),
-                post.getPostDate(),
+                post.getDate(),
                 post.getImgUrls(),
                 post.getInteractionCount(),
                 post.getCommunity().getName()

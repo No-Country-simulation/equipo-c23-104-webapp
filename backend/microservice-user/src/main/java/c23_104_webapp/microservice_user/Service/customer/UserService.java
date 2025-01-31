@@ -3,9 +3,10 @@ package c23_104_webapp.microservice_user.Service.customer;
 import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoForPostResponse;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface UserService {
     UserInfoResponse getLoggedInUserDetails();
@@ -13,7 +14,7 @@ public interface UserService {
     UserInfoResponse getUserById(Long id);
     UserInfoResponse getUserInfoByHandleUsername(String handleUsername);
     UserInfoResponse editUserProfile(EditProfileRequest editProfileRequest);
-    List<UserInfoForPostResponse> getUsersInfoForPost(ArrayList<Long> userIds);
+    Page<UserInfoForPostResponse> getUsersInfo(ArrayList<Long> userIds, Pageable pageable);
     void joinCommunity(String community);
     void leaveCommunity(String community);
 }

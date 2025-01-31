@@ -22,7 +22,8 @@ public class Post {
     private Long idUser;
     @Column(nullable = false)
     private String content;
-    private LocalDateTime postDate;
+    @Column(nullable = false)
+    private LocalDateTime date;
     @ElementCollection
     private List<String> imgUrls;
     @Column(nullable = false)
@@ -31,6 +32,7 @@ public class Post {
     private List<Interaction> interactions;
     @ManyToOne
     private Community community;
+    @Column(nullable = false)
     private Boolean isDeleted;
 
 }

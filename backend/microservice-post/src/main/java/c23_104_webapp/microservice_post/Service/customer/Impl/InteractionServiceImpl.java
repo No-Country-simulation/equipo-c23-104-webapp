@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -58,14 +57,14 @@ public class InteractionServiceImpl implements InteractionService {
 
     @Override
     @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetInteractions")
-    public Page<UserInfoResponse> getInteractionsByPost(Long id) {
+    public Page<UserInfoResponse> getInteractionsByPost(Long id,Pageable pageable) {
         Post post = postRepository.findById(id).orElseThrow(() -> new ApiException("Post not found",HttpStatus.BAD_REQUEST));
 
         Set<Long> userIds = interactionRepository.findUserIdsByPost(post);
 
-        List<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds));
+        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
 
-        return new PageImpl<>(userInfoList);
+        return new PageImpl<>(userInfoList.getContent(), pageable, userInfoList.getTotalElements());
     }
 
     public Page<UserInfoResponse> fallbackGetInteractions(Pageable pageable, Throwable t) {

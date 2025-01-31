@@ -4,6 +4,8 @@ import c23_104_webapp.microservice_post.DTO.response.authentication.UserDetailsD
 import c23_104_webapp.microservice_post.DTO.response.customer.UserInfoResponse;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,6 @@ public interface UserAPIClient {
     @GetMapping("/api/profile/user/{handleUsername}")
     UserInfoResponse getUserInfoByHandleUsername(@PathVariable("handleUsername") String handleUsername);
 
-    @GetMapping("/api/profile/usersInfoForPost")
-    List<UserInfoResponse> getUserInfoByIds(@RequestParam("userIds") List<Long> userIds);
+    @GetMapping("/api/profile/usersInfo")
+    Page<UserInfoResponse> getUserInfoByIds(@RequestParam("userIds") List<Long> userIds, Pageable pageable);
 }

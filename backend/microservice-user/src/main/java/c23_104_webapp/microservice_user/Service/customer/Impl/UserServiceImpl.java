@@ -8,6 +8,9 @@ import c23_104_webapp.microservice_user.Exception.ApiException;
 import c23_104_webapp.microservice_user.Repositories.UserRepository;
 import c23_104_webapp.microservice_user.Service.customer.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -94,13 +97,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public List<UserInfoForPostResponse> getUsersInfoForPost(ArrayList<Long> userIds) {
+    public Page<UserInfoForPostResponse> getUsersInfo(ArrayList<Long> userIds, Pageable pageable) {
         List<User> users = userRepository.findAllById(userIds);
 
-        return users.stream()
+        List<UserInfoForPostResponse> userInfoForPostResponses = users.stream()
                 .map(user -> new UserInfoForPostResponse(user.getId(), user.getName(),
                         user.getHandleUsername(), user.getEmail(), user.getUrlProfile()))
                 .collect(Collectors.toList());
+
+        return new PageImpl<>(userInfoForPostResponses, pageable, users.size());
     }
 
     @Override
