@@ -1,5 +1,6 @@
 package c23_104_webapp.microservice_comment.Service.customer.Impl;
 
+import c23_104_webapp.microservice_comment.DTO.response.customer.CommentResponse;
 import c23_104_webapp.microservice_comment.DTO.response.customer.UserInfoResponse;
 import c23_104_webapp.microservice_comment.Entities.Comment;
 import c23_104_webapp.microservice_comment.Entities.ENUM.InteractionType;
@@ -10,6 +11,7 @@ import c23_104_webapp.microservice_comment.Repositories.CommentRepository;
 import c23_104_webapp.microservice_comment.Repositories.InteractionRepository;
 import c23_104_webapp.microservice_comment.Security.UserContext;
 import c23_104_webapp.microservice_comment.Service.customer.InteractionService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -20,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -58,6 +59,7 @@ public class InteractionServiceImpl implements InteractionService {
     }
 
     @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetInteractions")
     public Page<UserInfoResponse> getInteractionsByComment(Long id, Pageable pageable) {
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new ApiException("Comment not found",HttpStatus.BAD_REQUEST));
 
@@ -66,6 +68,10 @@ public class InteractionServiceImpl implements InteractionService {
         Page<UserInfoResponse> userInfoResponseList = userAPIClient.getUserInfoByIds(new ArrayList<>(idUsers),pageable);
 
         return new PageImpl<>(userInfoResponseList.getContent(), pageable, userInfoResponseList.getTotalElements());
+    }
+
+    public Page<UserInfoResponse> fallbackGetInteractions(Pageable pageable, Throwable t) {
+        return new PageImpl<>(new ArrayList<>(), pageable, 0);
     }
 
     private Interaction interactionBuild(Comment comment,Long idUser){

@@ -25,6 +25,9 @@ public interface UserAPIClient {
     @GetMapping("/api/profile/usersInfo")
     Page<UserInfoResponse> getUserInfoByIds(@RequestParam("userIds") List<Long> userIds, Pageable pageable);
 
+    @GetMapping("/api/profile/user/{handleUsername}")
+    UserInfoResponse getUserInfoByHandleUsername(@PathVariable("handleUsername") String handleUsername);
+
     @GetMapping("/health")
     String healthCheck();
 }

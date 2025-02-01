@@ -28,4 +28,9 @@ public class CommentController {
     public ResponseEntity<Page<CommentResponse>> getCommentsByPost(@PathVariable Long id, Pageable pageable){
         return ResponseEntity.ok(commentService.getCommentsByPost(pageable,id));
     }
+
+    @GetMapping("/interactions/{username}")
+    public ResponseEntity<Page<CommentResponse>> findCommentsWithUserInteraction(@PathVariable String username,Pageable pageable){
+        return ResponseEntity.ok(commentService.findCommentsWithUserInteraction(pageable,username));
+    }
 }

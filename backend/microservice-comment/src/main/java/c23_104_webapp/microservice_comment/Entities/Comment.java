@@ -21,7 +21,7 @@ public class Comment {
     private Long idUser;
     @Column(nullable = false)
     private Long idPost;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long idCommentParent = 0L;
     @Column(nullable = false)
     private String content;

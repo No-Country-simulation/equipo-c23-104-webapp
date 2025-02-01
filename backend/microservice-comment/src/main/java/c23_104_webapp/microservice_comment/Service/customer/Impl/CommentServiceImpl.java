@@ -68,6 +68,24 @@ public class CommentServiceImpl implements CommentService {
         return new PageImpl<>(commentResponses, pageable, comments.getTotalElements());
     }
 
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetComments")
+    public Page<CommentResponse> findCommentsWithUserInteraction(Pageable pageable, String username) {
+        UserInfoResponse userInfoResponse = userAPIClient.getUserInfoByHandleUsername(username);
+
+        Page<Comment> commentsPage = commentRepository.findCommentsWithUserInteraction(userInfoResponse.id(),pageable);
+
+        Set<Long> userIds = commentsPage.getContent().stream()
+                .map(Comment::getIdUser)
+                .collect(Collectors.toSet());
+
+        Page<UserInfoResponse> userInfoResponses = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
+
+        List<CommentResponse> commentResponses = this.buildCommentResponseFromComments(commentsPage,userInfoResponses);
+
+        return new PageImpl<>(commentResponses,pageable,commentsPage.getTotalElements());
+    }
+
     public Page<CommentResponse> fallbackGetComments(Pageable pageable, Throwable t) {
         return new PageImpl<>(new ArrayList<>(), pageable, 0);
     }
