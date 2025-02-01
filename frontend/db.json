@@ -1,0 +1,38 @@
+{ 
+    "datos": [
+        { "id": "1", "nombre": "Anderson Forero", "nombreUsuario": "And_f12", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeOxXfSiTgja7b5zix_siA6wqf4I4R2o-fYQ&s" }
+    ],
+    "siguiendo": [
+        { "id": "1", "img": "https://robohash.org/1?set=set4", "nombre": "María Fernanda ", "nombreUsuario": "María_F" },
+        { "id": "2", "img": "https://robohash.org/2", "nombre": "Juan Carlos ", "nombreUsuario": "Juan_C" },
+        { "id": "3", "img": "https://robohash.org/3?set=set4", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "4", "img": "", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" },
+        { "id": "5", "img": "https://b2472105.smushcdn.com/2472105/wp-content/uploads/2023/09/Poses-Perfil-Profesional-Mujeres-ago.-10-2023-1-819x1024.jpg?lossy=1&strip=1&webp=1", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "6", "img": "https://robohash.org/6?set=set4", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" },
+        { "id": "7", "img": "", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "8", "img": "https://robohash.org/8", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" }
+
+    ],
+    "seguidores": [
+        { "id": "1", "img": "https://robohash.org/9", "nombre": "María Fernanda Gómez", "nombreUsuario": "María_F" },
+        { "id": "2", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNYxdwhRU1d1QYX8OiO4Ydt_4TYNywPhqZYg&s", "nombre": "Juan Carlos Pérez", "nombreUsuario": "Juan_C" },
+        { "id": "3", "img": "https://media.istockphoto.com/id/868385602/es/foto/hermosa-mujer-joven-sola-en-su-casa-mirando-en-el-espejo.jpg?s=612x612&w=0&k=20&c=6yBGei4losE181xBsuhWO0qUSLphnsm6XvVOnAcRZ3w=", "nombre": "Ana Isabel Martínez", "nombreUsuario": "Ana_I" },
+        { "id": "4", "img": "", "nombre": "David Alejandro Rodríguez", "nombreUsuario": "David_A" },
+        { "id": "5", "img": "https://robohash.org/13?set=set4", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "6", "img": "", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" },
+        { "id": "7", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR1rZW7V5iIEsH7bcxoS4wBXS13C5RTmivYA&s", "nombre": "Sofía Valentina López", "nombreUsuario": "Sofía_V" },
+        { "id": "8", "img": "https://robohash.org/16", "nombre": "Miguel Ángel Hernández", "nombreUsuario": "Miguel_Á" }
+    ],
+    "posts": [
+        { "id": "1", "nombre": "Anderson", "comentario": "¡Hola!" },
+        { "id": "2", "nombre": "Anderson", "comentario": "¿Como se encuentran todos hoy?" },
+        { "id": "3", "nombre": "Anderson", "comentario": "¡Buenos dias, feliz mañana!" },
+        { "id": "4", "nombre": "Anderson", "comentario": "¿Ya desayunaron?" }
+    ],
+    "comments": [
+        { "id": "1", "nombre": "Pedro Martinez", "comentario": "¿Alguien sabe como cambiar el fondo de pantalla en linux?" },
+        { "id": "2", "nombre": "Laura Gurrero", "comentario": "Me voy de vacaciones" },
+        { "id": "3", "nombre": "Pedro Martinez", "comentario": "Camino al cine" },
+        { "id": "4", "nombre": "Laura Gurrero", "comentario": "Estoy de vuelta, compartire fotos del viaje" }
+    ]
+}
