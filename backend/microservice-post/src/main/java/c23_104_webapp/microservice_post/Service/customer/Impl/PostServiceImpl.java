@@ -151,6 +151,35 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetUserInfo")
+    public PostDTO findPostById(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(()-> new ApiException("Post not found",HttpStatus.BAD_REQUEST));
+
+        UserInfoResponse userInfoResponse;
+        try {
+            userInfoResponse = userAPIClient.getUserInfoById(post.getId());
+        } catch (ApiException e) {
+            if (e.getStatus() == HttpStatus.BAD_REQUEST) {
+                userInfoResponse = fallbackGetUserInfo(e);
+            } else {
+                throw e;
+            }
+        }
+
+        return PostDTO.fromPost(post,userInfoResponse);
+    }
+
+    public UserInfoResponse fallbackGetUserInfo(Throwable t){
+        return new UserInfoResponse(
+                null,
+                "Unavailable",
+                "Unavailable",
+                "Unavailable",
+                "Unavailable"
+        );
+    }
+
     public Page<PostDTO> fallbackGetPosts(Pageable pageable, Throwable t) {
         return new PageImpl<>(new ArrayList<>(), pageable, 0);
     }
@@ -177,8 +206,6 @@ public class PostServiceImpl implements PostService {
             UserInfoResponse userInfoResponse = userInfoMap.get(post.getIdUser());
             if (userInfoResponse != null) {
                 postDTOS.add(PostDTO.fromPost(post, userInfoResponse));
-            } else {
-                postDTOS.add(PostDTO.fromPost(post, null));
             }
         }
 

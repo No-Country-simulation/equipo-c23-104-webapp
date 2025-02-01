@@ -26,8 +26,19 @@ public class PostDTO {
     private String communityName;
 
     public static PostDTO fromPost(Post post,UserInfoResponse userInfoResponse){
-        if(post == null){
-            return null;
+        if (post.getIsDeleted()) {
+
+            return new PostDTO(
+                    post.getId(),
+                    userInfoResponse.name(),
+                    userInfoResponse.username(),
+                    userInfoResponse.urlProfile(),
+                    "Content not available",
+                    post.getDate(),
+                    null,
+                    post.getInteractionCount(),
+                    post.getCommunity().getName()
+            );
         }
 
         return new PostDTO(

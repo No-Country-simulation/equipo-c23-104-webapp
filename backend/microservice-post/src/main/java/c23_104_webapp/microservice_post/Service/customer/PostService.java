@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
     void createPost(PostRequest postRequest);
@@ -16,4 +17,5 @@ public interface PostService {
     Page<PostDTO> getPostsByIdUser(Pageable pageable,String username);
     void deletePost(Long id);
     Page<PostDTO> findPostsWithUserInteraction(Pageable pageable,String username);
+    PostDTO findPostById(Long id);
 }
