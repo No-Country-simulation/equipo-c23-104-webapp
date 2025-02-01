@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "../../axiosConfig.js"; // Importa tu configuración de Axios
+import axios from "../../../axiosConfig.js"; // Importa tu configuración de Axios
 
 const Login = () => {
     const [email, setEmail] = useState("");

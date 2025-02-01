@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "../../axiosConfig.js"; // Asegúrate de tener configurada la base URL en axiosConfig
+import axios from "../../../axiosConfig.js"; // Asegúrate de tener configurada la base URL en axiosConfig
 
 const Register = () => {
     const [formValues, setFormValues] = useState({
