@@ -10,9 +10,6 @@ createRoot(document.getElementById("root")).render(
     <PerfilContextoProvider>
       <BrowserRouter>
         <App />
-  </StrictMode>
-);
-
       </BrowserRouter>
     </PerfilContextoProvider>
   </StrictMode>,
