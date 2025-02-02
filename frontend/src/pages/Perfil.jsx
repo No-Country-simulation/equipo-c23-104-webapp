@@ -31,8 +31,8 @@ const Perfil = () => {
                 <div className="w-7/12 min-w-96 m-auto border border-[#A19FA1]">
                     <div className="w-full h-40 bg-[#A19FA1]" />
                     <div className="flex justify-between p-4">
-                        <div className="w-32 h-32 bg-[#4A494A] border-2 border-[#A19FA1] rounded-full mt-[-80px] overflow-hidden">
-                            <img src={datosUsurio.img || perfilImagen} alt="perfil-icono" />
+                        <div className="w-32 h-32 flex items-center justify-center bg-[#4A494A] border-2 border-[#A19FA1] rounded-full mt-[-80px] overflow-hidden">
+                            <img className="w-full h-full object-cover" src={datosUsurio.img || perfilImagen} alt="perfil-icono" />
                         </div>
                         <Link to="/editar-perfil" className="h-8 px-4 flex items-center text-white font-medium bg-[#06BF00] rounded-3xl">Editar perfil</Link>
                     </div>
