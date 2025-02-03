@@ -28,6 +28,8 @@ public class Post {
     private List<String> imgUrls;
     @Column(nullable = false)
     private Long interactionCount = 0L;
+    @Column(nullable = false)
+    private Long repliesCount = 0L;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Interaction> interactions;
     @ManyToOne

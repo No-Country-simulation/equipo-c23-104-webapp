@@ -191,6 +191,7 @@ public class PostServiceImpl implements PostService {
                 .date(LocalDateTime.now())
                 .imgUrls(postRequest.imgUrls())
                 .interactionCount(0L)
+                .repliesCount(0L)
                 .community(postRequest.community())
                 .isDeleted(false)
                 .build();

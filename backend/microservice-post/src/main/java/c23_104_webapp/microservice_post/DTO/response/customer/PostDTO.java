@@ -23,6 +23,7 @@ public class PostDTO {
     private LocalDateTime postDate;
     private List<String> imgUrls;
     private Long interactionCount;
+    private Long repliesCount;
     private String communityName;
 
     public static PostDTO fromPost(Post post,UserInfoResponse userInfoResponse){
@@ -37,6 +38,7 @@ public class PostDTO {
                     post.getDate(),
                     null,
                     post.getInteractionCount(),
+                    post.getRepliesCount(),
                     post.getCommunity().getName()
             );
         }
@@ -50,6 +52,7 @@ public class PostDTO {
                 post.getDate(),
                 post.getImgUrls(),
                 post.getInteractionCount(),
+                post.getRepliesCount(),
                 post.getCommunity().getName()
         );
     }
