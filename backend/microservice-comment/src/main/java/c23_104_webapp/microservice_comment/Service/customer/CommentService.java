@@ -9,4 +9,6 @@ public interface CommentService {
     void createComment(CommentRequest commentRequest);
     Page<CommentResponse> getCommentsByPost(Pageable pageable,Long idPost);
     Page<CommentResponse> findCommentsWithUserInteraction(Pageable pageable,String username);
+    Page<CommentResponse> findCommentByIdAndReplies(Pageable pageable,Long id);
+    void deleteComment(Long id);
 }

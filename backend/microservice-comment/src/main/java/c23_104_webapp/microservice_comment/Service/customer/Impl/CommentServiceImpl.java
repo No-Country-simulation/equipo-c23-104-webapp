@@ -9,6 +9,7 @@ import c23_104_webapp.microservice_comment.Repositories.APIClient.UserAPIClient;
 import c23_104_webapp.microservice_comment.Repositories.CommentRepository;
 import c23_104_webapp.microservice_comment.Security.UserContext;
 import c23_104_webapp.microservice_comment.Service.customer.CommentService;
+import c23_104_webapp.microservice_comment.Service.event.CommentEventProducer;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserContext userContext;
     private final UserAPIClient userAPIClient;
+    private final CommentEventProducer commentEventProducer;
 
     @Override
     @Transactional
@@ -44,12 +46,16 @@ public class CommentServiceImpl implements CommentService {
             Comment parent = parentComment.get();
             parent.setRepliesCount(parent.getRepliesCount() + 1);
             commentRepository.save(parent);
+            return;
         }
 
         Long idUser = this.getUserIdFromUserLogged();
 
         Comment comment = this.buildComment(commentRequest, idUser);
         commentRepository.save(comment);
+
+        Long postId = commentRequest.idPost();
+        commentEventProducer.sendCommentCreatedEvent(postId);
     }
 
     @Override
@@ -57,11 +63,7 @@ public class CommentServiceImpl implements CommentService {
     public Page<CommentResponse> getCommentsByPost(Pageable pageable, Long idPost) {
         Page<Comment> comments = commentRepository.findByIdPostAndIsDeletedFalse(idPost,pageable);
 
-        Set<Long> userIds = comments.getContent().stream()
-                .map(Comment::getIdUser)
-                .collect(Collectors.toSet());
-
-        Page<UserInfoResponse> userInfoList = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
+        Page<UserInfoResponse> userInfoList = this.getUserInfoByIds(comments,pageable);
 
         List<CommentResponse> commentResponses = this.buildCommentResponseFromComments(comments,userInfoList);
 
@@ -75,15 +77,43 @@ public class CommentServiceImpl implements CommentService {
 
         Page<Comment> commentsPage = commentRepository.findCommentsWithUserInteraction(userInfoResponse.id(),pageable);
 
-        Set<Long> userIds = commentsPage.getContent().stream()
-                .map(Comment::getIdUser)
-                .collect(Collectors.toSet());
-
-        Page<UserInfoResponse> userInfoResponses = userAPIClient.getUserInfoByIds(new ArrayList<>(userIds),pageable);
+        Page<UserInfoResponse> userInfoResponses = this.getUserInfoByIds(commentsPage,pageable);
 
         List<CommentResponse> commentResponses = this.buildCommentResponseFromComments(commentsPage,userInfoResponses);
 
         return new PageImpl<>(commentResponses,pageable,commentsPage.getTotalElements());
+    }
+
+    @Override
+    @CircuitBreaker(name = "microservice-user", fallbackMethod = "fallbackGetComments")
+    public Page<CommentResponse> findCommentByIdAndReplies(Pageable pageable, Long id) {
+        Page<Comment> commentPage = commentRepository.findCommentsByParentId(id,pageable);
+
+        Page<UserInfoResponse> userInfoList = this.getUserInfoByIds(commentPage,pageable);
+
+        List<CommentResponse> commentResponses = this.buildCommentResponseFromComments(commentPage,userInfoList);
+
+        return new PageImpl<>(commentResponses, pageable, commentPage.getTotalElements());
+    }
+
+    @Override
+    @Transactional
+    public void deleteComment(Long id) {
+        Long idUser = this.getUserIdFromUserLogged();
+        Optional<Comment> comment = commentRepository.findByIdAndIdUserAndIsDeletedFalse(id,idUser);
+
+        if(comment.isPresent()){
+            Comment existingComment = comment.get();
+            existingComment.setIsDeleted(true);
+            commentRepository.save(existingComment);
+
+            if (existingComment.getIdCommentParent() == 0) {
+                Long postId = existingComment.getIdPost();
+                commentEventProducer.sendCommentDeletedEvent(postId);
+            }
+        } else {
+            throw new ApiException("Comment not found or not belonging to the user",HttpStatus.BAD_REQUEST);
+        }
     }
 
     public Page<CommentResponse> fallbackGetComments(Pageable pageable, Throwable t) {
@@ -106,6 +136,14 @@ public class CommentServiceImpl implements CommentService {
         }
 
         return commentResponses;
+    }
+
+    private Page<UserInfoResponse> getUserInfoByIds(Page<Comment> comments, Pageable pageable) {
+        Set<Long> userIds = comments.getContent().stream()
+                .map(Comment::getIdUser)
+                .collect(Collectors.toSet());
+
+        return userAPIClient.getUserInfoByIds(new ArrayList<>(userIds), pageable);
     }
 
     private Comment buildComment(CommentRequest commentRequest,Long idUser){

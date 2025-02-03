@@ -33,4 +33,15 @@ public class CommentController {
     public ResponseEntity<Page<CommentResponse>> findCommentsWithUserInteraction(@PathVariable String username,Pageable pageable){
         return ResponseEntity.ok(commentService.findCommentsWithUserInteraction(pageable,username));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Page<CommentResponse>> findCommentByIdAndReplies(@PathVariable Long id,Pageable pageable){
+        return ResponseEntity.ok(commentService.findCommentByIdAndReplies(pageable,id));
+    }
+
+    @PatchMapping("/delete/{id}")
+    public ResponseEntity<GenericResponse> deleteComment(@PathVariable Long id){
+        commentService.deleteComment(id);
+        return ResponseEntity.ok(new GenericResponse("Comment deleted"));
+    }
 }
