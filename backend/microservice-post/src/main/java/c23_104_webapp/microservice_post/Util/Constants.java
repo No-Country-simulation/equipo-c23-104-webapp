@@ -10,6 +10,10 @@ public class Constants {
     public static final Set<String> UNPROTECTED_PATHS = Set.of(
             "health",
             "api/community/all",
-            "api/community/id/.*"
+            "api/community/id/.*",
+            "swagger-ui.html",
+            "swagger-ui/.*",
+            "v3/api-docs",
+            "swagger.json/.*"
     );
 }
