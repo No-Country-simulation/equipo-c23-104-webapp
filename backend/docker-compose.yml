@@ -30,9 +30,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_user?createDatabaseIfNotExist=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9093
     depends_on:
       - eureka-sv
       - mysql
+      - kafka
     networks:
       - 'microservices-network'
 
@@ -46,9 +48,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_post?createDatabaseIfNotExist=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9093
     depends_on:
       - eureka-sv
       - mysql
+      - kafka
     networks:
       - 'microservices-network'
 
@@ -62,11 +66,39 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_comment?createDatabaseIfNotExist=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9093
     depends_on:
       - eureka-sv
       - mysql
+      - kafka
     networks:
       - 'microservices-network'
-
+      
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - '9093:9093'
+      - '23:29093'  # Para conexiones externas
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093,PLAINTEXT_HOST://localhost:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - 'microservices-network'
+    
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - 'microservices-network'
 networks:
   microservices-network:
