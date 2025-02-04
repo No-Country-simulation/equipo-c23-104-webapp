@@ -1,4 +1,4 @@
-import Post from "../components/Post";
+import PostsPerfil from "../components/PostsPerfil";
 import perfilImagen from "../assets/perfil-icono.png";
 import { Outlet, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
@@ -10,9 +10,10 @@ const Perfil = () => {
     const { datosUsurio } = useContext(PerfilContexto);
 
     const getPost = (url) => {
-        axios.get(`http://localhost:3000/${url}`)
+        axios.get(`http://localhost:3000/posts`)
             .then(response => {
                 setPostLista(response.data);
+                console.log("->",response.data);
             })
             .catch(error => {
                 console.error("Error", error);
@@ -52,7 +53,7 @@ const Perfil = () => {
                         <button className="text-center w-full p-4 hover:bg-[#A19FA1]" onClick={() => getPost("posts")}>Post</button>
                         <button className="text-center w-full p-4 hover:bg-[#A19FA1]" onClick={() => getPost("comments")}>Me gusta</button>
                     </nav>
-                    <Post postLista={postLista} />
+                    <PostsPerfil postLista={postLista} />
                 </div>
             </section>
             <Outlet />
