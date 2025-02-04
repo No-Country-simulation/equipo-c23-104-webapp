@@ -10,6 +10,7 @@ import './Marque.css';
 import PostAnimated from './components/PostAnimated';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
+import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 
 
@@ -31,8 +32,8 @@ const Welcome = () => {
                         <h2 className="text-2xl text-gray-800 text-center text-gray-800 lg:text-left md:text-4xl sm:text-4xl lg:text-4xl xl:text-6xl font-bold">Practicá tu nuevo idioma</h2>
                         <p className="lg:text-xl xl:text-2xl text-slate-600 mt-4 mb-10 text-justify">Sumérgete en un mundo de aprendizaje interactivo donde puedes conversar con nativos y otros estudiantes de tu nueva lengua. Mejora tus habilidades mientras haces nuevos amigos, todo en un ambiente amigable y relajado. ¡Únete a Parolu y lleva tu práctica al siguiente nivel! 🌍💬</p>
                         <div className='mx-auto lg:mx-0'>
-                            <a href="" className='h-10 p-3 font-semibold rounded-md bg-lime-600 text-white mr-5'>Registrarse</a>
-                            <a href="" className='h-10 p-3 font-semibold rounded-md bg-white text-lime-600 border boder-lime-600'>Iniciar sesión</a>
+                            <Link to="/registrar" className='h-10 p-3 font-semibold rounded-md bg-lime-600 text-white mr-5'>Registrarse</Link>
+                            <Link to="/login" className='h-10 p-3 font-semibold rounded-md bg-white text-lime-600 border boder-lime-600'>Iniciar sesión</Link>
                         </div>
                     </div>
 
@@ -163,8 +164,8 @@ const Welcome = () => {
     <div className="container mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">¡Únete a Parolu Hoy!</h2>
         <p className="md:text-xl text-white mb-10">Empieza a mejorar tus habilidades lingüísticas con nuestra comunidad global. ¡No esperes más!</p>
-        <a href="" className='h-10 px-6 py-4 font-semibold rounded-md bg-white text-lime-600 mr-5'>Registrarse</a>
-        <a href="" className='h-10 px-6 py-4 font-semibold rounded-md bg-transparent text-white border border-white'>Iniciar sesión</a>
+        <Link to="/registrar" className='h-10 px-6 py-4 font-semibold rounded-md bg-white text-lime-600 mr-5'>Registrarse</Link>
+        <Link to="/login" className='h-10 px-6 py-4 font-semibold rounded-md bg-transparent text-white border border-white'>Iniciar sesión</Link>
     </div>
 </section>
         </div>
