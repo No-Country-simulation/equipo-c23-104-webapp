@@ -1,4 +1,21 @@
-FROM openjdk:17-jdk-slim
-ARG JAR_FILE=target/eureka-sv-0.0.1.jar
-COPY ${JAR_FILE} app_eureka.jar
-ENTRYPOINT ["java","-jar","app_eureka.jar"]
+FROM jelastic/maven:3.9.5-openjdk-21 AS build
+
+WORKDIR /app
+
+COPY pom.xml .
+
+RUN mvn dependency:go-offline -B
+
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app_eureka.jar
+
+EXPOSE 8761
+
+ENTRYPOINT ["java", "-jar", "/app/app_eureka.jar"]
