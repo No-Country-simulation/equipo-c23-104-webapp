@@ -35,9 +35,9 @@ const Perfil = () => {
                         <div className="w-32 h-32 flex items-center justify-center bg-[#4A494A] border-2 rounded-full mt-[-80px] overflow-hidden">
                             <img className="w-full h-full object-cover" src={datosUsurio.img || perfilImagen} alt="perfil-icono" />
                         </div>
-                        <Link to="/editar-perfil" className="h-8 px-4 flex items-center text-white font-medium bg-lime-600 rounded-xl">Editar perfil</Link>
+                        <Link to="editar" className="h-8 px-4 flex items-center text-white font-medium bg-lime-600 rounded-xl">Editar perfil</Link>
                     </div>
-                    <div className="px-6">
+                    <div className="px-6 *:text-[#4A494A]">
                         <h2 className="text-2xl font-semibold">{datosUsurio.nombre}</h2>
                         <p>@{datosUsurio.nombreUsuario}</p>
                         <div className="flex gap-x-3">
@@ -47,7 +47,7 @@ const Perfil = () => {
                             <Link to="seguidores" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">20</span> seguidores</Link>
                         </div>
                     </div>
-                    <nav className="mt-2 flex border-b border">
+                    <nav className="mt-2 flex border-b border *:text-[#4A494A]">
                         {/* <Link to="/post" className="text-center w-full p-4 hover:bg-[#A19FA1]">Post</Link>
                         <Link to="/me-gusta" className="text-center w-full p-4 hover:bg-[#A19FA1]">Me gusta</Link> */}
                         <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPost("posts")}>Post</button>
