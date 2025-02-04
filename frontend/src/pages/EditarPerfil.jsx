@@ -56,7 +56,11 @@ const EditarPerfil = () => {
             <div className="w-96 p-4 relative flex flex-col justify-center rounded-xl bg-white max-[450px]:w-full max-[450px]:h-full max-[450px]:rounded-none">
                 <div className="flex items-center justify-between max-[450px]:absolute max-[450px]:top-4 max-[450px]:w-[calc(100%-2rem)]">
                     <div className="flex items-center gap-1">
-                        <Link to="/perfil" className="w-7 h-7 flex items-center justify-center text-2xl font-extralight rounded-full hover:bg-[#A19FA1]">⬅️</Link>
+                        <Link to="/perfil" className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[#A19FA1]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                            </svg>
+                        </Link>
                         <h2>Editar Perfil</h2>
                     </div>
                     {/* <Link to="/" className="h-8 px-3 flex items-center text-white font-medium bg-[#06BF00] rounded-3xl">Guardar</Link> */}

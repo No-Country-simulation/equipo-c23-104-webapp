@@ -29,7 +29,7 @@ const Perfil = () => {
     return (
         <>
             <section className="overflow-x-hidden">
-                <div className="w-7/12 min-w-96 m-auto border">
+                <div className="w-7/12 min-w-[30rem] m-auto border max-[550px]:w-full">
                     <div className="w-full h-40 bg-[#A19FA1]" />
                     <div className="flex justify-between p-4">
                         <div className="w-32 h-32 flex items-center justify-center bg-[#4A494A] border-2 rounded-full mt-[-80px] overflow-hidden">
