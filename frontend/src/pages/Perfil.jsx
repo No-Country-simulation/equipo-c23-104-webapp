@@ -4,14 +4,17 @@ import { Outlet, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { PerfilContexto } from "../context/PerfilContext";
-// npx json-server db.json  
+
+const apiPosts = import.meta.env.VITE_PERFIL_POSTS;
+// npx json-server db.json
+
 const Perfil = () => {
     const [postLista, setPostLista] = useState([]);
     const { datosUsurio } = useContext(PerfilContexto);
 
     const getPost = async (url) => {
         try {
-            const response = await axios.get(`http://localhost:3000/posts`)
+            const response = await axios.get(apiPosts)
                 setPostLista(response.data);
                 console.log("->",response.data);
         } catch (error) {
@@ -28,7 +31,7 @@ const Perfil = () => {
     return (
         <>
             <section className="overflow-x-hidden">
-                <div className="w-7/12 min-w-[30rem] m-auto border max-[550px]:w-full">
+                <div className="w-7/12 min-w-[30rem] m-auto border max-[550px]:w-full max-[550px]:min-w-80">
                     <div className="w-full h-40 bg-[#A19FA1]" />
                     <div className="flex justify-between p-4">
                         <div className="w-32 h-32 flex items-center justify-center bg-[#4A494A] border-2 rounded-full mt-[-80px] overflow-hidden">

@@ -5,8 +5,10 @@ import { PerfilContexto } from "../context/PerfilContext";
 import axios from "axios";
 import camaraIcono from "../assets/camara.png";
 
+const VITE_IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+
 const EditarPerfil = () => {
-    const { datosUsurio, getDatosUsuario } = useContext(PerfilContexto);
+    const { datosUsurio, getDatosUsuario, apiDatosUsuario } = useContext(PerfilContexto);
     const [ nombre, setNombre ] = useState("");
     const [ nombreUsuario, setNombreUsuario ] = useState("");
     const [ img, setImg ] = useState(null);
@@ -23,7 +25,7 @@ const EditarPerfil = () => {
         };
         
         try {
-            const response = await axios.patch('http://localhost:3000/datos/1', datos)
+            const response = await axios.patch(apiDatosUsuario, datos)
                 console.log('Usuario actualizado:', response.data);
                 getDatosUsuario();
                 navigate(-1);
@@ -35,13 +37,12 @@ const EditarPerfil = () => {
 
     const handleImageChange = async (e) => {
         const imagenFile = e.target.files[0];
-        const url = "84b4fff8d7a59b039bf752f709df1642";
     
         const formData = new FormData();
         formData.append('image', imagenFile);
 
         try {
-            const response = await axios.post(`https://api.imgbb.com/1/upload?&key=${url}`, formData)
+            const response = await axios.post(`https://api.imgbb.com/1/upload?&key=${VITE_IMGBB_API_KEY}`, formData)
                 setImg(response.data.data.url);
                 imgRef.current.src = response.data.data.url;
         } catch (error) {

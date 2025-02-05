@@ -4,6 +4,8 @@ import "./seguidores.css";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
+const apiSeguidores = import.meta.env.VITE_PERFIL_SEGUIDORES;
+
 const Seguidores = ({url, titulo, boton}) => {
 
     const [seguidores, setSeguidores] = useState([]);
@@ -11,7 +13,7 @@ const Seguidores = ({url, titulo, boton}) => {
         
     const getSeguidores = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/${url}`)
+            const response = await axios.get(apiSeguidores + url)
                 setSeguidores(...seguidores, response.data),
                 response.data.length !== 0 ? contenRef.current.classList.add("hidden") : ""
         } catch (error) {
@@ -25,7 +27,7 @@ const Seguidores = ({url, titulo, boton}) => {
 
     return (
         <section className="fixed top-0 w-full h-full flex items-center justify-center overflow-hidden bg-[#4a494ada] backdrop-blur-[2px] *:text-[#4A494A] z-50">
-            <div id="contenedor" className="relative max-h-[95vh] min-w-64 flex flex-col gap-y-4 p-4 rounded-xl bg-white overflow-auto max-[550px]:w-full max-[550px]:h-full max-[550px]:rounded-none">
+            <div id="contenedor" className="relative max-h-[95vh] min-w-64 flex flex-col gap-y-4 p-4 rounded-xl bg-white overflow-auto max-[550px]:w-full max-[550px]:max-h-full max-[550px]:rounded-none">
                 <div className="w-full p-1 mb-[-10px] flex items-center gap-1 sticky top-[-1.1rem] bg-white">
                     <Link to="/perfil" className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[rgb(161,159,161)]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
