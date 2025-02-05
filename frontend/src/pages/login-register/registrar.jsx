@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../../axiosConfig.js"; // Asegúrate de tener configurada la base URL en axiosConfig
+const apiRegister = import.meta.env.VITE_REGISTER_USER;
 
 const Register = () => {
     const [formValues, setFormValues] = useState({
+        name: "",
         username: "",
         email: "",
         password: "",
@@ -21,6 +23,7 @@ const Register = () => {
 
     const validate = () => {
         const newErrors = {};
+        if (!formValues.name) newErrors.name = "El nombre completo es obligatorio";
         if (!formValues.username) newErrors.username = "El nombre de usuario es obligatorio";
         if (!formValues.email) {
             newErrors.email = "El email es obligatorio";
@@ -31,9 +34,14 @@ const Register = () => {
             newErrors.password = "La contraseña es obligatoria";
         } else if (formValues.password.length < 6) {
             newErrors.password = "La contraseña debe tener al menos 6 caracteres";
+        } else if (!/[A-Z]/.test(formValues.password)) {
+            newErrors.password = "La contraseña debe contener al menos una letra mayúscula";
+        } else if (!/[^A-Za-z0-9]/.test(formValues.password)) {
+            newErrors.password = "La contraseña debe contener al menos un carácter especial";
         }
         return newErrors;
     };
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
@@ -41,10 +49,9 @@ const Register = () => {
             setErrors(validationErrors);
         } else {
             try {
-                // Cambié la URL a '/users' ya que es el endpoint adecuado para agregar usuarios en JSON Server
-                await axios.post("/users", formValues);  
+                await axios.post(apiRegister, formValues);  
                 setSuccessMessage("Usuario registrado con éxito");
-                setFormValues({ username: "", email: "", password: "" }); // Limpiar el formulario
+                setFormValues({ name: "", username: "", email: "", password: "" }); // Limpiar el formulario
                 setErrorMessage("");
             } catch (error) {
                 console.error("Error al registrar usuario:", error);
@@ -62,9 +69,9 @@ const Register = () => {
             <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
                 <img src="../src/assets/fondo.jpg" alt="Register Image" className="w-full h-full object-center object-cover" />
             </div>
-
             <div className="w-full md:w-1/2 flex items-center justify-center bg-white py-10">
                 <div className="w-full max-w-md p-8">
+            <div className="w-full max-w-md px-8">
                     <div className="mb-32 flex items-center gap-2">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 66 66" fill="none">
@@ -81,11 +88,24 @@ const Register = () => {
                             <p className="text-gray-600">Aprende idiomas con gente</p>
                         </div>
                     </div>
-
+            </div>
                     <form className="w-full" onSubmit={handleSubmit}>
                         <h2 className="text-4xl mb-4">Register</h2>
                         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
                         {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+
+                        <div className="mb-4">
+                            <label className="block text-gray-700">Nombre Completo</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formValues.name}
+                                onChange={handleChange}
+                                className={`w-full px-3 py-2 border ${errors.name ? "border-red-500" : "border-gray-300"} rounded`}
+                                placeholder="Ingrese su nombre completo"
+                            />
+                            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                        </div>
 
                         <div className="mb-4">
                             <label className="block text-gray-700">Nombre de Usuario</label>
