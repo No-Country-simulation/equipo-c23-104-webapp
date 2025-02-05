@@ -417,7 +417,7 @@ export default function Navbar({
               </a>
             ))}
           </div>
-          <div className="sm:hidden fixed top-[56px] left-0 w-full bg-white dark:bg-[#4A494A] border-b border-[#A19FA1]  flex justify-around py-2">
+          <div className="sm:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-[#4A494A] border-b border-[#A19FA1]  flex justify-around py-2">
             {[
               { icon: "fa-hand-holding-heart", label: t("foryou") },
               { icon: "fa-arrow-trend-up", label: t("trend") },
