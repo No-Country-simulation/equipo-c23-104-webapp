@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axiosConfig.js"; // Importa tu configuración de Axios
 
 const Login = () => {
@@ -7,6 +7,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({ email: "", password: "" });
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     const validateForm = () => {
         let isValid = true;
@@ -36,31 +37,25 @@ const Login = () => {
         e.preventDefault();
         if (validateForm()) {
             try {
-                // Realiza una solicitud GET a JSON Server para obtener los usuarios
-                const response = await axios.get("/users");
-                const users = response.data;
+                const response = await axios.post(import.meta.env.VITE_LOGIN_USER, {
+                    identifier: email,
+                    password,
+                });
 
-                // Busca al usuario que coincida con el email y contraseña
-                const user = users.find(
-                    (u) => u.email === email && u.password === password
-                );
-
-                if (user) {
-                    alert(`Bienvenido, ${user.username}!`);
-                    setErrorMessage(""); // Limpia cualquier error previo
-                } else {
-                    setErrorMessage("Correo o contraseña incorrectos.");
+                const { token } = response.data;
+                if (token) {
+                    localStorage.setItem("authToken", token);
+                    navigate("/home");
                 }
             } catch (error) {
-                console.error("Error al consultar usuarios:", error);
-                setErrorMessage("Hubo un error al iniciar sesión. Intenta más tarde.");
+                console.error("Error al iniciar sesión:", error);
+                setErrorMessage("Correo o contraseña incorrectos.");
             }
         }
     };
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
-            {/* Sección de imagen - oculta en móviles */}
             <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
                 <img
                     src="../src/assets/fondo.jpg"
@@ -68,7 +63,6 @@ const Login = () => {
                     className="w-full h-full object-center object-cover"
                 />
             </div>
-
             <div className="w-full md:w-1/2 flex items-center justify-center bg-white py-10">
                 <div className="w-full max-w-md p-8">
                     <div className="mb-32 flex items-center gap-2">
@@ -87,7 +81,6 @@ const Login = () => {
                             <p className="text-gray-600">Aprende idiomas con gente</p>
                         </div>
                     </div>
-
                     <form className="w-full" onSubmit={handleSubmit}>
                         <h2 className="text-4xl mb-4">Login</h2>
                         {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
@@ -97,9 +90,7 @@ const Login = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className={`w-full px-3 py-2 border rounded ${
-                                    errors.email ? "border-red-500" : "border-gray-300"
-                                }`}
+                                className={`w-full px-3 py-2 border rounded ${errors.email ? "border-red-500" : "border-gray-300"}`}
                                 placeholder="Enter your email"
                             />
                             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -110,9 +101,7 @@ const Login = () => {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className={`w-full px-3 py-2 border rounded ${
-                                    errors.password ? "border-red-500" : "border-gray-300"
-                                }`}
+                                className={`w-full px-3 py-2 border rounded ${errors.password ? "border-red-500" : "border-gray-300"}`}
                                 placeholder="Enter your password"
                             />
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
