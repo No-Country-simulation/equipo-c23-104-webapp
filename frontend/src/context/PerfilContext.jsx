@@ -6,14 +6,13 @@ export const PerfilContexto = createContext();
 const PerfilContextoProvider = (props) => {
     const [datosUsurio, setDatosUsurio] = useState({});
 
-    const getDatosUsuario = () => {
-        axios.get(`http://localhost:3000/datos/1`)
-            .then(response => {
+    const getDatosUsuario = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/datos/1`)
                 setDatosUsurio(response.data);
-            })
-            .catch(error => {
-                console.error("Error", error);
-            });
+        } catch (error) {
+            console.error("Error", error);
+        }
     };
 
     useEffect(() => {

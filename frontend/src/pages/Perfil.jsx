@@ -9,15 +9,14 @@ const Perfil = () => {
     const [postLista, setPostLista] = useState([]);
     const { datosUsurio } = useContext(PerfilContexto);
 
-    const getPost = (url) => {
-        axios.get(`http://localhost:3000/posts`)
-            .then(response => {
+    const getPost = async (url) => {
+        try {
+            const response = await axios.get(`http://localhost:3000/posts`)
                 setPostLista(response.data);
                 console.log("->",response.data);
-            })
-            .catch(error => {
-                console.error("Error", error);
-            });
+        } catch (error) {
+            console.error("Error", error);
+        }
     };
 
     useEffect(() => {
