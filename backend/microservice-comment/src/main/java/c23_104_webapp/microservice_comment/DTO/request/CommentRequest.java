@@ -7,10 +7,7 @@ import java.util.List;
 
 public record CommentRequest(@NotBlank(message = "Content cannot be empty") String content,
                              @NotNull(message = "Post id cannot be null") Long idPost,
-                             Long idCommentParent,
+                             @NotNull(message = "Parent Comment id cannot be null")Long idCommentParent,
                              List<String> imgUrls) {
 
-    public Long getIdCommentParent() {
-        return idCommentParent == null ? 0L : idCommentParent;
-    }
 }

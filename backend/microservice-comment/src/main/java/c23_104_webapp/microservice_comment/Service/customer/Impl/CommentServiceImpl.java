@@ -46,11 +46,16 @@ public class CommentServiceImpl implements CommentService {
             Comment parent = parentComment.get();
             parent.setRepliesCount(parent.getRepliesCount() + 1);
             commentRepository.save(parent);
+
+            Long idUser = this.getUserIdFromUserLogged();
+            Comment comment = this.buildComment(commentRequest, idUser);
+            comment.setIdCommentParent(commentRequest.idCommentParent());
+            commentRepository.save(comment);
+
             return;
         }
 
         Long idUser = this.getUserIdFromUserLogged();
-
         Comment comment = this.buildComment(commentRequest, idUser);
         commentRepository.save(comment);
 
@@ -150,7 +155,7 @@ public class CommentServiceImpl implements CommentService {
         return Comment.builder()
                 .idUser(idUser)
                 .idPost(commentRequest.idPost())
-                .idCommentParent(commentRequest.getIdCommentParent())
+                .idCommentParent(commentRequest.idCommentParent())
                 .content(commentRequest.content())
                 .date(LocalDateTime.now())
                 .imgUrls(commentRequest.imgUrls())

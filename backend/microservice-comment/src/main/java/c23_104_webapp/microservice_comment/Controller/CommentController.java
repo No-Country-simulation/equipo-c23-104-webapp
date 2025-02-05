@@ -35,7 +35,7 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Page<CommentResponse>> findCommentByIdAndReplies(@PathVariable Long id,Pageable pageable){
+    public ResponseEntity<Page<CommentResponse>> findCommentByIdAndReplies(@PathVariable Long id, Pageable pageable){
         return ResponseEntity.ok(commentService.findCommentByIdAndReplies(pageable,id));
     }
 
