@@ -13,7 +13,7 @@ const EditarPerfil = () => {
     const navigate = useNavigate();
     const imgRef = useRef(null);
 
-    const controladorEvento = (e) => {
+    const controladorEvento = async (e) => {
         e.preventDefault();
 
         const datos = {
@@ -21,17 +21,16 @@ const EditarPerfil = () => {
             nombreUsuario,
             img
         };
-
-        axios.patch('http://localhost:3000/datos/1', datos)
-            .then(response => {
+        
+        try {
+            const response = await axios.patch('http://localhost:3000/datos/1', datos)
                 console.log('Usuario actualizado:', response.data);
                 getDatosUsuario();
                 navigate(-1);
-            })
-            .catch(error => {
-                console.error('Error al actualizar usuario:', error);
-                window.alert("Hubo un error, vuelva a intentarlo");
-            });
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error);
+            window.alert("Hubo un error, vuelva a intentarlo");
+        }
     };
 
     const handleImageChange = async (e) => {

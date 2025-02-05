@@ -9,15 +9,14 @@ const Seguidores = ({url, titulo, boton}) => {
     const [seguidores, setSeguidores] = useState([]);
     const contenRef = useRef(null);
         
-    const getSeguidores = () => {
-        axios.get(`http://localhost:3000/${url}`)
-            .then((response) => {
+    const getSeguidores = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/${url}`)
                 setSeguidores(...seguidores, response.data),
                 response.data.length !== 0 ? contenRef.current.classList.add("hidden") : ""
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     useEffect(() => {
