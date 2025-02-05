@@ -8,13 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/**")
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // Aplica a todas las rutas
                 .allowedOrigins("*") // Permite todos los orígenes
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH") // Permite estos métodos
-                .allowedHeaders("Authorization", "Content-Type") // Permite encabezados como Authorization
-                .allowCredentials(true); // Permite el uso de credenciales (si se usan cookies o encabezados Authorization)
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD") // Permite todos los métodos HTTP
+                .allowedHeaders("*") // Permite todos los encabezados
+                .exposedHeaders("Authorization") // Expone el encabezado Authorization, útil para las respuestas
+                .allowCredentials(true); // Permite credenciales, como cookies o encabezados de autenticación
     }
 }
 
