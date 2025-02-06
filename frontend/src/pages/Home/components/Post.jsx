@@ -19,9 +19,6 @@ export default function Post(props) {
     
         // Diferencia en segundos
         const diffInSeconds = Math.floor((nowUTC - publicationUTC) / 1000);
-        {
-            console.log(diffInSeconds);
-        }
     
         // Evitar valores negativos por desfases horarios
         if (diffInSeconds < 0) return "Just now";
