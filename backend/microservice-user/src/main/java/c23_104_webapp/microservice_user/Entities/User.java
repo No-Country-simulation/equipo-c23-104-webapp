@@ -35,6 +35,12 @@ public class User implements UserDetails {
     private String description;
     private String urlProfile;
 
+    @Transient
+    private int followersCount;
+
+    @Transient
+    private int followingCount;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> communities = new HashSet<>();
 

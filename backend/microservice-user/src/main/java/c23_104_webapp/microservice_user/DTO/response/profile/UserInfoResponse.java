@@ -8,5 +8,7 @@ public record UserInfoResponse (Long id,
                                 String email,
                                 String description,
                                 String urlProfile,
-                                Set<String> communities){
+                                Set<String> communities,
+                                int followersCount,
+                                int followingCount){
 }

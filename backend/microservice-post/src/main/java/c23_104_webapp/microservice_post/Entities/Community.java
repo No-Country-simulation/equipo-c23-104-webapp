@@ -30,4 +30,5 @@ public class Community {
     private Set<Long> idUsers = new HashSet<>();
     @Column(nullable = false)
     private Long memberCount = 0L;
+    private String iconUrl;
 }
