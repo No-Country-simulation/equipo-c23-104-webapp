@@ -2,7 +2,6 @@ package c23_104_webapp.microservice_post.Controller;
 
 import c23_104_webapp.microservice_post.Repositories.APIClient.UserAPIClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
