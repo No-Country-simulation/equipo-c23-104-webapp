@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/api/interaction")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.DELETE})
 public class InteractionController {
 
     private final InteractionService interactionService;

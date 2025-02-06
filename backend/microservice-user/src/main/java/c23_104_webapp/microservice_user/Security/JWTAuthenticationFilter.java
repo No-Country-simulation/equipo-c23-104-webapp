@@ -47,6 +47,13 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        //response.setHeader("ngrok-skip-browser-warning", "06429");
+
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
         String uri = request.getRequestURI().replaceFirst("/", "");
         boolean isUnprotectedPath = UNPROTECTED_PATHS.stream().anyMatch(uri::matches);
 

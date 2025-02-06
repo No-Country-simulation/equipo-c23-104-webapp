@@ -32,6 +32,8 @@ public class SecurityFilterChainConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("health","swagger-ui.html", "swagger-ui/**", "v3/api-docs","swagger.json/**").permitAll()
                         .anyRequest().authenticated())
+                .cors()
+                .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

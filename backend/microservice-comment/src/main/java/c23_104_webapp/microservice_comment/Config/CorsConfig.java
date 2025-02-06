@@ -1,18 +1,17 @@
 package c23_104_webapp.microservice_comment.Config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
     @Override
-    public void addCorsMappings(@NonNull CorsRegistry registry) {
+    public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*");
+                .allowedOriginPatterns("*") // Permite todos los orígenes con credenciales
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("Authorization", "Content-Type");
     }
 }
-

@@ -25,16 +25,28 @@ public class SecurityFilterChainConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(sessionManagementCustomizer ->
-                        sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("api/users/**", "api/auth/password-reset/**","health","api/profile/**","swagger-ui.html", "swagger-ui/**", "v3/api-docs","swagger.json/**").permitAll()
+                .authorizeRequests(requests -> requests
+                        .requestMatchers(
+                                "api/users/**",
+                                "api/auth/password-reset/**",
+                                "health",
+                                "api/profile/**",
+                                "swagger-ui.html",
+                                "swagger-ui/**",
+                                "v3/api-docs",
+                                "swagger.json/**")
+                        .permitAll()
                         .anyRequest().authenticated())
+                .cors()
+                .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
 
 
 }
