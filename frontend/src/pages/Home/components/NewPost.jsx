@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const IMGBB_API_KEY = import.meta.env.REACT_APP_IMGBB_API_KEY;
+const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+const apiNewPost = import.meta.env.VITE_POST_CREATE;
+
+console.log(IMGBB_API_KEY)
 
 export default function NewPost({ onPost }) {
     const [postText, setPostText] = useState('');
@@ -41,6 +44,13 @@ export default function NewPost({ onPost }) {
 
     // Manejar la publicación
     const handlePost = async () => {
+
+        const authToken = localStorage.getItem("authToken");
+        if (!authToken) {
+          alert("No tienes una sesión activa");
+          return;
+        }
+
         if (postText.trim() === '') {
             alert('Por favor, escribe algo antes de publicar.');
             return;
@@ -54,18 +64,16 @@ export default function NewPost({ onPost }) {
         }
 
         const newPost = {
-            username: 'Tu Nombre', // Cambiar dinámicamente si es necesario
-            views: 0,
-            profilePictureUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNKNyfU1Gvp2ELPqa-dMVWCV_I4Db8fgHUg&s',
-            publicationDate: new Date().toISOString().split('T')[0],
             content: postText,
-            imageUrl, // Agregar la URL de la imagen subida
-            likes: 0,
-            commentsCount: 0,
+            imgUrls: [imageUrl], // Agregar la URL de la imagen subida
+            community: {id:1}
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/posts', newPost);
+            console.log(newPost);
+            const response = await axios.post(apiNewPost, newPost, {
+                headers: { Authorization: `Bearer ${authToken}` }
+              });
             alert('Publicación creada con éxito.');
             setPostText('');
             setImage(null);

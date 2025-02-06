@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CommunitySelector = () => {
   const [communities, setCommunities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCommunities = async () => {
@@ -23,7 +25,6 @@ const CommunitySelector = () => {
 
   const handleJoinCommunity = async (id) => {
     const authToken = localStorage.getItem("authToken");
-    console.log("TOKEN->",authToken);
     if (!authToken) {
       alert("No tienes una sesión activa");
       return;
@@ -32,7 +33,7 @@ const CommunitySelector = () => {
       await axios.patch(`${import.meta.env.VITE_COMMUNITY_JOIN}/${id}`, {}, {
         headers: { Authorization: `Bearer ${authToken}` }
       });
-      alert("Te has unido a la comunidad exitosamente");
+      navigate("/home");
     } catch (err) {
       alert("Error al unirse a la comunidad");
     }

@@ -1,40 +1,66 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
+const apiPostLike = import.meta.env.VITE_POST_LIKE;
 
 export default function Post(props) {
-    const { textos, imagePerfil, nombre, publicationDate, imagenPost } = props;
-    const [likes, setLikes] = useState(500);
-    const [comments, setComments] = useState(120);
+    const { textos, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
+    
+    const [likeCount, setLikeCount] = useState(likes);
+    const [liked, setLiked] = useState(false);
 
-    // Función para calcular el tiempo relativo basado en la fecha de publicación
-    const getRelativeTime = (date) => {
-        const now = new Date();
-        const publication = new Date(date);
-        const diffInMs = now - publication;
-        const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-        const diffInHours = Math.floor(diffInMinutes / 60);
-        const diffInDays = Math.floor(diffInHours / 24);
-        const diffInWeeks = Math.floor(diffInDays / 7);
-        const diffInMonths = Math.floor(diffInDays / 30);
-        const diffInYears = Math.floor(diffInDays / 365);
-
-        if (diffInMinutes < 60) {
-            return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`;
-        } else if (diffInHours < 24) {
-            return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`;
-        } else if (diffInDays < 7) {
-            return `${diffInDays} day${diffInDays === 1 ? '' : 's'} ago`;
-        } else if (diffInWeeks < 4) {
-            return `${diffInWeeks} week${diffInWeeks === 1 ? '' : 's'} ago`;
-        } else if (diffInMonths < 12) {
-            return `${diffInMonths} month${diffInMonths === 1 ? '' : 's'} ago`;
-        } else {
-            return `${diffInYears} year${diffInYears === 1 ? '' : 's'} ago`;
+    const getRelativeTime = (dateString) => {
+        const now = new Date(); // Hora actual
+        const publication = new Date(dateString); // Fecha de la API
+    
+        // Convertir ambas fechas a milisegundos UTC
+        const nowUTC = now.getTime();
+        const publicationUTC = publication.getTime();
+    
+        // Diferencia en segundos
+        const diffInSeconds = Math.floor((nowUTC - publicationUTC) / 1000);
+        {
+            console.log(diffInSeconds);
         }
+    
+        // Evitar valores negativos por desfases horarios
+        if (diffInSeconds < 0) return "Just now";
+    
+        if (diffInSeconds < 60) return `${diffInSeconds} second${diffInSeconds === 1 ? '' : 's'} ago`;
+        const diffInMinutes = Math.floor(diffInSeconds / 60);
+        if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`;
+        const diffInHours = Math.floor(diffInMinutes / 60);
+        if (diffInHours < 24) return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`;
+        const diffInDays = Math.floor(diffInHours / 24);
+        if (diffInDays === 1) return "Yesterday";
+        if (diffInDays <= 6) return `${diffInDays} days ago`;
+        const diffInWeeks = Math.floor(diffInDays / 7);
+        if (diffInWeeks < 4) return `${diffInWeeks} week${diffInWeeks === 1 ? '' : 's'} ago`;
+        const diffInMonths = Math.floor(diffInDays / 30);
+        if (diffInMonths < 12) return `${diffInMonths} month${diffInMonths === 1 ? '' : 's'} ago`;
+        const diffInYears = Math.floor(diffInDays / 365);
+        return `${diffInYears} year${diffInYears === 1 ? '' : 's'} ago`;
     };
+    
+    
 
-    // Manejar incremento de likes
-    const handleLike = () => {
-        setLikes(likes + 1);
+    const handleLike = async () => {
+        const authToken = localStorage.getItem("authToken");
+        if (!authToken) {
+            alert("No tienes una sesión activa");
+            return;
+        }
+        
+        try {
+            await axios.post(`${apiPostLike}/${id}`, {}, {
+                headers: { Authorization: `Bearer ${authToken}` }
+            });
+            
+            setLikeCount(prev => liked ? prev - 1 : prev + 1);
+            setLiked(!liked);
+        } catch (error) {
+            console.error('Error al dar like:', error);
+        }
     };
 
     return (
@@ -46,15 +72,12 @@ export default function Post(props) {
                     <p className="text-sm text-gray-500">{getRelativeTime(publicationDate)}</p>
                 </div>
             </div>
-            <p className="text-xl mt-5 lg:text-xl text-gray-700">
-                {textos}
-            </p>
-            
+            <p className="text-xl mt-5 lg:text-xl text-gray-700">{textos}</p>
             <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3'/>
 
             <div className="flex justify-start items-center mt-5 space-x-6">
                 <button
-                    className="flex items-center text-gray-700 hover:text-red-600 focus:outline-none"
+                    className={`flex items-center ${liked ? 'text-red-600' : 'text-gray-700 hover:text-red-600'} focus:outline-none`}
                     onClick={handleLike}
                 >
                     <svg
@@ -71,7 +94,7 @@ export default function Post(props) {
                             d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
                         />
                     </svg>
-                    <span>{likes} Likes</span>
+                    <span>{likeCount} Likes</span>
                 </button>
                 <button className="flex items-center text-gray-700 hover:text-lime-600 focus:outline-none">
                     <svg
@@ -88,7 +111,7 @@ export default function Post(props) {
                             d="M8 10h.01M12 10h.01M16 10h.01M21 12.9V19a2 2 0 01-2 2H6a2 2 0 01-2-2v-6.1a6 6 0 1112 0z"
                         />
                     </svg>
-                    <span>{comments} Comments</span>
+                    <span>{comentarios} Comments</span>
                 </button>
             </div>
         </div>

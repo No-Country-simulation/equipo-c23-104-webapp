@@ -3,15 +3,25 @@ import axios from 'axios';
 import Post from './components/Post';
 import NewPost from './components/NewPost';
 
+const apiGetPosts = import.meta.env.VITE_GET_POSTS;
+
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      alert("No tienes una sesión activa");
+      return;
+    }
     // Realizamos la consulta con Axios
     axios
-      .get('http://localhost:3000/posts')
+      .get(apiGetPosts, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      })
       .then((response) => {
-        setPosts(response.data.reverse()); // Guardamos las publicaciones en el estado
+        console.log(response.data.content);
+        setPosts(response.data.content.reverse()); // Guardamos las publicaciones en el estado
       })
       .catch((error) => {
         console.error('Error fetching posts:', error);
@@ -25,12 +35,14 @@ export default function Home() {
           <NewPost/>
           {posts.map((post) => (
             <Post
-              key={post.id}
-              nombre={post.username} // Usando la URL de la foto de perfil
+              id={post.id}
+              nombre={post.nameUser} // Usando la URL de la foto de perfil
               textos={[post.content]} // Pasamos el contenido como texto
-              imagePerfil={post.profilePictureUrl} // Usamos la foto como imagen del post
-              imagenPost={post.imageUrl} // Usamos la URL de la imagen del post
-              publicationDate={post.publicationDate} // Usamos la fecha de creación del post
+              imagePerfil={post.urlProfile} // Usamos la foto como imagen del post
+              imagenPost={post.imgUrls[0]} // Usamos la URL de la imagen del post
+              publicationDate={post.postDate} // Usamos la fecha de creación del post
+              likes={post.interactionCount} // Usamos la fecha de creación del post
+              comentarios={post.repliesCount} // Usamos la fecha de creación del post
             />
           ))}
         </div>
