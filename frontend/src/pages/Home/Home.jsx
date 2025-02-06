@@ -43,6 +43,8 @@ export default function Home() {
               publicationDate={post.postDate} // Usamos la fecha de creación del post
               likes={post.interactionCount} // Usamos la fecha de creación del post
               comentarios={post.repliesCount} // Usamos la fecha de creación del post
+              username={post.username} // Usando la URL de la foto de perfil
+
             />
           ))}
         </div>

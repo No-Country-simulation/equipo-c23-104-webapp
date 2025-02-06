@@ -6,25 +6,31 @@ import axios from "axios";
 import { PerfilContexto } from "../context/PerfilContext";
 import { use } from "react";
 
-const apiPosts = import.meta.env.VITE_PERFIL_POSTS;
+const apiPosts = import.meta.env.VITE_PERFIL_POSTS_USUARIO;
 
 const Perfil = () => {
     const [postLista, setPostLista] = useState([]);
-    const {datosUsuario} = useContext(PerfilContexto);
+    const {datosUsuario, authToken} = useContext(PerfilContexto);
+    const [actualizar, setActualizar] = useState(datosUsuario);
 
-    const getPost = async (url) => {
+    const getPost = async () => {
         try {
-            const response = await axios.get(apiPosts)
-                setPostLista(response.data);
+            console.log(datosUsuario.username);
+            const response = await axios.get(`${apiPosts}/${datosUsuario.username}`,{
+                headers: { Authorization: `Bearer ${authToken}` }
+            }).then((res)=>{
+                setPostLista(res.data);
+                console.log(res.data);
+            })
         } catch (error) {
             console.error("Error", error);
         }
     };
 
     useEffect(() => {
-        
-        getPost("posts");
-    }, []);
+        getPost();
+    }, [datosUsuario]);
+
 
     return (
         <>
@@ -49,7 +55,7 @@ const Perfil = () => {
                         <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPost("posts")}>Post</button>
                         <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPost("comments")}>Me gusta</button>
                     </nav>
-                    <PostsPerfil postLista={postLista} />
+                    <PostsPerfil postLista={postLista.content} />
                 </div>
             </section>
             <Outlet />

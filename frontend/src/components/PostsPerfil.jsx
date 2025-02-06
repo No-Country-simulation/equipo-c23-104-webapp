@@ -18,12 +18,15 @@ const PostsPerfil = ({ postLista = [] }) => { // 👈 Asigna un array vacío por
             {posts.length  ? (
               posts.map((post) => (
                   <Post
-                      key={post.id}
-                      nombre={post.username} 
-                      textos={[post.content]} 
-                      imagePerfil={post.profilePictureUrl} 
-                      imagenPost={post.imageUrl} 
-                      publicationDate={post.publicationDate} 
+                  id={post.id}
+                  nombre={post.nameUser} // Usando la URL de la foto de perfil
+                  username={post.username} // Usando la URL de la foto de perfil
+                  textos={[post.content]} // Pasamos el contenido como texto
+                  imagePerfil={post.urlProfile} // Usamos la foto como imagen del post
+                  imagenPost={post.imgUrls[0]} // Usamos la URL de la imagen del post
+                  publicationDate={post.postDate} // Usamos la fecha de creación del post
+                  likes={post.interactionCount} // Usamos la fecha de creación del post
+                  comentarios={post.repliesCount} // Usamos la fecha de creación del post
                   />
               ))
             ) : (

@@ -8,7 +8,7 @@ const apiDatosUsuario = import.meta.env.VITE_PERFIL_DATOS_USUARIO;
 
 const PerfilContextoProvider = (props) => {
     const [datosUsuario, setDatosUsuario] = useState({});
-
+    const authToken = localStorage.getItem("authToken");
     const getDatosUsuario = async () => {
         try {
             const authToken = localStorage.getItem("authToken");
@@ -30,7 +30,7 @@ const PerfilContextoProvider = (props) => {
     }, []);
 
     return (
-        <PerfilContexto.Provider value={{ datosUsuario, getDatosUsuario, apiDatosUsuario }}>
+        <PerfilContexto.Provider value={{ datosUsuario, getDatosUsuario, apiDatosUsuario, authToken }}>
             {props.children}
         </PerfilContexto.Provider>
     );
