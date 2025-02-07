@@ -1,7 +1,7 @@
 package c23_104_webapp.microservice_user.Controller.profile;
 
 import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
-import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoForPostResponse;
+import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoGeneralResponse;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Service.customer.UserService;
 import jakarta.validation.constraints.Email;
@@ -43,8 +43,8 @@ public class UserProfileController {
     }
 
     @GetMapping("/usersInfo")
-    public ResponseEntity<Page<UserInfoForPostResponse>> getUsersInfo(@RequestParam("userIds") ArrayList<Long> userIds,
-                                                                             Pageable pageable){
+    public ResponseEntity<Page<UserInfoGeneralResponse>> getUsersInfo(@RequestParam("userIds") ArrayList<Long> userIds,
+                                                                      Pageable pageable){
         return ResponseEntity.ok(userService.getUsersInfo(userIds,pageable));
     }
 

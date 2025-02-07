@@ -152,12 +152,16 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private Comment buildComment(CommentRequest commentRequest,Long idUser){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        LocalDateTime adjustedDateTime = currentDateTime.minusHours(3);
+
         return Comment.builder()
                 .idUser(idUser)
                 .idPost(commentRequest.idPost())
                 .idCommentParent(commentRequest.idCommentParent())
                 .content(commentRequest.content())
-                .date(LocalDateTime.now())
+                .date(adjustedDateTime)
                 .imgUrls(commentRequest.imgUrls())
                 .interactionCount(0L)
                 .repliesCount(0L)

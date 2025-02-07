@@ -1,10 +1,11 @@
 package c23_104_webapp.microservice_user.Service.customer.Impl;
 
 import c23_104_webapp.microservice_user.DTO.request.profile.EditProfileRequest;
-import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoForPostResponse;
+import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoGeneralResponse;
 import c23_104_webapp.microservice_user.DTO.response.profile.UserInfoResponse;
 import c23_104_webapp.microservice_user.Entities.User;
 import c23_104_webapp.microservice_user.Exception.ApiException;
+import c23_104_webapp.microservice_user.Repositories.FollowRepository;
 import c23_104_webapp.microservice_user.Repositories.UserRepository;
 import c23_104_webapp.microservice_user.Service.customer.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
+    private final FollowRepository followRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -97,11 +99,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public Page<UserInfoForPostResponse> getUsersInfo(ArrayList<Long> userIds, Pageable pageable) {
+    public Page<UserInfoGeneralResponse> getUsersInfo(ArrayList<Long> userIds, Pageable pageable) {
         List<User> users = userRepository.findAllById(userIds);
 
-        List<UserInfoForPostResponse> userInfoForPostResponses = users.stream()
-                .map(user -> new UserInfoForPostResponse(user.getId(), user.getName(),
+        List<UserInfoGeneralResponse> userInfoForPostResponses = users.stream()
+                .map(user -> new UserInfoGeneralResponse(user.getId(), user.getName(),
                         user.getHandleUsername(), user.getEmail(), user.getUrlProfile()))
                 .collect(Collectors.toList());
 
@@ -139,13 +141,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     private UserInfoResponse buildUserInfoResponse(User user) {
+
+        int followersCount = followRepository.countByFollowing_Id(user.getId());
+        int followingCount = followRepository.countByFollower_Id(user.getId());
+
         return new UserInfoResponse(user.getId(),
                                     user.getName(),
                                     user.getHandleUsername(),
                                     user.getEmail(),
                                     user.getDescription(),
                                     user.getUrlProfile(),
-                                    user.getCommunities());
+                                    user.getCommunities(),
+                                    followersCount,
+                                    followingCount
+        );
     }
 
     private User getUserLogged() {
