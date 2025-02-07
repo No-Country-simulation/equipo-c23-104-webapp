@@ -74,7 +74,11 @@ export default function NewPost({ onPost, onNewPost }) {
         try {
             console.log(newPost);
             const response = await axios.post(apiNewPost, newPost, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
               });
             onNewPost();  
             setPostText('');

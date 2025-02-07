@@ -19,7 +19,11 @@ export default function VisorPostComments() {
     }
     axios
       .get(`${import.meta.env.VITE_GET_COMMENTS}/${post.id}`, {
-        headers: { Authorization: `Bearer ${authToken}` }
+        headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
       })
       .then((response) => {
         setComments(response.data.content.reverse());

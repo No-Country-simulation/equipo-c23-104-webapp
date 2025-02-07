@@ -73,7 +73,11 @@ export default function NewComentario({ onPost, id, onNewComment }) {
         try {
             console.log(newPost);
             const response = await axios.post(apiNewComment, newPost, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
               });
             setPostText('');
             onNewComment(); // Esto llamará a la función que actualiza los comentarios en VisorPostComments

@@ -42,7 +42,11 @@ export default function Comentario(props) {
         
         try {
             await axios.post(`${apiCommentLike}/${id}`, {}, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
             });
             
         } catch (error) {

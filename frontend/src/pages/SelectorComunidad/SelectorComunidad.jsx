@@ -11,8 +11,12 @@ const CommunitySelector = () => {
   useEffect(() => {
     const fetchCommunities = async () => {
       try {
-        const response = await axios.get(import.meta.env.VITE_COMMUNITY_GET);
+        const response = await axios.get(import.meta.env.VITE_COMMUNITY_GET,{headers: { 
+          'Content-Type': 'application/json', 
+          'ngrok-skip-browser-warning': 'true' 
+        }});
         setCommunities(response.data);
+        console.log(response.data)
       } catch (err) {
         setError("Error al cargar las comunidades");
       } finally {
@@ -31,7 +35,11 @@ const CommunitySelector = () => {
     }
     try {
       await axios.patch(`${import.meta.env.VITE_COMMUNITY_JOIN}/${id}`, {}, {
-        headers: { Authorization: `Bearer ${authToken}` }
+        headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
       });
       localStorage.setItem("communityId", id);
       navigate("/home");

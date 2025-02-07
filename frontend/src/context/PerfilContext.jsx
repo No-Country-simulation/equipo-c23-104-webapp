@@ -17,7 +17,10 @@ const PerfilContextoProvider = (props) => {
             if (!decodedToken || !decodedToken.userId) throw new Error("Invalid token structure");
             
             const userId = decodedToken.userId;
-            const response = await axios.get(`${apiDatosUsuario}/${userId}`).then((res) => {
+            const response = await axios.get(`${apiDatosUsuario}/${userId}`,{headers: { 
+                'Content-Type': 'application/json', 
+                'ngrok-skip-browser-warning': 'true' 
+              }}).then((res) => {
                 setDatosUsuario(res.data);
             });
         } catch (error) {

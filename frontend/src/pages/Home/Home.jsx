@@ -18,7 +18,11 @@ export default function Home() {
     // Realizamos la consulta con Axios
     axios
       .get(`${apiGetPosts}/${communityId}`, {
-        headers: { Authorization: `Bearer ${authToken}` }
+        headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
       })
       .then((response) => {
         console.log(response.data.content);

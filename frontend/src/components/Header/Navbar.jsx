@@ -32,7 +32,10 @@ export default function Navbar({
       if (!decodedToken || !decodedToken.userId) throw new Error("Invalid token structure");
 
       const userId = decodedToken.userId;
-      const response = await axios.get(`${apiDatosUsuario}/${userId}`);
+      const response = await axios.get(`${apiDatosUsuario}/${userId}`,{headers: { 
+        'Content-Type': 'application/json', 
+        'ngrok-skip-browser-warning': 'true' 
+      }});
       setDatosUsuario(response.data);
     } catch (error) {
       console.error("Error obteniendo datos del usuario:", error);

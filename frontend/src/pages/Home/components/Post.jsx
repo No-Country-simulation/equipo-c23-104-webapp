@@ -44,7 +44,11 @@ export default function Post(props) {
         
         try {
             await axios.post(`${apiPostLike}/${id}`, {}, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
             });
             
         } catch (error) {

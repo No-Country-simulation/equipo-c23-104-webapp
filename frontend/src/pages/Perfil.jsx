@@ -21,7 +21,11 @@ const Perfil = (props) => {
         if (username) {
             try {
                 const response = await axios.get(`${apiDatosUsuario}/${username}`, {
-                    headers: { Authorization: `Bearer ${authToken}` }
+                    headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
                 });
                 setPerfilData(response.data);
             } catch (error) {
@@ -33,7 +37,11 @@ const Perfil = (props) => {
     const getPost = async () => {
         try {
             const response = await axios.get(`${apiPosts}/${username ? username : perfilData.username}`, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
             });
             setPostLista(response.data);
             console.log(response.data);
@@ -45,7 +53,11 @@ const Perfil = (props) => {
     const getPostLiked = async () => {
         try {
             const response = await axios.get(`${apiPostsLiked}/${perfilData.username}`, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
             });
             setPostLista(response.data);
             console.log("liked->", response.data);

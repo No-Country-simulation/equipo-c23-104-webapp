@@ -40,7 +40,11 @@ export default function PostCompleto(props) {
         
         try {
             await axios.post(`${apiPostLike}/${id}`, {}, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { 
+  Authorization: `Bearer ${authToken}`, 
+  'Content-Type': 'application/json', 
+  'ngrok-skip-browser-warning': 'true' 
+}
             });
             
             setLikeCount(prev => liked ? prev - 1 : prev + 1);
