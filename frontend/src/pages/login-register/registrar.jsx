@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axiosConfig.js"; // Asegúrate de tener configurada la base URL en axiosConfig
+import fondo from "../../assets/fondo.jpg";
+
+
 const apiRegister = import.meta.env.VITE_REGISTER_USER;
 
 const Register = () => {
@@ -83,7 +86,7 @@ const Register = () => {
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
-                <img src="../src/assets/fondo.jpg" alt="Register Image" className="w-full h-full object-center object-cover" />
+                <img src={fondo} alt="Register Image" className="w-full h-full object-center object-cover" />
             </div>
             <div className="w-full md:w-1/2 flex items-center justify-center bg-white py-10">
                 <div className="w-full max-w-md p-8">

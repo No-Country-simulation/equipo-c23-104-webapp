@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axiosConfig.js"; // Importa tu configuración de Axios
+import fondo from "../../assets/fondo.jpg";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -58,7 +59,7 @@ const Login = () => {
         <div className="flex flex-col md:flex-row min-h-screen">
             <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
                 <img
-                    src="../src/assets/fondo.jpg"
+                    src={fondo}
                     alt="Login Image"
                     className="w-full h-full object-center object-cover"
                 />
