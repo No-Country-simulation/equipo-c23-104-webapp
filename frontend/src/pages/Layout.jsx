@@ -36,7 +36,9 @@ const Layout = () => {
         toggleTextVisibility={toggleTextVisibility}
         showText={showText}
       />
-            <Outlet />
+        <div className="py-10 md:py-20">
+          <Outlet className/>
+        </div>
         </>
     );
 };

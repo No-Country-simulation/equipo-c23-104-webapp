@@ -4,25 +4,17 @@ import axios from 'axios';
 const apiPostLike = import.meta.env.VITE_POST_LIKE;
 
 export default function Post(props) {
-    const { textos,username, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
+    const { textos, username, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
     
     const [likeCount, setLikeCount] = useState(likes);
     const [liked, setLiked] = useState(false);
 
     const getRelativeTime = (dateString) => {
-        const now = new Date(); // Hora actual
-        const publication = new Date(dateString); // Fecha de la API
-    
-        // Convertir ambas fechas a milisegundos UTC
-        const nowUTC = now.getTime();
-        const publicationUTC = publication.getTime();
-    
-        // Diferencia en segundos
-        const diffInSeconds = Math.floor((nowUTC - publicationUTC) / 1000);
-    
-        // Evitar valores negativos por desfases horarios
+        const now = new Date();
+        const publication = new Date(dateString);
+        const diffInSeconds = Math.floor((now.getTime() - publication.getTime()) / 1000);
+
         if (diffInSeconds < 0) return "Just now";
-    
         if (diffInSeconds < 60) return `${diffInSeconds} second${diffInSeconds === 1 ? '' : 's'} ago`;
         const diffInMinutes = Math.floor(diffInSeconds / 60);
         if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`;
@@ -38,8 +30,6 @@ export default function Post(props) {
         const diffInYears = Math.floor(diffInDays / 365);
         return `${diffInYears} year${diffInYears === 1 ? '' : 's'} ago`;
     };
-    
-    
 
     const handleLike = async () => {
         const authToken = localStorage.getItem("authToken");
@@ -61,9 +51,17 @@ export default function Post(props) {
     };
 
     return (
-        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto z-10 border">
+        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto border">
             <div className="flex items-center justify-start border-b-2 border-gray-300 pb-4">
-                <img src={imagePerfil} alt="" className="w-16 h-16 rounded-full" />
+                {imagePerfil ? (
+                    <img src={imagePerfil} alt="Perfil" className="w-16 h-16 p-2 rounded-full" />
+                ) : (
+                    <div className="w-16 h-16 p-2 rounded-full bg-lime-600 flex items-center justify-center">
+                        <span className="text-white text-xl font-bold">
+                            {nombre ? nombre.charAt(0).toUpperCase() : '?'}
+                        </span>
+                    </div>
+                )}
                 <div className="ml-4 w-full text-start">
                     <p className="text-xl lg:text-2xl font-bold text-gray-700">{nombre}</p>
                     <p className="text-md text-gray-700">@{username}</p>
@@ -71,7 +69,7 @@ export default function Post(props) {
                 </div>
             </div>
             <p className="text-xl mt-5 lg:text-xl text-gray-700">{textos}</p>
-            <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3'/>
+            <img src={imagenPost} alt="Post" className='w-3/5 mx-auto h-auto rounded-md my-3'/>
 
             <div className="flex justify-start items-center mt-5 space-x-6">
                 <button

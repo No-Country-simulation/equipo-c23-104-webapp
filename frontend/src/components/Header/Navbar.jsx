@@ -76,7 +76,7 @@ return newMode;
 return (
 <nav
 id="navbar-container"
-className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19fa1] transition-all duration-500 border border-[#A19FA1] dark:border-transparent"
+className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transition-all duration-500 border border dark:border-transparent"
 >
 <div className="px-3 pt-2 pb-2 lg:px-5 lg:pl-3">
 <div className="flex  justify-between items-center">
@@ -87,16 +87,16 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
     <button
       id="ocultar-mostrar"
       onClick={toggleTextVisibility}
-      className="hidden md:block px-3 py-2 rounded text-sm border hover:border-transparent font-medium dark:bg-transparent bg-transparent dark:text-white hover:bg-[#00bf00] group dark:hover:bg-[#00bf00] dark:hover:border-white transition-all duration-200 focus:outline-none"
+      className="hidden md:block px-3 py-2 rounded text-sm border hover:border-transparent font-medium dark:bg-transparent bg-transparent dark:text-white hover:bg-lime-600 group dark:hover:bg-lime-600 dark:hover:border-white transition-all duration-200 focus:outline-none"
     >
-      <i className="fa-solid fa-bars text-[#00bf00] dark:text-white group-hover:text-white"></i>
+      <i className="fa-solid fa-bars text-lime-600 dark:text-white group-hover:text-white"></i>
     </button>
 
     <a href="#" className="flex mr-3 items-center ">
-      <i className="text-2xl fa-solid fa-comment-dots text-[#00bf00] dark:text-white me-3 mr-1 ml-3"></i>
+      <i className="text-2xl fa-solid fa-comment-dots text-lime-600 dark:text-white me-3 mr-1 ml-3"></i>
       <span
         id="page-name"
-        className={`self-center text-3xl font-semibold whitespace-nowrap text-[#00bf00] dark:text-white hidden md:inline  ${
+        className={`self-center text-3xl font-semibold whitespace-nowrap text-lime-600 dark:text-white hidden md:inline  ${
           isSidebarCollapsed ? "hidden" : ""
         }`}
       >
@@ -109,7 +109,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
       <div className="relative w-full flex items-center group">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
-            className="w-3 h-3 text-[#00bf00] group-hover:text-white dark:text-white"
+            className="w-3 h-3 text-lime-600 group-hover:text-white dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -128,7 +128,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
           type="search"
           id="default-search"
           placeholder={t("search")}
-          className="block w-full p-2 pl-7 text-xs text-gray-900 border-1 focus:border-[#00bf00] border-[#00bf00] rounded-full bg-white hover:bg-[#00bf00] hover:text-white group hover:placeholder:text-white placeholder:text-[11px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
+          className="block w-full p-2 pl-7 text-xs text-gray-900 border-1 focus:border-lime-600 border-lime-600 rounded-full bg-white hover:bg-lime-600 hover:text-white group hover:placeholder:text-white placeholder:text-[11px] placeholder:italic hover:shadow-lg focus:ring-0 focus:outline-none dark:bg-[#4A494A] dark:placeholder-white dark:text-white dark:hover:shadow-lg transition-all duration-200"
           value={searchQuery}
           onChange={handleSearchChange}
         />
@@ -154,7 +154,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
       </a>
       <div
         id="dropdown-user"
-        className={`absolute top-full right-[-10px] mt-3 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-all duration-300 ease-out transform ${
+        className={`absolute top-full right-[-10px] mt-3 z-50 w-40 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border transition-all duration-300 ease-out transform ${
           isDropdownOpen
             ? "scale-100 opacity-100"
             : "scale-95 opacity-0 pointer-events-none"
@@ -172,11 +172,11 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
           <li>
             <a
               href="#"
-              className={`text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+              className={`text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                 showText ? "opacity-100" : "opacity-0"
               }`}
             >
-              <i className="fa-solid fa-user mr-3 text-[#00bf00] dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
+              <i className="fa-solid fa-user mr-3 text-lime-600 dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
               {t("profile")}
             </a>
           </li>
@@ -184,15 +184,15 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
             <a
               href="#"
               onClick={toggleSubmenu}
-              className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+              className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                 showText ? "opacity-100" : "opacity-0"
               }`}
             >
-              <i className="fa-solid fa-gear mr-3 text-[#00bf00] dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
+              <i className="fa-solid fa-gear mr-3 text-lime-600 dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
               {t("settings")}
             </a>
             <div
-              className={`absolute right-full top-24 mx-0.5 py-2 z-50 w-36 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
+              className={`absolute right-full top-24 mx-0.5 py-2 z-50 w-36 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border transition-opacity duration-500 ease-out transform ${
                 isSubmenuOpen
                   ? "scale-100 opacity-100"
                   : "scale-95 opacity-0 pointer-events-none"
@@ -203,12 +203,12 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                   <a
                     href="#"
                     onClick={toggleLanguageMenu}
-                    className={`flex items-center w-34 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-[#00bf00] transition-opacity duration-500 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-[#00bf00] dark:text-white dark:hover:border-white dark:hover:text-white group text-[12px] ${
+                    className={`flex items-center w-34 mx-2 mt-1 mb-1 px-4 py-1.5 bg-white text-gray-900 rounded hover:bg-lime-600 transition-opacity duration-500 hover:text-white hover:shadow-inner group border border-transparent dark:bg-transparent dark:hover:bg-lime-600 dark:text-white dark:hover:border-white dark:hover:text-white group text-[12px] ${
                       showText ? "opacity-100" : "opacity-0"
                     }`}
                   >
                     <svg
-                      className="w-2.5 h-2.5 me-3 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"
+                      className="w-2.5 h-2.5 me-3 text-lime-600 dark:text-white transition-opacity duration-500 group-hover:text-white"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 6 10"
@@ -225,7 +225,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                   </a>
                   <div
                     ref={languageMenuRef}
-                    className={`absolute right-full top-[-1px] mx-0.5 w-40 py-2 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border-[#A19FA1] transition-opacity duration-500 ease-out transform ${
+                    className={`absolute right-full top-[-1px] mx-0.5 w-40 py-2 bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-[#4A494A] dark:divide-gray-600 border border transition-opacity duration-500 ease-out transform ${
                       isLanguageMenuOpen
                         ? "scale-100 opacity-100"
                         : "scale-95 opacity-0 pointer-events-none"
@@ -235,7 +235,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                       <li>
                         <a
                           onClick={() => handleChangeLanguage("es")}
-                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                             showText ? "opacity-100" : "opacity-0"
                           }`}
                         >
@@ -250,7 +250,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                       <li>
                         <a
                           onClick={() => handleChangeLanguage("en")}
-                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                             showText ? "opacity-100" : "opacity-0"
                           }`}
                         >
@@ -265,7 +265,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                       <li>
                         <a
                           onClick={() => handleChangeLanguage("pt")}
-                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                             showText ? "opacity-100" : "opacity-0"
                           }`}
                         >
@@ -280,7 +280,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                       <li>
                         <a
                           onClick={() => handleChangeLanguage("esp")}
-                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                             showText ? "opacity-100" : "opacity-0"
                           }`}
                         >
@@ -291,7 +291,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                       <li>
                         <a
                           onClick={() => handleChangeLanguage("fr")}
-                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent  px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                             showText ? "opacity-100" : "opacity-0"
                           }`}
                         >
@@ -306,7 +306,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                       <li>
                         <a
                           onClick={() => handleChangeLanguage("ger")}
-                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900  ease-in-out  transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                          className={`flex items-center text-[12px] mx-2 rounded border border-transparent px-4 py-2 text-gray-900  ease-in-out  transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                             showText ? "opacity-100" : "opacity-0"
                           }`}
                         >
@@ -326,18 +326,18 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
                     id="dark-mode-toggle"
                     href="#"
                     onClick={toggleDarkMode}
-                    className={`text-[12px] mx-2 rounded border border-transparent block px-3 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+                    className={`text-[12px] mx-2 rounded border border-transparent block px-3 py-2 text-gray-900 transition-opacity duration-500 ease-in-out hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                       showText ? "opacity-100" : "opacity-0"
                     }`}
                   >
                     {darkMode ? (
                       <>
-                        <i className="fa-solid fa-sun mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
+                        <i className="fa-solid fa-sun mr-2 text-lime-600 dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
                         <span> {t("light")}</span>
                       </>
                     ) : (
                       <>
-                        <i className="fa-solid fa-moon mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
+                        <i className="fa-solid fa-moon mr-2 text-lime-600 dark:text-white transition-opacity duration-500 ease-in-out  group-hover:text-white"></i>
                         <span> {t("dark")}</span>
                       </>
                     )}
@@ -349,33 +349,33 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
           <li>
             <a
               href="#"
-              className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+              className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                 showText ? "opacity-100" : "opacity-0"
               }`}
             >
-              <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
+              <i className="fa-solid fa-screwdriver-wrench mr-2 text-lime-600 dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
               {t("my-resources")}
             </a>
           </li>
           <li>
             <a
               href="#"
-              className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+              className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                 showText ? "opacity-100" : "opacity-0"
               }`}
             >
-              <i className="fa-solid fa-circle-up mr-2 text-[#00bf00] dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
+              <i className="fa-solid fa-circle-up mr-2 text-lime-600 dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
               {t("upgrade")}
             </a>
           </li>
           <li>
             <a
               href="#"
-              className={`text-[12px] mx-2 my-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out  hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+              className={`text-[12px] mx-2 my-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 ease-in-out  hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                 showText ? "opacity-100" : "opacity-0"
               }`}
             >
-              <i className="fa-solid fa-circle-question mr-2 text-[#00bf00] dark:text-white ease-in-out  transition-opacity duration-500 group-hover:text-white"></i>{" "}
+              <i className="fa-solid fa-circle-question mr-2 text-lime-600 dark:text-white ease-in-out  transition-opacity duration-500 group-hover:text-white"></i>{" "}
               {t("help")}
             </a>
           </li>
@@ -383,11 +383,11 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
         <div className="pt-1 pb-2 mt-2">
           <a
             href="#"
-            className={`text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-[#00bf00] hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
+            className={`text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
               showText ? "opacity-100" : "opacity-0"
             }`}
           >
-            <i className="fa-solid fa-right-from-bracket mr-2 text-[#00bf00] dark:text-white transition-all duration-500 group-hover:text-white"></i>{" "}
+            <i className="fa-solid fa-right-from-bracket mr-2 text-lime-600 dark:text-white transition-all duration-500 group-hover:text-white"></i>{" "}
             {t("logout")}
           </a>
         </div>
@@ -406,18 +406,18 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
       <a
         key={index}
         href="#"
-        className={`relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[#00bf00] after:transition-all after:duration-500 hover:after:w-full ${
+        className={`relative text-[12px] rounded border border-transparent block hover:text-[#4A494A] text-[#4A494A] px-1 py-1 mx-2 my-1 transition-opacity duration-500 group dark:text-white dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-lime-600 after:transition-all after:duration-500 hover:after:w-full ${
           showText ? "opacity-100" : "opacity-0"
         }`}
       >
         <i
-          className={`fa-solid ${item.icon} mr-2 text-[#00bf00] dark:text-white`}
+          className={`fa-solid ${item.icon} mr-2 text-lime-600 dark:text-white`}
         ></i>
         {item.label}
       </a>
     ))}
   </div>
-  <div className="sm:hidden fixed top-[56px] left-0 w-full bg-white dark:bg-[#4A494A] border-b border-[#A19FA1]  flex justify-around py-2">
+  <div className="sm:hidden fixed top-[56px] left-0 w-full bg-white dark:bg-[#4A494A] border-b border  flex justify-around py-2">
     {[
       { icon: "fa-hand-holding-heart", label: t("foryou") },
       { icon: "fa-arrow-trend-up", label: t("trend") },
@@ -427,7 +427,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border-[#a19f
       <a
         key={index}
         href="#"
-        className="flex flex-col items-center text-gray-900 dark:text-white transition-all duration-200 hover:text-[#00bf00]"
+        className="flex flex-col items-center text-gray-900 dark:text-white transition-all duration-200 hover:text-lime-600"
       >
         <i className={`fa-solid ${item.icon} text-lg`}></i>
         <span className="text-[10px]">{item.label}</span>
