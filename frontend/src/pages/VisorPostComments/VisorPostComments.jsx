@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Post from './components/Post';
-import NewPost from './components/NewPost';
+import PostCompleto from './components/PostCompleto';
+import Post from "../Home/components/Post";
+import Comentario from './components/Comentarios';
+import NewComentario from './components/NewComentario';
 
 const apiGetPosts = import.meta.env.VITE_GET_POSTS;
 
-export default function Home() {
+export default function VisorPostComments(props) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -30,11 +32,26 @@ export default function Home() {
 
   return (
     <div>
-      <div className='container m-auto md:w-1/2 my-20'>
-        <div className='grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2 h-full'>
-          <NewPost/>
+      <div className='container m-auto md:w-2/3 my-20'>
+      {posts.length > 0 ? (
+  <PostCompleto
+    id={posts[0].id}
+    nombre={posts[0].nameUser}
+    textos={[posts[0].content]}
+    imagePerfil={posts[0].urlProfile}
+    imagenPost={posts[0].imgUrls?.[0]} // Evita error si imgUrls es undefined
+    publicationDate={posts[0].postDate}
+    likes={posts[0].interactionCount}
+    comentarios={posts[0].repliesCount}
+    username={posts[0].username}
+  />
+) : (
+  <h1>No hay posts</h1>
+)}
+    <NewComentario />
+        <div className=''>
           {posts.map((post) => (
-            <Post
+            <Comentario
               id={post.id}
               nombre={post.nameUser} // Usando la URL de la foto de perfil
               textos={[post.content]} // Pasamos el contenido como texto

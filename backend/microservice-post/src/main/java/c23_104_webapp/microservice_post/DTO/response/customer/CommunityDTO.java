@@ -15,6 +15,7 @@ public class CommunityDTO{
     private Long id;
     private String name;
     private Long members;
+    private String iconUrl;
 
     public static CommunityDTO fromCommunity(Community community){
         if(community == null){
@@ -24,7 +25,8 @@ public class CommunityDTO{
         return new CommunityDTO(
                 community.getId(),
                 community.getName(),
-                community.getMemberCount()
+                community.getMemberCount(),
+                community.getIconUrl()
         );
     }
 }

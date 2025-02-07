@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const apiPostLike = import.meta.env.VITE_POST_LIKE;
 
-export default function Post(props) {
+export default function PostCompleto(props) {
     const { textos, username, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
     
     const [likeCount, setLikeCount] = useState(likes);
@@ -51,10 +51,10 @@ export default function Post(props) {
     };
 
     return (
-        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto border">
+        <div className="bg-white w-full p-8 h-auto my-auto border-b-2 ">
             <div className="flex items-center justify-start border-b-2 border-gray-300 pb-4">
                 {imagePerfil ? (
-                    <img src={imagePerfil} alt="Perfil" className="w-16 h-16 p-2 rounded-full" />
+                    <img src={imagePerfil} alt="Perfil" className="w-20 h-20 p-2 rounded-full" />
                 ) : (
                     <div className="w-16 h-16 p-2 rounded-full bg-lime-600 flex items-center justify-center">
                         <span className="text-white text-xl font-bold">
@@ -68,7 +68,7 @@ export default function Post(props) {
                     <p className="text-sm text-gray-500">{getRelativeTime(publicationDate)}</p>
                 </div>
             </div>
-            <p className="text-xl mt-5 lg:text-xl text-gray-700">{textos}</p>
+            <p className="text-3xl mt-5 text-gray-700">{textos}</p>
             {
                 imagenPost? <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3'/> : null
             }

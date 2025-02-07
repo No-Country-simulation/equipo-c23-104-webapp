@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const apiPostLike = import.meta.env.VITE_POST_LIKE;
 
-export default function Post(props) {
+export default function Comentario(props) {
     const { textos, username, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
     
     const [likeCount, setLikeCount] = useState(likes);
@@ -51,8 +51,9 @@ export default function Post(props) {
     };
 
     return (
-        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto border">
-            <div className="flex items-center justify-start border-b-2 border-gray-300 pb-4">
+        <div className="bg-white w-full h-auto m-0">
+            <div className='border-l-2 px-4 p-8 ml-10'>
+            <div className="flex items-center justify-start">
                 {imagePerfil ? (
                     <img src={imagePerfil} alt="Perfil" className="w-16 h-16 p-2 rounded-full" />
                 ) : (
@@ -63,7 +64,7 @@ export default function Post(props) {
                     </div>
                 )}
                 <div className="ml-4 w-full text-start">
-                    <p className="text-xl lg:text-2xl font-bold text-gray-700">{nombre}</p>
+                    <p className="text-xl font-bold text-gray-700">{nombre}</p>
                     <p className="text-md text-gray-700">@{username}</p>
                     <p className="text-sm text-gray-500">{getRelativeTime(publicationDate)}</p>
                 </div>
@@ -93,23 +94,7 @@ export default function Post(props) {
                     </svg>
                     <span>{likeCount} Likes</span>
                 </button>
-                <button className="flex items-center text-gray-700 hover:text-lime-600 focus:outline-none">
-                    <svg
-                        className="w-6 h-6 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 10h.01M12 10h.01M16 10h.01M21 12.9V19a2 2 0 01-2 2H6a2 2 0 01-2-2v-6.1a6 6 0 1112 0z"
-                        />
-                    </svg>
-                    <span>{comentarios} Comments</span>
-                </button>
+            </div>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../../../axiosConfig.js"; // Asegúrate de tener configurada la base URL en axiosConfig
 const apiRegister = import.meta.env.VITE_REGISTER_USER;
 
@@ -14,6 +14,8 @@ const Register = () => {
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,8 +53,22 @@ const Register = () => {
             try {
                 await axios.post(apiRegister, formValues);  
                 setSuccessMessage("Usuario registrado con éxito");
-                setFormValues({ name: "", username: "", email: "", password: "" }); // Limpiar el formulario
                 setErrorMessage("");
+                try {
+                    const response = await axios.post(import.meta.env.VITE_LOGIN_USER, {
+                        identifier: formValues.email,
+                        password: formValues.password,
+                    });
+                    
+                    const { token } = response.data;
+                    if (token) {
+                        localStorage.setItem("authToken", token);
+                        navigate("/comunidades");
+                    }
+                } catch (error) {
+                    console.error("Error al iniciar sesión:", error);
+                    setErrorMessage("Correo o contraseña incorrectos.");
+                }
             } catch (error) {
                 console.error("Error al registrar usuario:", error);
                 if (error.response?.data?.error) {

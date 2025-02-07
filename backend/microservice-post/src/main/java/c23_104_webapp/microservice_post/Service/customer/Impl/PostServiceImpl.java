@@ -185,10 +185,14 @@ public class PostServiceImpl implements PostService {
     }
 
     private Post buildPost(Long idUser,PostRequest postRequest){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        LocalDateTime adjustedDateTime = currentDateTime.minusHours(3);
+
         return Post.builder()
                 .idUser(idUser)
                 .content(postRequest.content())
-                .date(LocalDateTime.now())
+                .date(adjustedDateTime)
                 .imgUrls(postRequest.imgUrls())
                 .interactionCount(0L)
                 .repliesCount(0L)

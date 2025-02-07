@@ -6,7 +6,7 @@ const apiNewPost = import.meta.env.VITE_POST_CREATE;
 
 console.log(IMGBB_API_KEY)
 
-export default function NewPost({ onPost }) {
+export default function NewComentario({ onPost }) {
     const [postText, setPostText] = useState('');
     const [image, setImage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -87,8 +87,7 @@ export default function NewPost({ onPost }) {
     };
 
     return (
-        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto z-10 border">
-            <h2 className="text-xl lg:text-2xl font-bold text-gray-700 mb-4">Crear nueva publicación</h2>
+        <div className="bg-white w-full p-8 h-auto my-auto z-10 border-b-2">
             <textarea
                 className="w-full p-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
                 rows="4"
