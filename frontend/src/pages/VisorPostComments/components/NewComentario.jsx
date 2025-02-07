@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
-const apiNewPost = import.meta.env.VITE_POST_CREATE;
+const apiNewComment = import.meta.env.VITE_COMMENT_CREATE;
 
 console.log(IMGBB_API_KEY)
 
-export default function NewComentario({ onPost }) {
+export default function NewComentario({ onPost, id }) {
     const [postText, setPostText] = useState('');
     const [image, setImage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -66,12 +66,13 @@ export default function NewComentario({ onPost }) {
         const newPost = {
             content: postText,
             imgUrls: [imageUrl], // Agregar la URL de la imagen subida
-            community: {id:1}
+            idPost: id,
+            idCommentParent:0
         };
 
         try {
             console.log(newPost);
-            const response = await axios.post(apiNewPost, newPost, {
+            const response = await axios.post(apiNewComment, newPost, {
                 headers: { Authorization: `Bearer ${authToken}` }
               });
             alert('Publicación creada con éxito.');
@@ -95,7 +96,26 @@ export default function NewComentario({ onPost }) {
                 value={postText}
                 onChange={handleInputChange}
             ></textarea>
-            <div className="flex items-center mt-4">
+            
+                {image && (
+                    <div className="mt-4">
+                        <img
+                            src={URL.createObjectURL(image)}
+                            alt="Vista previa"
+                            className="w-16 h-16 rounded-md object-cover"
+                        />
+                    </div>
+                )}
+            {/* Contenedor de los botones alineados */}
+            <div className="flex items-center mt-4 space-x-4">
+                <button
+                    className="bg-lime-600 hover:bg-lime-700 text-white px-6 py-2 rounded-md shadow-md focus:outline-none"
+                    onClick={handlePost}
+                    disabled={isLoading}
+                >
+                    {isLoading ? 'Publicando...' : 'Publicar'}
+                </button>
+    
                 <label className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow-md focus:ring-2 focus:ring-blue-500">
                     Subir imagen
                     <input
@@ -105,22 +125,10 @@ export default function NewComentario({ onPost }) {
                         className="hidden"
                     />
                 </label>
-                {image && (
-                    <img
-                        src={URL.createObjectURL(image)}
-                        alt="Vista previa"
-                        className="w-16 h-16 rounded-md ml-4 object-cover"
-                    />
-                )}
             </div>
-
-            <button
-                className="mt-4 bg-lime-600 hover:bg-lime-700 text-white px-6 py-2 rounded-md shadow-md focus:outline-none"
-                onClick={handlePost}
-                disabled={isLoading}
-            >
-                {isLoading ? 'Publicando...' : 'Publicar'}
-            </button>
+    
+            {/* Vista previa de la imagen */}
         </div>
     );
+    
 }

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const apiPostLike = import.meta.env.VITE_POST_LIKE;
 
 export default function Post(props) {
     const { textos, username, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
+    const navigate = useNavigate();
     
     const [likeCount, setLikeCount] = useState(likes);
     const [liked, setLiked] = useState(false);
@@ -51,8 +53,14 @@ export default function Post(props) {
     };
 
     return (
-        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto border">
-            <div className="flex items-center justify-start border-b-2 border-gray-300 pb-4">
+        <div className="bg-white w-full p-8 rounded-md shadow-lg h-auto my-auto border" onClick={() => navigate('/posteo', { state: props })}>
+            <div 
+                className="flex items-center justify-start border-b-2 border-gray-300 pb-4 cursor-pointer"
+                onClick={(e) => {
+                    e.stopPropagation(); 
+                    navigate('/perfil', { state: { username } });
+                }}
+            >
                 {imagePerfil ? (
                     <img src={imagePerfil} alt="Perfil" className="w-16 h-16 p-2 rounded-full" />
                 ) : (
@@ -69,13 +77,14 @@ export default function Post(props) {
                 </div>
             </div>
             <p className="text-xl mt-5 lg:text-xl text-gray-700">{textos}</p>
-            {
-                imagenPost? <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3'/> : null
-            }
+            {imagenPost && <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3' />}
             <div className="flex justify-start items-center mt-5 space-x-6">
                 <button
                     className={`flex items-center ${liked ? 'text-red-600' : 'text-gray-700 hover:text-red-600'} focus:outline-none`}
-                    onClick={handleLike}
+                    onClick={(e) => {
+                        e.stopPropagation(); 
+                        handleLike();
+                    }}
                 >
                     <svg
                         className="w-6 h-6 mr-2"
