@@ -34,6 +34,8 @@ export default function Post(props) {
     };
 
     const handleLike = async () => {
+        setLikeCount(prev => liked ? prev - 1 : prev + 1);
+        setLiked(!liked);
         const authToken = localStorage.getItem("authToken");
         if (!authToken) {
             alert("No tienes una sesión activa");
@@ -45,10 +47,10 @@ export default function Post(props) {
                 headers: { Authorization: `Bearer ${authToken}` }
             });
             
-            setLikeCount(prev => liked ? prev - 1 : prev + 1);
-            setLiked(!liked);
         } catch (error) {
             console.error('Error al dar like:', error);
+            setLikeCount(prev =>  prev - 1 );
+            setLiked(liked);
         }
     };
 

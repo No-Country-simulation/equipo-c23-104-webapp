@@ -1,82 +1,107 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import perfilImagen from "../../assets/perfil-icono.png";
+
 
 export default function Navbar({
-toggleTextVisibility,
-setSearchQuery,
-handleChangeLanguage,
-showText,
+  toggleTextVisibility,
+  setSearchQuery,
+  handleChangeLanguage,
+  showText,
 }) {
-const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
-const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-const [darkMode, setDarkMode] = useState(false);
-const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-const [searchQuery, setSearchQueryState] = useState("");
-const [filter, setFilter] = useState("recomendados");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [searchQuery, setSearchQueryState] = useState("");
+  const [filter, setFilter] = useState("recomendados");
+  const [datosUsuario, setDatosUsuario] = useState({});
 
-const toggleDropdown = () => {
-setIsDropdownOpen((prevState) => !prevState);
-};
-const toggleSubmenu = () => {
-setIsSubmenuOpen((prevState) => !prevState);
-};
-const toggleLanguageMenu = () => {
-setIsLanguageMenuOpen((prevState) => !prevState);
-setIsSubmenuOpen(true);
-};
-const handleSearchChange = (e) => {
-const value = e.target.value;
-setSearchQuery(value);
-setSearchQueryState(value);
-};
-const dropdownRef = useRef(null);
-const submenuRef = useRef(null);
-const languageMenuRef = useRef(null);
-useEffect(() => {
-function handleClickOutside(event) {
-if (
-languageMenuRef.current &&
-!languageMenuRef.current.contains(event.target) &&
-submenuRef.current &&
-!submenuRef.current.contains(event.target)
-) {
-setIsDropdownOpen(false);
-setIsSubmenuOpen(false);
-setIsLanguageMenuOpen(false);
-}
-}
+  const apiDatosUsuario = import.meta.env.VITE_PERFIL_DATOS_USUARIO;
 
-// SI SE DEJA ESTA PARTE EL MENU SE CIERRA ANTES DE REDIRIGIR
+  const getDatosUsuario = async () => {
+    try {
+      const authToken = localStorage.getItem("authToken");
+      if (!authToken) throw new Error("No auth token found");
+      const decodedToken = jwt_decode(authToken);
+      if (!decodedToken || !decodedToken.userId) throw new Error("Invalid token structure");
 
-// document.addEventListener("mousedown", handleClickOutside);
-// return () => {
-// document.removeEventListener("mousedown", handleClickOutside);
-// };
-}, []);
-const { t } = useTranslation();
-useEffect(() => {
-const savedDarkMode = localStorage.getItem("darkMode") === "true";
-setDarkMode(savedDarkMode);
-if (savedDarkMode) {
-document.documentElement.classList.add("dark");
-} else {
-document.documentElement.classList.remove("dark");
-}
-}, []);
-const toggleDarkMode = () => {
-setDarkMode((prevMode) => {
-const newMode = !prevMode;
-if (newMode) {
-document.documentElement.classList.add("dark");
-} else {
-document.documentElement.classList.remove("dark");
-}
-localStorage.setItem("darkMode", newMode.toString());
-return newMode;
-});
-};
+      const userId = decodedToken.userId;
+      const response = await axios.get(`${apiDatosUsuario}/${userId}`);
+      setDatosUsuario(response.data);
+    } catch (error) {
+      console.error("Error obteniendo datos del usuario:", error);
+    }
+  };
+
+  useEffect(() => {
+    getDatosUsuario();
+  }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+  const toggleSubmenu = () => {
+    setIsSubmenuOpen((prevState) => !prevState);
+  };
+  const toggleLanguageMenu = () => {
+    setIsLanguageMenuOpen((prevState) => !prevState);
+    setIsSubmenuOpen(true);
+  };
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setSearchQueryState(value);
+  };
+
+  const dropdownRef = useRef(null);
+  const submenuRef = useRef(null);
+  const languageMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        languageMenuRef.current &&
+        !languageMenuRef.current.contains(event.target) &&
+        submenuRef.current &&
+        !submenuRef.current.contains(event.target)
+      ) {
+        setIsDropdownOpen(false);
+        setIsSubmenuOpen(false);
+        setIsLanguageMenuOpen(false);
+      }
+    }
+  }, []);
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem("darkMode") === "true";
+    setDarkMode(savedDarkMode);
+    if (savedDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      if (newMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      localStorage.setItem("darkMode", newMode.toString());
+      return newMode;
+    });
+  };
+
 return (
 <nav
 id="navbar-container"
@@ -152,7 +177,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
         <span className="sr-only">Open user menu</span>
         <img
           className="w-full h-full object-cover"
-          src="https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1"
+          src={datosUsuario?.urlProfile || perfilImagen}
           alt="user photo"
         />
       </a>
@@ -166,10 +191,10 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
       >
         <div className="px-4 py-3">
           <p className="ml-8 text-[13px] text-gray-900 dark:text-white">
-            Lionel Messi
+            {datosUsuario.name}
           </p>
           <p className="ml-8 text-[12px] font-medium text-gray-900 truncate dark:text-gray-300">
-            messi@test.com
+            {datosUsuario.username}
           </p>
         </div>
         <ul className="space-y-0">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const apiPostLike = import.meta.env.VITE_POST_LIKE;
+const apiCommentLike = import.meta.env.VITE_COMMENT_LIKE;
 
 export default function Comentario(props) {
     const { textos, username, imagePerfil, nombre, publicationDate, imagenPost, likes, comentarios, id } = props;
@@ -32,6 +32,8 @@ export default function Comentario(props) {
     };
 
     const handleLike = async () => {
+        setLikeCount(prev => liked ? prev - 1 : prev + 1);
+        setLiked(!liked);
         const authToken = localStorage.getItem("authToken");
         if (!authToken) {
             alert("No tienes una sesión activa");
@@ -39,14 +41,14 @@ export default function Comentario(props) {
         }
         
         try {
-            await axios.post(`${apiPostLike}/${id}`, {}, {
+            await axios.post(`${apiCommentLike}/${id}`, {}, {
                 headers: { Authorization: `Bearer ${authToken}` }
             });
             
-            setLikeCount(prev => liked ? prev - 1 : prev + 1);
-            setLiked(!liked);
         } catch (error) {
             console.error('Error al dar like:', error);
+            setLikeCount(prev =>  prev - 1 );
+            setLiked(liked);
         }
     };
 
