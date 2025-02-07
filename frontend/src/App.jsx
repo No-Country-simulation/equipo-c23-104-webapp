@@ -21,8 +21,8 @@ const App = () => {
           <Route path="posteo" element={<VisorPostComments/>} />
           <Route path="perfil" element={<Perfil/>}>
             <Route path="editar" element={<EditarPerfil/>} />
-            <Route path="siguiendo" element={<Seguidores url="siguiendo" titulo="Siguiendo" boton={true} />} />
-            <Route path="seguidores" element={<Seguidores url="seguidores" titulo="Seguidores" boton={false} />} />
+            {/* <Route path="siguiendo" element={<Seguidores url="siguiendo" titulo="Siguiendo" boton={true} />} />
+            <Route path="seguidores" element={<Seguidores url="seguidores" titulo="Seguidores" boton={false} />} /> */}
           </Route>
         </Route>
         <Route path="login" element={<Login/>} />

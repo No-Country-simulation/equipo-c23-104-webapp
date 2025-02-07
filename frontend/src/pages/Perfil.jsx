@@ -95,10 +95,10 @@ const Perfil = (props) => {
                     <div className="px-6 *:text-[#4A494A]">
                         <h2 className="text-2xl font-semibold">{perfilData.name}</h2>
                         <p>@{perfilData.username}</p>
-                        <div className="flex gap-x-3">
+                        {/* <div className="flex gap-x-3">
                             <Link to="siguiendo" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">10</span> siguiendo</Link>
                             <Link to="seguidores" className="hover:underline decoration-[#4A494A]"><span className="font-semibold">20</span> seguidores</Link>
-                        </div>
+                        </div> */}
                     </div>
                     <nav className="mt-2 flex border-b border *:text-[#4A494A]">
                         <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPost()}>Post</button>

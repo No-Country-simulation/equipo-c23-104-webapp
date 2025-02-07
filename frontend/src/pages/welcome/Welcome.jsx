@@ -63,7 +63,9 @@ const Welcome = () => {
     <div>
         <div className="container mx-auto text-center">
             <h2 className="text-4xl lg:text-5xl xl:text-7xl text-lime-600 font-bold mb-10">¿Qué es Parolu?</h2>
-            <p className="text-xl text-gray-700 mb-10 px-10">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, quaerat soluta repudiandae ut a adipisci sapiente iusto cupiditate atque amet? Consequatur eveniet dolor sed, nisi beatae error! Quas, et dicta.</p>
+            <p className="text-xl text-gray-700 mb-10 px-10">Parolu! es una red social diseñada para personas que quieren aprender y practicar nuevos idiomas de manera interactiva. 
+            Parolu! facilita el aprendizaje de idiomas a través de la interacción social, creando una experiencia divertida y accesible para todos los niveles. 
+            Con Parolu!, aprender un idioma es más que estudiar, es conectar con personas de todo el mundo.</p>
             </div>
     </div>
 </section>
@@ -93,7 +95,7 @@ const Welcome = () => {
         </div>
         <div className="text-center md:text-left order-2" data-aos="fade-up">
             <h3 className="text-4xl lg:text-3.5xl xl:text-6xl text-lime-600 font-bold mb-10">#1 Crea tu cuenta</h3>
-            <p className="text-xl xl:text-3xl text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi molestiae aspernatur exercitationem sequi hic nihil velit dolorem eveniet.</p>
+            <p className="text-xl xl:text-3xl text-gray-700">Únete a nuestra comunidad y conecta con millones de personas. Crea tu cuenta hoy mismo y descubre un mundo de posibilidades.</p>
         </div>
 
         {/* Segunda Fila: Imagen | Texto */}
