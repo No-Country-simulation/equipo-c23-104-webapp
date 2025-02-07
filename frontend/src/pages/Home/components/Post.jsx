@@ -69,8 +69,9 @@ export default function Post(props) {
                 </div>
             </div>
             <p className="text-xl mt-5 lg:text-xl text-gray-700">{textos}</p>
-            <img src={imagenPost} alt="Post" className='w-3/5 mx-auto h-auto rounded-md my-3'/>
-
+            {
+                imagenPost? <img src={imagenPost} alt="" className='w-3/5 mx-auto h-auto rounded-md my-3'/> : null
+            }
             <div className="flex justify-start items-center mt-5 space-x-6">
                 <button
                     className={`flex items-center ${liked ? 'text-red-600' : 'text-gray-700 hover:text-red-600'} focus:outline-none`}
