@@ -8,7 +8,7 @@ const apiGetPosts = import.meta.env.VITE_GET_POSTS;
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
+  const getPosts = () => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
       alert("No tienes una sesión activa");
@@ -26,13 +26,17 @@ export default function Home() {
       .catch((error) => {
         console.error('Error fetching posts:', error);
       });
+  };
+
+  useEffect(() => {
+    getPosts();
   }, []);
 
   return (
     <div>
       <div className='container m-auto md:w-1/2 my-20'>
         <div className='grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2 h-full'>
-          <NewPost/>
+          <NewPost onNewPost={getPosts}/>
           {posts.map((post) => (
             <Post
               id={post.id}

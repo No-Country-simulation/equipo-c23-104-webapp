@@ -6,7 +6,7 @@ const apiNewPost = import.meta.env.VITE_POST_CREATE;
 
 console.log(IMGBB_API_KEY)
 
-export default function NewPost({ onPost }) {
+export default function NewPost({ onPost, onNewPost }) {
     const [postText, setPostText] = useState('');
     const [image, setImage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -74,10 +74,10 @@ export default function NewPost({ onPost }) {
             const response = await axios.post(apiNewPost, newPost, {
                 headers: { Authorization: `Bearer ${authToken}` }
               });
-            alert('Publicación creada con éxito.');
+            onNewPost();  
             setPostText('');
             setImage(null);
-            if (onPost) onPost(response.data);
+            if (onPost) onPost(response.data); // Llamamos a la función onPost pasando el nuevo post
         } catch (error) {
             console.error('Error al crear la publicación:', error);
             alert('Hubo un error al intentar crear la publicación.');

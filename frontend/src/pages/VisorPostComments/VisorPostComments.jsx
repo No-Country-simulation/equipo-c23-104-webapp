@@ -10,7 +10,7 @@ export default function VisorPostComments() {
   const post = location.state;
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {
+  const fetchComments = () => {
     if (!post) return;
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
@@ -28,6 +28,10 @@ export default function VisorPostComments() {
       .catch((error) => {
         console.error('Error fetching comments:', error);
       });
+  };
+
+  useEffect(() => {
+    fetchComments();
   }, [post]);
 
   if (!post) {
@@ -47,7 +51,7 @@ export default function VisorPostComments() {
         comentarios={post.comentarios}
         username={post.username}
       />
-      <NewComentario id={post.id}/>
+      <NewComentario id={post.id} onNewComment={fetchComments} />
       <div>
         {comments.map((comment) => (
           <Comentario

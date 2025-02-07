@@ -6,7 +6,7 @@ const apiNewComment = import.meta.env.VITE_COMMENT_CREATE;
 
 console.log(IMGBB_API_KEY)
 
-export default function NewComentario({ onPost, id }) {
+export default function NewComentario({ onPost, id, onNewComment }) {
     const [postText, setPostText] = useState('');
     const [image, setImage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -75,8 +75,8 @@ export default function NewComentario({ onPost, id }) {
             const response = await axios.post(apiNewComment, newPost, {
                 headers: { Authorization: `Bearer ${authToken}` }
               });
-            alert('Publicación creada con éxito.');
             setPostText('');
+            onNewComment(); // Esto llamará a la función que actualiza los comentarios en VisorPostComments
             setImage(null);
             if (onPost) onPost(response.data);
         } catch (error) {
