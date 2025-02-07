@@ -6,9 +6,10 @@ import axios from "axios";
 import camaraIcono from "../assets/camara.png";
 
 const VITE_IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+const apiEditPerfil = import.meta.env.VITE_PERFIL_EDIT_USUARIO;
 
-const EditarPerfil = () => {
-    const { datosUsuario, getDatosUsuario, apiDatosUsuario } = useContext(PerfilContexto);
+const EditarPerfil = (props) => {
+    const { datosUsuario, getDatosUsuario, authToken } = useContext(PerfilContexto);
     const [ nombre, setNombre ] = useState("");
     const [ nombreUsuario, setNombreUsuario ] = useState("");
     const [ img, setImg ] = useState(null);
@@ -19,13 +20,14 @@ const EditarPerfil = () => {
         e.preventDefault();
 
         const datos = {
-            nombre,
-            nombreUsuario,
-            img
+            nameEdit: nombre,
+            urlProfileEdit: img
         };
         
         try {
-            const response = await axios.patch(apiDatosUsuario, datos)
+            const response = await axios.patch(apiEditPerfil, datos, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
                 console.log('Usuario actualizado:', response.data);
                 getDatosUsuario();
                 navigate(-1);
@@ -72,11 +74,10 @@ const EditarPerfil = () => {
                     </label>
                 </div>
                 <form onSubmit={controladorEvento} className="flex flex-col gap-4 *:outline-none">
-                    <input className="p-2 rounded-xl border border-[#A19FA1] bg-transparent text-[#4A494A]" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder={datosUsuario.nombre} required />
-                    <input className="p-2 rounded-xl border border-[#A19FA1] bg-transparent text-[#4A494A]" type="text" value={nombreUsuario} onChange={(e) => setNombreUsuario(e.target.value)} placeholder={`@${datosUsuario.nombreUsuario}`} required />
+                    <input className="p-2 rounded-xl border border-[#A19FA1] bg-transparent text-[#4A494A]" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder={"Nombre"} required />
                     {/* <input className="p-2 rounded-xl border border-[#A19FA1]" type="text" placeholder="Biografía" /> */}
                     <input id="subir-imagen" className="hidden" type="file" accept=".jpg,.jpeg,.png" onChange={handleImageChange} />
-                    <input className="h-8 px-3 flex items-center absolute top-4 right-4 text-white font-medium bg-[#06BF00] rounded-3xl hover:cursor-pointer" type="submit" value="Guardar" />
+                    <input className="h-8 px-3 flex items-center absolute top-4 right-4 text-white font-medium bg-lime-600 rounded-3xl hover:cursor-pointer" type="submit" value="Guardar" />
                 </form>
             </div>
         </section>
