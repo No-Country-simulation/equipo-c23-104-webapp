@@ -8,6 +8,7 @@ import Welcome from './pages/welcome/Welcome';
 import Home from './pages/Home/Home';
 import Layout from './pages/Layout';
 import CommunitySelector from './pages/SelectorComunidad/SelectorComunidad';
+import VisorPostComments from './pages/VisorPostComments/VisorPostComments';
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={ <Welcome/> } />
         <Route path="*" element={<Layout />}>
           <Route path="home" element={<Home/>} />
+          <Route path="posteo" element={<VisorPostComments/>} />
           <Route path="perfil" element={<Perfil/>}>
             <Route path="editar" element={<EditarPerfil/>} />
             <Route path="siguiendo" element={<Seguidores url="siguiendo" titulo="Siguiendo" boton={true} />} />
