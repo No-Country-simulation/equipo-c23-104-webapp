@@ -45,7 +45,7 @@ const Login = () => {
                 const { token } = response.data;
                 if (token) {
                     localStorage.setItem("authToken", token);
-                    navigate("/home");
+                    navigate("/comunidades");
                 }
             } catch (error) {
                 console.error("Error al iniciar sesión:", error);

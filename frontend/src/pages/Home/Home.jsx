@@ -10,13 +10,14 @@ export default function Home() {
 
   const getPosts = () => {
     const authToken = localStorage.getItem("authToken");
+    const communityId = localStorage.getItem("communityId");
     if (!authToken) {
       alert("No tienes una sesión activa");
       return;
     }
     // Realizamos la consulta con Axios
     axios
-      .get(apiGetPosts, {
+      .get(`${apiGetPosts}/${communityId}`, {
         headers: { Authorization: `Bearer ${authToken}` }
       })
       .then((response) => {

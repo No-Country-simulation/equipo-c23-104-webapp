@@ -44,8 +44,10 @@ export default function NewPost({ onPost, onNewPost }) {
 
     // Manejar la publicación
     const handlePost = async () => {
-
+        
         const authToken = localStorage.getItem("authToken");
+        const communityId = localStorage.getItem("communityId");
+
         if (!authToken) {
           alert("No tienes una sesión activa");
           return;
@@ -66,7 +68,7 @@ export default function NewPost({ onPost, onNewPost }) {
         const newPost = {
             content: postText,
             imgUrls: [imageUrl], // Agregar la URL de la imagen subida
-            community: {id:1}
+            community: {id: communityId}
         };
 
         try {

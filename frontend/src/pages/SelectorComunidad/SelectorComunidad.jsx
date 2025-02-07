@@ -33,9 +33,12 @@ const CommunitySelector = () => {
       await axios.patch(`${import.meta.env.VITE_COMMUNITY_JOIN}/${id}`, {}, {
         headers: { Authorization: `Bearer ${authToken}` }
       });
+      localStorage.setItem("communityId", id);
       navigate("/home");
     } catch (err) {
-      alert("Error al unirse a la comunidad");
+      navigate("/home");
+      localStorage.setItem("communityId", id);
+      console.log("Error al unirse a la comunidad, redirigiendo si ya tiene una comunidad seleccionada");
     }
   };
 
