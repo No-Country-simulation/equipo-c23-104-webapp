@@ -23,13 +23,13 @@ public class FollowController {
         return ResponseEntity.ok(new GenericResponse("Follow or unfollow action completed"));
     }
 
-    @GetMapping("/following")
-    public ResponseEntity<Page<UserInfoGeneralResponse>> getUsersFollowing(Pageable pageable){
-        return ResponseEntity.ok(followService.getUsersFollowing(pageable));
+    @GetMapping("/following/{id}")
+    public ResponseEntity<Page<UserInfoGeneralResponse>> getUsersFollowing(Pageable pageable,@PathVariable Long id){
+        return ResponseEntity.ok(followService.getUsersFollowing(pageable,id));
     }
 
-    @GetMapping("/followers")
-    public ResponseEntity<Page<UserInfoGeneralResponse>> getUsersFollowers(Pageable pageable){
-        return ResponseEntity.ok(followService.getUsersFollowers(pageable));
+    @GetMapping("/followers/{id}")
+    public ResponseEntity<Page<UserInfoGeneralResponse>> getUsersFollowers(Pageable pageable,@PathVariable Long id){
+        return ResponseEntity.ok(followService.getUsersFollowers(pageable,id));
     }
 }

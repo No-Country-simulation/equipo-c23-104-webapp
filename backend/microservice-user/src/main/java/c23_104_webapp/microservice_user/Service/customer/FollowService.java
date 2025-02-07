@@ -6,6 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface FollowService {
     void followUser(Long id);
-    Page<UserInfoGeneralResponse> getUsersFollowing(Pageable pageable);
-    Page<UserInfoGeneralResponse> getUsersFollowers(Pageable pageable);
+    Page<UserInfoGeneralResponse> getUsersFollowing(Pageable pageable,Long id);
+    Page<UserInfoGeneralResponse> getUsersFollowers(Pageable pageable,Long id);
 }

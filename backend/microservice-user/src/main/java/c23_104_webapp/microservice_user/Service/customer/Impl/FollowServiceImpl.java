@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,10 @@ public class FollowServiceImpl implements FollowService {
         User userFollower = this.getUserLogged();
         User userFollowing = userRepository.findById(id).orElseThrow(()-> new ApiException("User not found", HttpStatus.BAD_REQUEST));
 
+        if(Objects.equals(userFollower.getId(), userFollowing.getId())){
+            throw new ApiException("The user to follow is yourself, is the same ID with the user logged ",HttpStatus.BAD_REQUEST);
+        }
+
         if(followRepository.existsByFollower_IdAndFollowing_Id(userFollower.getId(),userFollowing.getId())){
             Follow follow = followRepository.findByFollower_IdAndFollowing_Id(userFollower.getId(),userFollowing.getId())
                     .orElseThrow(()-> new ApiException("Follow relationship not found",HttpStatus.BAD_REQUEST));
@@ -43,10 +48,8 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public Page<UserInfoGeneralResponse> getUsersFollowing(Pageable pageable) {
-        User userFollower = this.getUserLogged();
-
-        Page<Follow> followPage = followRepository.findByFollower_Id(userFollower.getId(), pageable);
+    public Page<UserInfoGeneralResponse> getUsersFollowing(Pageable pageable, Long id) {
+        Page<Follow> followPage = followRepository.findByFollower_Id(id, pageable);
 
         List<UserInfoGeneralResponse> userInfoForPostResponses = followPage.getContent().stream()
                 .map(follow -> mapToUserInfoGeneralResponse(follow, true))
@@ -56,10 +59,8 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public Page<UserInfoGeneralResponse> getUsersFollowers(Pageable pageable) {
-        User user = this.getUserLogged();
-
-        Page<Follow> followPage = followRepository.findByFollowing_Id(user.getId(), pageable);
+    public Page<UserInfoGeneralResponse> getUsersFollowers(Pageable pageable, Long id) {
+        Page<Follow> followPage = followRepository.findByFollowing_Id(id, pageable);
 
         List<UserInfoGeneralResponse> userInfoForPostResponses = followPage.getContent().stream()
                 .map(follow -> mapToUserInfoGeneralResponse(follow, false))
