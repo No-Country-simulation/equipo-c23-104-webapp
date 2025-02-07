@@ -66,7 +66,7 @@ const Perfil = () => {
                         </div>
                     </div>
                     <nav className="mt-2 flex border-b border *:text-[#4A494A]">
-                        <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPost("posts")}>Post</button>
+                        <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPost()}>Post</button>
                         <button className="text-center w-full rounded-none p-4 hover:bg-[#A19FA1] hover:border-none" onClick={() => getPostLiked()}>Me gusta</button>
                     </nav>
                     <PostsPerfil postLista={postLista.content} />

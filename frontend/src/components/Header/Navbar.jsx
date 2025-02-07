@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function Navbar({
 toggleTextVisibility,
@@ -46,10 +47,13 @@ setIsSubmenuOpen(false);
 setIsLanguageMenuOpen(false);
 }
 }
-document.addEventListener("mousedown", handleClickOutside);
-return () => {
-document.removeEventListener("mousedown", handleClickOutside);
-};
+
+// SI SE DEJA ESTA PARTE EL MENU SE CIERRA ANTES DE REDIRIGIR
+
+// document.addEventListener("mousedown", handleClickOutside);
+// return () => {
+// document.removeEventListener("mousedown", handleClickOutside);
+// };
 }, []);
 const { t } = useTranslation();
 useEffect(() => {
@@ -92,19 +96,19 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
       <i className="fa-solid fa-bars text-lime-600 dark:text-white group-hover:text-white"></i>
     </button>
 
-    <a href="#" className="flex mr-3 items-center ">
-      <i className="text-2xl fa-solid fa-comment-dots text-lime-600 dark:text-white me-3 mr-1 ml-3"></i>
-      <span
-        id="page-name"
-        className={`self-center text-3xl font-semibold whitespace-nowrap text-lime-600 dark:text-white hidden md:inline  ${
-          isSidebarCollapsed ? "hidden" : ""
-        }`}
-      >
-        Parolu!
-      </span>
-    </a>
   </div>
-  <div id="caja-02" className="flex-1 flex justify-center">
+  <a href="#" className="flex mr-3 items-center ">
+    <i className="text-2xl fa-solid fa-comment-dots text-lime-600 dark:text-white me-3 mr-1 ml-3"></i>
+    <span
+      id="page-name"
+      className={`self-center text-3xl font-semibold whitespace-nowrap text-lime-600 dark:text-white hidden md:inline  ${
+        isSidebarCollapsed ? "hidden" : ""
+      }`}
+    >
+      Parolu!
+    </span>
+  </a>
+  {/* <div id="caja-02" className="flex-1 flex justify-center">
     <form className="w-48 sm:w-48 md:w-64 lg:w-96 flex items-center flex-col">
       <div className="relative w-full flex items-center group">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -134,7 +138,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
         />
       </div>
     </form>
-  </div>
+  </div> */}
 
   <div id="caja-03" className="flex-1 flex justify-end">
     <div ref={dropdownRef} className="relative flex items-center ms-3">
@@ -170,15 +174,15 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
         </div>
         <ul className="space-y-0">
           <li>
-            <a
-              href="#"
+            <Link
+              to="/perfil"
               className={`text-[12px] mx-2 mt-2 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
                 showText ? "opacity-100" : "opacity-0"
               }`}
             >
               <i className="fa-solid fa-user mr-3 text-lime-600 dark:text-white transition-opacity duration-300 group-hover:text-white"></i>
-              {t("profile")}
-            </a>
+              {t("profile")} 
+            </Link>
           </li>
           <li ref={submenuRef}>
             <a
@@ -346,7 +350,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
               </ul>
             </div>
           </li>
-          <li>
+          {/* <li>
             <a
               href="#"
               className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
@@ -356,8 +360,8 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
               <i className="fa-solid fa-screwdriver-wrench mr-2 text-lime-600 dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
               {t("my-resources")}
             </a>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <a
               href="#"
               className={`text-[12px] mx-2 rounded border border-transparent block px-4 py-2  text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
@@ -367,7 +371,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
               <i className="fa-solid fa-circle-up mr-2 text-lime-600 dark:text-white transition-opacity duration-500 group-hover:text-white"></i>{" "}
               {t("upgrade")}
             </a>
-          </li>
+          </li> */}
           <li>
             <a
               href="#"
@@ -395,7 +399,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
     </div>
   </div>
 </div>
-<div className="flex items-start justify-center">
+{/* <div className="flex items-start justify-center">
   <div className="hidden sm:flex items-center justify-between rtl:justify-end my-1">
     {[
       { icon: "fa-hand-holding-heart", label: t("foryou") },
@@ -434,7 +438,7 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
       </a>
     ))}
   </div>
-</div>
+</div> */}
 </div>
 </nav>
 );

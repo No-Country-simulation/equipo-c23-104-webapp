@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ isTextVisible, showText }) {
 const { t } = useTranslation();
@@ -16,10 +17,10 @@ aria-label="Sidebar"
 <div className="h-full px-3 pb-4 pt-3 overflow-y-auto bg-white dark:bg-[#4A494A] mt-4 transition-all duration-500">
   <ul className="space-y-0 font-medium">
     {[
-      { icon: "fa-house", label: t("home") },
-      { icon: "fa-users", label: t("community") },
-      { icon: "fa-bell", label: t("notifications") },
-      { icon: "fa-right-from-bracket", label: t("logout") },
+      { icon: "fa-house", label: t("home"), to: "/home" },
+      { icon: "fa-users", label: t("community"), to: "/comunidades" },
+      // { icon: "fa-bell", label: t("notifications") },
+      // { icon: "fa-right-from-bracket", label: t("logout") },
     ].map((item, index) => (
       <li
         key={index}
@@ -27,11 +28,11 @@ aria-label="Sidebar"
           isTextVisible ? "w-56 h-10" : "w-10 h-10 rounded-full"
         }`}
       >
-        <a
+        <Link
           className={`flex items-center w-full h-full transition-opacity duration-500 ease-in-out ${
             showText ? "opacity-100" : "opacity-0"
           }`}
-          href="#"
+          to={item.to}
         >
           <i
             className={`fa-solid ${item.icon} text-lime-600 dark:text-white transition-all duration-100 group-hover:text-white`}
@@ -47,7 +48,7 @@ aria-label="Sidebar"
               {item.label}
             </span>
           )}
-        </a>
+        </Link>
       </li>
     ))}
   </ul>
@@ -75,19 +76,19 @@ aria-label="Sidebar"
 </aside>
 <nav className="fixed bottom-0 left-0 w-full bg-white border-t border dark:bg-[#4A494A] dark:border-gray-700 flex justify-around py-2 sm:hidden">
 {[
-  { icon: "fa-house", label: t("home") },
-  { icon: "fa-users", label: t("community") },
-  { icon: "fa-bell", label: t("notifications") },
+  { icon: "fa-house", label: t("home"), to: "/home" },
+  { icon: "fa-users", label: t("community"), to: "/comunidades" },
+  // { icon: "fa-bell", label: t("notifications") },
   { icon: "fa-right-from-bracket", label: t("logout") },
 ].map((item, index) => (
-  <a
+  <Link
     key={index}
-    href="#"
+    to={item.to}
     className="flex flex-col items-center text-gray-900 dark:text-white transition-all duration-200 hover:text-lime-600"
   >
     <i className={`fa-solid ${item.icon} text-lg`}></i>
     <span className="text-[10px]">{item.label}</span>
-  </a>
+  </Link>
 ))}
 <button
   title={t("create")}
