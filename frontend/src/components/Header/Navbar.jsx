@@ -22,6 +22,7 @@ export default function Navbar({
   const [datosUsuario, setDatosUsuario] = useState({});
 
   const apiDatosUsuario = import.meta.env.VITE_PERFIL_DATOS_USUARIO;
+  const apiLogout = import.meta.env.VITE_LOGOUT_USER;
 
   const getDatosUsuario = async () => {
     try {
@@ -37,6 +38,24 @@ export default function Navbar({
       console.error("Error obteniendo datos del usuario:", error);
     }
   };
+
+  const logout = async () => {
+    // const authToken = localStorage.getItem("authToken");
+    // try {
+    //   const response = await axios.post(apiLogout, authToken, {
+    //     headers: { 
+    //       'Authorization': `Bearer ${authToken}`,
+    //       'Content-Type': 'application/json',
+    //       'ngrok-skip-browser-warning': 'true'
+    //     }
+    //   })
+    //     console.log(response.data);
+    // } catch (error) {
+    //   console.error('Error al cerrar sesion', error);
+    //   alert('Hubo un error al cerrar la secion.');
+    //   return null;
+    // }
+  }
 
   useEffect(() => {
     getDatosUsuario();
@@ -410,15 +429,16 @@ className="fixed top-0 z-50 w-full bg-white dark:bg-[#4A494A] dark:border transi
           </li>
         </ul>
         <div className="pt-1 pb-2 mt-2">
-          <a
-            href="#"
+          <Link
+            to="/"
             className={`text-[12px] mx-2 mt-1 rounded border border-transparent block px-4 py-2 text-gray-900 transition-opacity duration-500 hover:bg-lime-600 hover:text-white hover:shadow-inner group dark:text-white dark:hover:border-white dark:hover:text-white ${
               showText ? "opacity-100" : "opacity-0"
             }`}
+            onClick={() => localStorage.clear()}
           >
             <i className="fa-solid fa-right-from-bracket mr-2 text-lime-600 dark:text-white transition-all duration-500 group-hover:text-white"></i>{" "}
             {t("logout")}
-          </a>
+          </Link>
         </div>
       </div>
     </div>
